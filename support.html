@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get help with BalancePilot — contact support or find answers to common questions about the debt payoff planning app." />
+  <meta name="theme-color" content="#000000" />
+  <title>Support — BalancePilot</title>
+  <link rel="icon" type="image/png" href="balancepilot-icon.png" />
+  <link rel="apple-touch-icon" href="balancepilot-icon.png" />
+  <link rel="canonical" href="https://balancepilot.net/support.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://balancepilot.net/support.html" />
+  <meta property="og:title" content="Support — BalancePilot" />
+  <meta property="og:description" content="Get help with BalancePilot — contact support or find answers to common questions about the debt payoff planning app." />
+  <meta property="og:image" content="https://balancepilot.net/balancepilot-og.png" />
+
+  <style>
+    :root {
+      --bg: #000000;
+      --panel: #0b0d10;
+      --stroke: rgba(255,255,255,.13);
+      --text: #ffffff;
+      --muted: #a8adb8;
+      --muted-2: #747b89;
+      --blue: #0a84ff;
+      --green: #32d74b;
+      --radius: 28px;
+      --max: 900px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background:
+        radial-gradient(circle at 76% 9%, rgba(10,132,255,.22), transparent 31rem),
+        radial-gradient(circle at 0% 60%, rgba(10,132,255,.12), transparent 25rem),
+        linear-gradient(180deg, #000 0%, #02050b 50%, #000 100%);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(100% - 36px, var(--max)); margin: 0 auto; }
+
+    /* ── Header ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(0,0,0,.72);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(20px);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; color: #fff; letter-spacing: -.045em; }
+    .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; display: block; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: #000; }
+    .links { display: flex; align-items: center; gap: 22px; color: #f4f7fb; font-weight: 600; font-size: .94rem; }
+    .links a { opacity: .88; }
+    .links a:hover { opacity: 1; color: var(--blue); }
+    .nav-button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; padding: 0 20px; border-radius: 11px;
+      border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .9rem;
+      background: var(--blue); color: white;
+      box-shadow: 0 14px 38px rgba(10,132,255,.28); transition: .18s ease;
+      opacity: 1;
+    }
+    .nav-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+    /* ── Buttons ── */
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; padding: 0 24px; border-radius: 11px;
+      border: 1px solid var(--stroke); font-weight: 800; font-size: .94rem; transition: .18s ease;
+    }
+    .button.primary { background: var(--blue); color: white; border-color: rgba(255,255,255,.12); box-shadow: 0 14px 38px rgba(10,132,255,.28); }
+    .button.secondary { background: rgba(255,255,255,.045); color: white; }
+    .button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+    /* ── Page content ── */
+    .content { padding: 64px 0 88px; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px;
+      background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.28);
+      color: var(--blue); font-size: .82rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      line-height: 1.04; letter-spacing: -.065em;
+      margin-bottom: 16px;
+    }
+
+    .intro {
+      color: var(--muted); font-size: 1.08rem; line-height: 1.7;
+      max-width: 640px; margin-bottom: 52px;
+    }
+
+    /* ── Sections ── */
+    .support-body { display: flex; flex-direction: column; gap: 16px; }
+
+    .support-section {
+      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 28px 32px;
+    }
+
+    .support-section h2 {
+      font-size: 1.05rem; font-weight: 800;
+      letter-spacing: -.025em; margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .support-section p { color: var(--muted); font-size: .98rem; line-height: 1.7; }
+    .support-section a { color: var(--blue); }
+    .support-section a:hover { text-decoration: underline; }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 20px; }
+
+    .faq-item {}
+
+    .faq-q {
+      font-size: 1rem; font-weight: 800; color: #fff;
+      letter-spacing: -.02em; margin-bottom: 6px;
+    }
+
+    .faq-a { color: var(--muted); font-size: .98rem; line-height: 1.7; }
+    .faq-a a { color: var(--blue); }
+    .faq-a a:hover { text-decoration: underline; }
+
+    /* ── Bottom CTA ── */
+    .cta-row {
+      margin-top: 52px;
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 32px 0;
+      color: var(--muted-2);
+      font-size: .88rem;
+    }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted-2); }
+    .footer-links a:hover { color: var(--blue); }
+
+    /* ── Mobile ── */
+    @media (max-width: 680px) {
+      .links { display: none; }
+      .support-section { padding: 22px 20px; }
+      h1 { font-size: 2.3rem; }
+      .cta-row .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="BalancePilot home">
+        <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" />
+        <span>BalancePilot</span>
+      </a>
+      <nav class="links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#screenshots">Screenshots</a>
+        <a class="nav-button" href="index.html#waitlist">Join Waitlist</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container content">
+
+      <div class="eyebrow">BalancePilot Support</div>
+      <h1>Support</h1>
+      <p class="intro">Need help with BalancePilot? You're in the right place. Browse the questions below or reach out directly — we're happy to help.</p>
+
+      <div class="support-body">
+
+        <div class="support-section">
+          <h2>Contact Us</h2>
+          <p>For questions, bug reports, or feature requests, email us at <a href="mailto:support@balancepilot.net">support@balancepilot.net</a>. We read every message and aim to respond as quickly as possible.</p>
+        </div>
+
+        <div class="support-section">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-list">
+
+            <div class="faq-item">
+              <p class="faq-q">Is BalancePilot connected to my bank?</p>
+              <p class="faq-a">No. BalancePilot is fully manual — you enter your own balances and payments. No bank connections, no account linking.</p>
+            </div>
+
+            <div class="faq-item">
+              <p class="faq-q">Is my data private?</p>
+              <p class="faq-a">Yes. All your financial data stays on your device. We never transmit or store your account information on our servers.</p>
+            </div>
+
+            <div class="faq-item">
+              <p class="faq-q">How do I delete my data?</p>
+              <p class="faq-a">You can delete all your data by removing the app from your device. All locally stored data is deleted with the app.</p>
+            </div>
+
+            <div class="faq-item">
+              <p class="faq-q">I found a bug or have a feature request.</p>
+              <p class="faq-a">Email us at <a href="mailto:support@balancepilot.net">support@balancepilot.net</a> — we read every message.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cta-row">
+        <a class="button primary" href="index.html#waitlist">Join the Waitlist</a>
+        <a class="button secondary" href="index.html">Back to Home</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <a class="brand" href="index.html">
+        <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" />
+        <span>BalancePilot</span>
+      </a>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#waitlist">Waitlist</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html" aria-current="page">Support</a>
+      </div>
+      <small style="color:var(--muted-2);">© <span id="year"></span> BalancePilot. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>
