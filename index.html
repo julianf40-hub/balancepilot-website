@@ -43,7 +43,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
     body {
       background:
         radial-gradient(circle at 76% 9%, rgba(10,132,255,.34), transparent 31rem),
@@ -256,7 +256,7 @@
     @media (max-width: 680px) {
       .brand { font-size:1.1rem; }
       .logo-icon { width:34px; height:34px; border-radius:10px; }
-      .hero { padding-top:46px; }
+      .hero { padding-top:72px; }
       h1 { font-size: clamp(3rem, 17vw, 4.3rem); }
       .feature-grid, .steps { grid-template-columns:1fr; }
       .mobile-swipe-hint {
@@ -489,6 +489,15 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.addEventListener("load", function() {
+      if (!window.location.hash) {
+        window.scrollTo(0, 0);
+      }
+    });
 
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobileMenu');
