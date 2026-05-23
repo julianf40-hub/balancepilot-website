@@ -185,6 +185,7 @@
     }
     .shot-title { padding: 12px 4px 2px; color: white; font-weight: 800; letter-spacing: -.03em; font-size: .95rem; }
     .shot-caption { color: var(--muted); font-size: .85rem; padding: 0 4px 6px; }
+    .mobile-swipe-hint { display: none; }
 
     .steps { display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; }
     .step { padding: 26px; position:relative; }
@@ -285,7 +286,36 @@
       .logo-icon { width:34px; height:34px; border-radius:10px; }
       .hero { padding-top:46px; }
       h1 { font-size: clamp(3rem, 17vw, 4.3rem); }
-      .feature-grid, .steps, .screenshot-grid { grid-template-columns:1fr; }
+      .feature-grid, .steps { grid-template-columns:1fr; }
+      .mobile-swipe-hint {
+        display: block;
+        color: var(--muted);
+        font-size: .95rem;
+        margin-top: -18px;
+        margin-bottom: 18px;
+      }
+      .screenshot-grid {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 18px;
+        padding: 4px 18px 18px;
+        margin-left: -18px;
+        margin-right: -18px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .screenshot-grid::-webkit-scrollbar { display: none; }
+      .shot {
+        flex: 0 0 min(82vw, 360px);
+        scroll-snap-align: center;
+      }
+      .shot-img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
       .actions .button { width:100%; }
       .waitlist-form { flex-direction: column; }
       .waitlist-form input[type="email"],
@@ -381,6 +411,7 @@
           <h2>See BalancePilot in action.</h2>
           <p>Real screens from the app — OLED dark interface, blue accents, and everything you need to stay on top of your debt payoff.</p>
         </div>
+        <p class="mobile-swipe-hint">Swipe to preview more screens →</p>
         <div class="screenshot-grid">
           <article class="shot">
             <img class="shot-img" src="screenshot-home.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot home dashboard showing debt overview and best next move" />
