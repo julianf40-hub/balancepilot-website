@@ -139,9 +139,57 @@
     .footer-links a { color: var(--muted-2); }
     .footer-links a:hover { color: var(--blue); }
 
+    /* ── Hamburger / mobile menu ── */
+    .mobile-menu-toggle {
+      display: none;
+      width: 46px; height: 46px; border-radius: 13px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.07);
+      color: var(--text);
+      align-items: center; justify-content: center; flex-direction: column; gap: 5px;
+      cursor: pointer;
+    }
+    .mobile-menu-toggle span {
+      width: 20px; height: 2px; border-radius: 999px;
+      background: currentColor; transition: transform .18s ease, opacity .18s ease;
+    }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; }
+
+    /* Coming soon */
+    .btn-coming-soon { pointer-events: none; opacity: .52; cursor: default; }
+    .coming-soon-badge {
+      display: inline-block; font-size: .72rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px; padding: 3px 10px;
+      color: var(--muted); vertical-align: middle;
+    }
+
     /* ── Mobile ── */
     @media (max-width: 680px) {
       .links { display: none; }
+      .brand { min-width: 0; flex: 1; }
+      .brand span { white-space: nowrap; }
+      .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
+      .mobile-menu {
+        display: grid; gap: 10px;
+        padding: 0 18px 18px;
+        background: rgba(0,0,0,.92);
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        backdrop-filter: blur(20px);
+      }
+      .mobile-menu[hidden] { display: none; }
+      .mobile-menu a {
+        display: flex; align-items: center;
+        min-height: 46px; padding: 0 14px; border-radius: 13px;
+        color: var(--text); font-weight: 700;
+        background: rgba(255,255,255,.055);
+        border: 1px solid rgba(255,255,255,.08);
+      }
+      .mobile-menu a:hover { border-color: rgba(10,132,255,.45); }
       .policy-section { padding: 22px 20px; }
       h1 { font-size: 2.3rem; }
       .cta-row .button { width: 100%; }
@@ -160,8 +208,23 @@
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
         <a href="index.html#screenshots">Screenshots</a>
-        <a class="nav-button" href="index.html#waitlist">Join Waitlist</a>
+        <a href="support.html">Support</a>
+        <a href="privacy.html" aria-current="page">Privacy</a>
+        <span class="nav-button btn-coming-soon">Download <span class="coming-soon-badge">Soon</span></span>
       </nav>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="index.html">Home</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#screenshots">Screenshots</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html" aria-current="page">Privacy</a>
+      <span class="btn-coming-soon" style="display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:13px;font-weight:700;color:var(--text);background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);">Download — Coming Soon</span>
     </div>
   </header>
 
@@ -248,14 +311,32 @@
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
-        <a href="index.html#waitlist">Waitlist</a>
+        <a href="support.html">Support</a>
         <a href="privacy.html" aria-current="page">Privacy</a>
       </div>
       <small style="color:var(--muted-2);">© <span id="year"></span> BalancePilot. All rights reserved.</small>
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', function() {
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!isOpen));
+        mobileMenu.hidden = isOpen;
+      });
+      mobileMenu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          menuToggle.setAttribute('aria-expanded', 'false');
+          mobileMenu.hidden = true;
+        });
+      });
+    }
+  </script>
 
 </body>
 </html>

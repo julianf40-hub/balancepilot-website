@@ -193,47 +193,18 @@
     .disclaimer { padding: 28px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center; }
     .shield { width:64px; height:64px; border-radius:22px; display:grid; place-items:center; font-size:1.8rem; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.07); }
     .cta-panel { padding: clamp(30px, 6vw, 56px); display:flex; align-items:center; justify-content:space-between; gap:24px; }
-    /* Waitlist form */
-    .waitlist-form {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      width: min(100%, 560px);
-      margin-top: 24px;
+
+    /* Coming soon button states */
+    .btn-coming-soon { pointer-events: none; opacity: .52; cursor: default; }
+    .coming-soon-badge {
+      display: inline-block;
+      font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px; padding: 3px 10px;
+      color: var(--muted); vertical-align: middle;
     }
-    .waitlist-form input[type="email"] {
-      flex: 1 1 260px;
-      min-height: 48px;
-      height: 48px;
-      padding: 0 16px;
-      border-radius: 11px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.07);
-      color: var(--text);
-      font: inherit;
-      outline: none;
-    }
-    .waitlist-form input[type="email"]::placeholder { color: var(--muted-2); }
-    .waitlist-form input[type="email"]:focus {
-      border-color: rgba(10,132,255,.75);
-      box-shadow: 0 0 0 4px rgba(10,132,255,.16);
-    }
-    .waitlist-success {
-      color: var(--green);
-      font-weight: 700;
-      margin-top: 14px;
-    }
-    .hidden-field { display: none; }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
+    .hero-coming-soon-label {
+      font-size: .85rem; color: var(--muted-2); margin-top: 8px;
     }
 
     footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(--muted); }
@@ -322,9 +293,6 @@
       #waitlist .cta-panel { padding: 28px 22px; border-radius: 24px; gap: 20px; }
       #waitlist .h2-cta, #waitlist h2 { font-size: clamp(2rem, 9vw, 2.7rem); line-height: 1; letter-spacing: -.06em; }
       #waitlist .cta-panel p { font-size: 1rem; line-height: 1.5; }
-      .waitlist-form { width: 100%; display: grid; gap: 12px; }
-      .waitlist-form input[type="email"] { width: 100%; min-height: 48px; height: 48px; flex: none; }
-      .waitlist-form .button, .waitlist-form button { width: 100%; min-height: 48px; }
       .hero-visual { display:none; }
       .disclaimer { grid-template-columns:1fr; }
     }
@@ -341,8 +309,9 @@
         <a href="#features">Features</a>
         <a href="#screenshots">Screenshots</a>
         <a href="#how">How It Works</a>
+        <a href="support.html">Support</a>
         <a href="privacy.html">Privacy</a>
-        <a class="nav-button" href="#waitlist">Join Waitlist</a>
+        <span class="nav-button btn-coming-soon">Download <span class="coming-soon-badge">Soon</span></span>
       </nav>
       <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span>
@@ -354,8 +323,9 @@
       <a href="#features">Features</a>
       <a href="#screenshots">Screenshots</a>
       <a href="#how">How It Works</a>
+      <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
-      <a class="mobile-menu-button" href="#waitlist">Join Waitlist</a>
+      <span class="mobile-menu-button btn-coming-soon" style="display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:13px;font-weight:700;color:var(--text);">Download — Coming Soon</span>
     </div>
   </header>
 
@@ -367,7 +337,10 @@
           <h1>Take Control<br>of <span class="blue">Your Debt</span></h1>
           <p class="lead">Track balances, prioritize payments, compare payoff strategies, and stay on top of every due date — all in one focused app.</p>
           <div class="actions">
-            <a class="button primary" href="#waitlist">Join the Waitlist</a>
+            <div>
+              <span class="button primary btn-coming-soon">Download on the App Store</span>
+              <p class="hero-coming-soon-label">Coming Soon</p>
+            </div>
             <a class="button secondary" href="#features">See Features</a>
           </div>
           <div class="trust">
@@ -492,34 +465,12 @@
       <div class="container">
         <div class="cta-panel">
           <div style="flex:1; max-width:640px;">
-            <h2 class="h2-cta">Be the First to Know.</h2>
-            <p>BalancePilot is getting ready for launch. Join the waitlist and we'll let you know when it's available on the App Store.</p>
-            <form
-              name="waitlist"
-              method="POST"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
-              class="waitlist-form"
-              id="waitlistForm"
-            >
-              <input type="hidden" name="form-name" value="waitlist" />
-              <p class="hidden-field">
-                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-              </p>
-              <label class="sr-only" for="waitlistEmail">Email address</label>
-              <input
-                id="waitlistEmail"
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                required
-                autocomplete="email"
-              />
-              <button class="button primary" type="submit">Join Waitlist</button>
-            </form>
-            <p class="waitlist-success" id="waitlistSuccess" hidden>
-              You're on the list. We'll let you know when BalancePilot launches.
-            </p>
+            <h2 class="h2-cta">Coming Soon to the App Store.</h2>
+            <p>BalancePilot is launching soon. Follow along for updates.</p>
+            <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:26px;">
+              <span class="button primary btn-coming-soon">Download on the App Store</span>
+              <span class="coming-soon-badge">Coming Soon</span>
+            </div>
           </div>
         </div>
       </div>
@@ -530,7 +481,7 @@
     <div class="container">
       <div class="footer-row">
         <a class="brand" href="#top"><img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" /><span>BalancePilot</span></a>
-        <div class="footer-links"><a href="#features">Features</a><a href="#screenshots">Screenshots</a><a href="#how">How It Works</a><a href="privacy.html">Privacy</a><a href="#waitlist">Waitlist</a></div>
+        <div class="footer-links"><a href="#features">Features</a><a href="#screenshots">Screenshots</a><a href="#how">How It Works</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a></div>
         <small>© <span id="year"></span> BalancePilot. All rights reserved.</small>
       </div>
     </div>
@@ -555,27 +506,6 @@
       });
     }
 
-    const waitlistForm = document.getElementById('waitlistForm');
-    const waitlistSuccess = document.getElementById('waitlistSuccess');
-
-    if (waitlistForm && waitlistSuccess) {
-      waitlistForm.addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const formData = new FormData(waitlistForm);
-        try {
-          await fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData).toString()
-          });
-          waitlistForm.reset();
-          waitlistForm.hidden = true;
-          waitlistSuccess.hidden = false;
-        } catch (error) {
-          waitlistForm.submit();
-        }
-      });
-    }
   </script>
 </body>
 </html>
