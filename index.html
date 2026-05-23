@@ -204,6 +204,7 @@
     .waitlist-form input[type="email"] {
       flex: 1 1 260px;
       min-height: 48px;
+      height: 48px;
       padding: 0 16px;
       border-radius: 11px;
       border: 1px solid var(--stroke);
@@ -317,9 +318,13 @@
         object-fit: contain;
       }
       .actions .button { width:100%; }
-      .waitlist-form { flex-direction: column; }
-      .waitlist-form input[type="email"],
-      .waitlist-form .button { width: 100%; }
+      #waitlist { padding: 52px 0; }
+      #waitlist .cta-panel { padding: 28px 22px; border-radius: 24px; gap: 20px; }
+      #waitlist .h2-cta, #waitlist h2 { font-size: clamp(2rem, 9vw, 2.7rem); line-height: 1; letter-spacing: -.06em; }
+      #waitlist .cta-panel p { font-size: 1rem; line-height: 1.5; }
+      .waitlist-form { width: 100%; display: grid; gap: 12px; }
+      .waitlist-form input[type="email"] { width: 100%; min-height: 48px; height: 48px; flex: none; }
+      .waitlist-form .button, .waitlist-form button { width: 100%; min-height: 48px; }
       .hero-visual { display:none; }
       .disclaimer { grid-template-columns:1fr; }
     }
