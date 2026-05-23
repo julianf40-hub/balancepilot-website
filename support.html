@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Get help with BalancePilot — contact support or find answers to common questions about the debt payoff planning app." />
+  <meta name="description" content="Get help with BalancePilot, including frequently asked questions about accounts, payoff strategies, due dates, payments, waitlist, privacy, and support." />
   <meta name="theme-color" content="#000000" />
   <title>Support — BalancePilot</title>
   <link rel="icon" type="image/png" href="balancepilot-icon.png" />
@@ -14,20 +14,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://balancepilot.net/support.html" />
   <meta property="og:title" content="Support — BalancePilot" />
-  <meta property="og:description" content="Get help with BalancePilot — contact support or find answers to common questions about the debt payoff planning app." />
+  <meta property="og:description" content="Get help with BalancePilot and read frequently asked questions." />
   <meta property="og:image" content="https://balancepilot.net/balancepilot-og.png" />
 
   <style>
     :root {
       --bg: #000000;
-      --panel: #0b0d10;
       --stroke: rgba(255,255,255,.13);
       --text: #ffffff;
       --muted: #a8adb8;
       --muted-2: #747b89;
       --blue: #0a84ff;
       --green: #32d74b;
-      --radius: 28px;
       --max: 900px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
     }
@@ -60,15 +58,39 @@
     .links { display: flex; align-items: center; gap: 22px; color: #f4f7fb; font-weight: 600; font-size: .94rem; }
     .links a { opacity: .88; }
     .links a:hover { opacity: 1; color: var(--blue); }
+    .links a[aria-current="page"] { opacity: 1; color: var(--blue); }
+
+    /* Coming-soon nav button */
     .nav-button {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 44px; padding: 0 20px; border-radius: 11px;
-      border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .9rem;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 44px; padding: 0 18px; border-radius: 11px;
+      border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .88rem;
       background: var(--blue); color: white;
-      box-shadow: 0 14px 38px rgba(10,132,255,.28); transition: .18s ease;
-      opacity: 1;
+      box-shadow: 0 14px 38px rgba(10,132,255,.28); transition: .18s ease; opacity: 1;
     }
-    .nav-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    .btn-coming-soon { pointer-events: none; opacity: .52; cursor: default; }
+    .coming-soon-badge {
+      display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.2); border-radius: 999px; padding: 2px 8px;
+      color: rgba(255,255,255,.8); vertical-align: middle;
+    }
+
+    /* ── Hamburger ── */
+    .mobile-menu-toggle {
+      display: none; width: 46px; height: 46px; border-radius: 13px;
+      border: 1px solid var(--stroke); background: rgba(255,255,255,.07);
+      color: var(--text); align-items: center; justify-content: center;
+      flex-direction: column; gap: 5px; cursor: pointer;
+    }
+    .mobile-menu-toggle span {
+      width: 20px; height: 2px; border-radius: 999px; background: currentColor;
+      transition: transform .18s ease, opacity .18s ease;
+    }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; }
 
     /* ── Buttons ── */
     .button {
@@ -88,79 +110,91 @@
       padding: 6px 14px; border-radius: 999px;
       background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.28);
       color: var(--blue); font-size: .82rem; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase;
-      margin-bottom: 18px;
+      letter-spacing: .06em; text-transform: uppercase; margin-bottom: 18px;
     }
+    h1 { font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 1.04; letter-spacing: -.065em; margin-bottom: 14px; }
+    .intro { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 640px; margin-bottom: 52px; }
 
-    h1 {
-      font-size: clamp(2.6rem, 5vw, 3.8rem);
-      line-height: 1.04; letter-spacing: -.065em;
-      margin-bottom: 16px;
-    }
-
-    .intro {
-      color: var(--muted); font-size: 1.08rem; line-height: 1.7;
-      max-width: 640px; margin-bottom: 52px;
-    }
-
-    /* ── Sections ── */
+    /* ── Cards ── */
     .support-body { display: flex; flex-direction: column; gap: 16px; }
 
     .support-section {
       background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border: 1px solid var(--stroke);
-      border-radius: 20px;
-      padding: 28px 32px;
+      border: 1px solid var(--stroke); border-radius: 20px; padding: 28px 32px;
     }
-
-    .support-section h2 {
-      font-size: 1.05rem; font-weight: 800;
-      letter-spacing: -.025em; margin-bottom: 12px;
-      color: #fff;
+    .support-section > h2 {
+      font-size: 1.05rem; font-weight: 800; letter-spacing: -.025em;
+      margin-bottom: 16px; color: #fff;
     }
-
     .support-section p { color: var(--muted); font-size: .98rem; line-height: 1.7; }
+    .support-section p + p { margin-top: 10px; }
     .support-section a { color: var(--blue); }
     .support-section a:hover { text-decoration: underline; }
+    .contact-action { margin-top: 18px; }
 
-    /* ── FAQ ── */
-    .faq-list { display: flex; flex-direction: column; gap: 20px; }
+    /* ── FAQ accordions ── */
+    .faq-group { display: flex; flex-direction: column; gap: 8px; }
 
-    .faq-item {}
-
-    .faq-q {
-      font-size: 1rem; font-weight: 800; color: #fff;
-      letter-spacing: -.02em; margin-bottom: 6px;
+    details.faq-item {
+      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+      border: 1px solid rgba(255,255,255,.10); border-radius: 13px; overflow: hidden;
     }
-
-    .faq-a { color: var(--muted); font-size: .98rem; line-height: 1.7; }
-    .faq-a a { color: var(--blue); }
-    .faq-a a:hover { text-decoration: underline; }
-
-    /* ── Bottom CTA ── */
-    .cta-row {
-      margin-top: 52px;
-      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    details.faq-item summary {
+      padding: 15px 20px; cursor: pointer; list-style: none;
+      font-weight: 700; font-size: .96rem; color: #fff;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      user-select: none; -webkit-tap-highlight-color: transparent;
     }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary::after {
+      content: '+'; font-size: 1.3rem; font-weight: 300; color: var(--blue);
+      flex-shrink: 0; line-height: 1;
+    }
+    details.faq-item[open] summary::after { content: '−'; }
+    details.faq-item summary:hover { background: rgba(255,255,255,.04); }
+    details.faq-item .faq-answer {
+      padding: 14px 20px 18px; border-top: 1px solid rgba(255,255,255,.07);
+      color: var(--muted); font-size: .95rem; line-height: 1.7;
+    }
+    details.faq-item .faq-answer a { color: var(--blue); }
+    details.faq-item .faq-answer a:hover { text-decoration: underline; }
 
     /* ── Footer ── */
-    footer {
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding: 32px 0;
-      color: var(--muted-2);
-      font-size: .88rem;
-    }
+    footer { border-top: 1px solid rgba(255,255,255,.08); padding: 32px 0; color: var(--muted-2); font-size: .88rem; }
     .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
     .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
     .footer-links a { color: var(--muted-2); }
     .footer-links a:hover { color: var(--blue); }
 
     /* ── Mobile ── */
-    @media (max-width: 680px) {
+    @media (max-width: 760px) {
+      .nav { min-height: 72px; }
+      .brand { min-width: 0; flex: 1; }
+      .brand span { white-space: nowrap; }
       .links { display: none; }
+      .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
+      .mobile-menu {
+        display: grid; gap: 10px; padding: 0 18px 18px;
+        background: rgba(0,0,0,.92); border-bottom: 1px solid rgba(255,255,255,.08);
+        backdrop-filter: blur(20px);
+      }
+      .mobile-menu[hidden] { display: none; }
+      .mobile-menu a {
+        display: flex; align-items: center; min-height: 46px; padding: 0 14px;
+        border-radius: 13px; color: var(--text); font-weight: 700;
+        background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08);
+      }
+      .mobile-menu a:hover { border-color: rgba(10,132,255,.45); }
+      .mobile-menu-button {
+        justify-content: center; background: rgba(255,255,255,.055) !important;
+      }
+    }
+    @media (max-width: 680px) {
+      .brand { font-size: 1.1rem; }
+      .logo-icon { width: 34px; height: 34px; border-radius: 10px; }
       .support-section { padding: 22px 20px; }
       h1 { font-size: 2.3rem; }
-      .cta-row .button { width: 100%; }
+      .button { width: 100%; }
     }
   </style>
 </head>
@@ -176,8 +210,23 @@
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
         <a href="index.html#screenshots">Screenshots</a>
-        <a class="nav-button" href="index.html#waitlist">Join Waitlist</a>
+        <a href="support.html" aria-current="page">Support</a>
+        <a href="privacy.html">Privacy</a>
+        <span class="nav-button btn-coming-soon">Download <span class="coming-soon-badge">Soon</span></span>
       </nav>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="index.html">Home</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#screenshots">Screenshots</a>
+      <a href="support.html" aria-current="page">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <span class="mobile-menu-button btn-coming-soon" style="display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:13px;font-weight:700;color:var(--muted-2);border:1px solid rgba(255,255,255,.08);">Download — Coming Soon</span>
     </div>
   </header>
 
@@ -185,47 +234,161 @@
     <div class="container content">
 
       <div class="eyebrow">BalancePilot Support</div>
-      <h1>Support</h1>
-      <p class="intro">Need help with BalancePilot? You're in the right place. Browse the questions below or reach out directly — we're happy to help.</p>
+      <h1>How can we help?</h1>
+      <p class="intro">Find answers to common questions about BalancePilot, payoff strategies, due dates, payment logging, privacy, and launch updates.</p>
 
       <div class="support-body">
 
+        <!-- Contact -->
         <div class="support-section">
-          <h2>Contact Us</h2>
-          <p>For questions, bug reports, or feature requests, email us at <a href="mailto:support@balancepilot.net">support@balancepilot.net</a>. We read every message and aim to respond as quickly as possible.</p>
+          <h2>Contact Support</h2>
+          <p>Need help or have feedback? Email us and we'll get back to you.</p>
+          <div class="contact-action">
+            <a class="button primary" href="mailto:hello@balancepilot.net?subject=BalancePilot%20Support">Email Support</a>
+          </div>
         </div>
 
+        <!-- A. Getting Started -->
         <div class="support-section">
-          <h2>Frequently Asked Questions</h2>
-          <div class="faq-list">
+          <h2>Getting Started</h2>
+          <div class="faq-group">
+            <details class="faq-item">
+              <summary>What is BalancePilot?</summary>
+              <div class="faq-answer">
+                <p>BalancePilot is a debt payoff planning app that helps you organize balances, due dates, payoff strategies, payments, and progress in one place.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Is BalancePilot available on the App Store yet?</summary>
+              <div class="faq-answer">
+                <p>BalancePilot is getting ready for launch. You can follow along for updates on the <a href="index.html">homepage</a>.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Does BalancePilot connect to my bank automatically?</summary>
+              <div class="faq-answer">
+                <p>No. BalancePilot is designed around manual tracking and planning. You enter your own balances, payments, and account details — no bank connections or account linking required.</p>
+              </div>
+            </details>
+          </div>
+        </div>
 
-            <div class="faq-item">
-              <p class="faq-q">Is BalancePilot connected to my bank?</p>
-              <p class="faq-a">No. BalancePilot is fully manual — you enter your own balances and payments. No bank connections, no account linking.</p>
-            </div>
+        <!-- B. Accounts and Balances -->
+        <div class="support-section">
+          <h2>Accounts and Balances</h2>
+          <div class="faq-group">
+            <details class="faq-item">
+              <summary>What account types can I track?</summary>
+              <div class="faq-answer">
+                <p>You can track debt accounts such as credit cards, loans, and other balances you want to organize for payoff planning.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Can I track checking cash or protected commitments?</summary>
+              <div class="faq-answer">
+                <p>Yes. BalancePilot can help account for checking and cash planning amounts and protected commitments so your payoff plan is more realistic about what money is actually available.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Do I have to enter exact account names?</summary>
+              <div class="faq-answer">
+                <p>No. You can use nicknames or labels that make sense to you.</p>
+              </div>
+            </details>
+          </div>
+        </div>
 
-            <div class="faq-item">
-              <p class="faq-q">Is my data private?</p>
-              <p class="faq-a">Yes. All your financial data stays on your device. We never transmit or store your account information on our servers.</p>
-            </div>
+        <!-- C. Payoff Strategies -->
+        <div class="support-section">
+          <h2>Payoff Strategies</h2>
+          <div class="faq-group">
+            <details class="faq-item">
+              <summary>What payoff strategies does BalancePilot support?</summary>
+              <div class="faq-answer">
+                <p>BalancePilot is designed to help compare strategies such as Avalanche, Snowball, Smart Hybrid, and Accelerated Payoff so you can see how each affects your timeline and total interest.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Does BalancePilot tell me what to pay first?</summary>
+              <div class="faq-answer">
+                <p>BalancePilot can highlight a suggested focus based on the information you enter and the strategy you choose, but it is a planning tool and not personalized financial advice.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>What is Accelerated Payoff?</summary>
+              <div class="faq-answer">
+                <p>Accelerated Payoff is designed to focus extra cash toward faster debt reduction while still helping you keep track of required payments and timing across all accounts.</p>
+              </div>
+            </details>
+          </div>
+        </div>
 
-            <div class="faq-item">
-              <p class="faq-q">How do I delete my data?</p>
-              <p class="faq-a">You can delete all your data by removing the app from your device. All locally stored data is deleted with the app.</p>
-            </div>
+        <!-- D. Due Dates and Payments -->
+        <div class="support-section">
+          <h2>Due Dates and Payments</h2>
+          <div class="faq-group">
+            <details class="faq-item">
+              <summary>Can BalancePilot track due dates?</summary>
+              <div class="faq-answer">
+                <p>Yes. BalancePilot is designed to help organize due dates, statement dates, urgent dates, and payoff timing across all your accounts.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Can I log payments?</summary>
+              <div class="faq-answer">
+                <p>Yes. BalancePilot is designed to let you log payments so progress and recent activity are easier to follow over time.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Can payment logging deduct from checking?</summary>
+              <div class="faq-answer">
+                <p>BalancePilot supports cash-aware planning where payment logging may optionally reflect checking and cash balance changes when that option is enabled.</p>
+              </div>
+            </details>
+          </div>
+        </div>
 
-            <div class="faq-item">
-              <p class="faq-q">I found a bug or have a feature request.</p>
-              <p class="faq-a">Email us at <a href="mailto:support@balancepilot.net">support@balancepilot.net</a> — we read every message.</p>
-            </div>
+        <!-- E. Privacy and Data -->
+        <div class="support-section">
+          <h2>Privacy and Data</h2>
+          <div class="faq-group">
+            <details class="faq-item">
+              <summary>Does BalancePilot sell my personal information?</summary>
+              <div class="faq-answer">
+                <p>No. BalancePilot does not sell personal information.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Is BalancePilot financial advice?</summary>
+              <div class="faq-answer">
+                <p>No. BalancePilot is a planning and organization tool. It does not provide personalized financial, legal, tax, or investment advice. Always consult a qualified professional for decisions that matter to your situation.</p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Where can I read the privacy policy?</summary>
+              <div class="faq-answer">
+                <p>You can read the full privacy policy on the <a href="privacy.html">Privacy page</a>.</p>
+              </div>
+            </details>
+          </div>
+        </div>
 
+        <!-- F. Feedback -->
+        <div class="support-section">
+          <h2>Feedback</h2>
+          <div class="faq-group">
+            <details class="faq-item">
+              <summary>How do I report a bug or request a feature?</summary>
+              <div class="faq-answer">
+                <p>Email <a href="mailto:hello@balancepilot.net?subject=BalancePilot%20Feedback">hello@balancepilot.net</a> with the subject "BalancePilot Feedback" and include details about what happened or what you would like to see. We read every message.</p>
+              </div>
+            </details>
           </div>
         </div>
 
       </div>
 
-      <div class="cta-row">
-        <a class="button primary" href="index.html#waitlist">Join the Waitlist</a>
+      <div style="margin-top:48px; display:flex; flex-wrap:wrap; gap:14px;">
         <a class="button secondary" href="index.html">Back to Home</a>
       </div>
 
@@ -239,17 +402,35 @@
         <span>BalancePilot</span>
       </a>
       <div class="footer-links">
-        <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
-        <a href="index.html#waitlist">Waitlist</a>
-        <a href="privacy.html">Privacy</a>
+        <a href="index.html#screenshots">Screenshots</a>
+        <a href="index.html#how">How It Works</a>
         <a href="support.html" aria-current="page">Support</a>
+        <a href="privacy.html">Privacy</a>
       </div>
       <small style="color:var(--muted-2);">© <span id="year"></span> BalancePilot. All rights reserved.</small>
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', function() {
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!isOpen));
+        mobileMenu.hidden = isOpen;
+      });
+      mobileMenu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          menuToggle.setAttribute('aria-expanded', 'false');
+          mobileMenu.hidden = true;
+        });
+      });
+    }
+  </script>
 
 </body>
 </html>
