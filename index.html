@@ -15,11 +15,11 @@
   <meta property="og:url" content="https://balancepilot.net/" />
   <meta property="og:title" content="BalancePilot — Take Control of Your Debt" />
   <meta property="og:description" content="Track balances, compare payoff strategies, manage due dates, log payments, and see your payoff progress clearly." />
-  <meta property="og:image" content="balancepilot-og.png" />
+  <meta property="og:image" content="https://balancepilot.net/balancepilot-og.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="BalancePilot — Take Control of Your Debt" />
   <meta name="twitter:description" content="Track balances, compare payoff strategies, manage due dates, log payments, and see your payoff progress clearly." />
-  <meta name="twitter:image" content="balancepilot-og.png" />
+  <meta name="twitter:image" content="https://balancepilot.net/balancepilot-og.png" />
 
   <style>
     :root {
@@ -152,6 +152,23 @@
     .disclaimer { padding: 28px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center; }
     .shield { width:64px; height:64px; border-radius:22px; display:grid; place-items:center; font-size:1.8rem; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.07); }
     .cta-panel { padding: clamp(30px, 6vw, 56px); display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    /* Waitlist form */
+    .waitlist-form { margin-top: 24px; }
+    .bot-field { display: none; }
+    .waitlist-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .waitlist-input {
+      flex: 1 1 220px; min-height: 48px; padding: 0 16px;
+      background: rgba(255,255,255,.07); border: 1px solid var(--stroke);
+      border-radius: 11px; color: white; font-size: .97rem; font-family: inherit;
+      transition: border-color .18s ease;
+    }
+    .waitlist-input::placeholder { color: var(--muted-2); }
+    .waitlist-input:focus { outline: none; border-color: var(--blue); background: rgba(255,255,255,.10); }
+    .waitlist-btn { flex-shrink: 0; }
+    .waitlist-note { margin-top: 12px; font-size: .85rem; color: var(--muted-2); }
+    .waitlist-success { display: none; margin-top: 18px; padding: 14px 18px; border-radius: 11px; background: rgba(50,215,75,.1); border: 1px solid rgba(50,215,75,.25); color: var(--green); font-weight: 600; }
+    .waitlist-success.show { display: block; }
+
     footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(--muted); }
     .footer-row { display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
     .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
@@ -180,6 +197,8 @@
       h1 { font-size: clamp(3rem, 17vw, 4.3rem); }
       .feature-grid, .steps, .screenshot-grid { grid-template-columns:1fr; }
       .actions .button { width:100%; }
+      .waitlist-row { flex-direction: column; }
+      .waitlist-input, .waitlist-btn { width: 100%; }
       .hero-visual { display:none; }
       .disclaimer { grid-template-columns:1fr; }
     }
@@ -197,7 +216,7 @@
         <a href="#screenshots">Screenshots</a>
         <a href="#how">How It Works</a>
         <a href="#privacy">Privacy</a>
-        <a class="nav-button" href="#download">Download</a>
+        <a class="nav-button" href="#waitlist">Join Waitlist</a>
       </nav>
     </div>
   </header>
@@ -210,7 +229,7 @@
           <h1>Take Control<br>of <span class="blue">Your Debt</span></h1>
           <p class="lead">Track balances, prioritize payments, compare payoff strategies, and stay on top of every due date — all in one focused app.</p>
           <div class="actions">
-            <a class="button primary" href="#download">Download on the App Store</a>
+            <a class="button primary" href="#waitlist">Join the Waitlist</a>
             <a class="button secondary" href="#features">See Features</a>
           </div>
           <div class="trust">
@@ -330,14 +349,23 @@
       </div>
     </section>
 
-    <section id="download">
+    <section id="waitlist">
       <div class="container">
         <div class="cta-panel">
-          <div>
-            <h2 class="h2-cta">Ready to Take Control?</h2>
-            <p>BalancePilot is getting ready for launch. Check back soon for the App Store link.</p>
+          <div style="flex:1; max-width:640px;">
+            <h2 class="h2-cta">Be the First to Know.</h2>
+            <p>BalancePilot is launching soon on the App Store. Drop your email and we'll notify you the moment it's live.</p>
+            <form class="waitlist-form" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="waitlist" />
+              <p class="bot-field"><label>Don't fill this out: <input name="bot-field" /></label></p>
+              <div class="waitlist-row">
+                <input class="waitlist-input" type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+                <button class="button primary waitlist-btn" type="submit">Notify Me at Launch</button>
+              </div>
+              <p class="waitlist-note">No spam. Just a heads-up when the app launches.</p>
+            </form>
+            <div class="waitlist-success" role="status" aria-live="polite">You're on the list — we'll be in touch when BalancePilot launches!</div>
           </div>
-          <a class="button primary disabled-link" href="#" aria-disabled="true">Coming Soon on the App Store</a>
         </div>
       </div>
     </section>
@@ -347,12 +375,36 @@
     <div class="container">
       <div class="footer-row">
         <a class="brand" href="#top"><img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" /><span>BalancePilot</span></a>
-        <div class="footer-links"><a href="#features">Features</a><a href="#screenshots">Screenshots</a><a href="#how">How It Works</a><a href="#privacy">Privacy</a></div>
+        <div class="footer-links"><a href="#features">Features</a><a href="#screenshots">Screenshots</a><a href="#how">How It Works</a><a href="#privacy">Privacy</a><a href="#waitlist">Waitlist</a></div>
         <small>© <span id="year"></span> BalancePilot. All rights reserved.</small>
       </div>
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Show success message after Netlify form submission (page reload with ?submitted)
+    const form = document.querySelector('.waitlist-form');
+    const success = document.querySelector('.waitlist-success');
+    if (form && success) {
+      if (new URLSearchParams(location.search).get('submitted') === 'waitlist') {
+        form.style.display = 'none';
+        success.classList.add('show');
+      }
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const data = new FormData(form);
+        fetch('/', { method: 'POST', body: data })
+          .then(function() {
+            form.style.display = 'none';
+            success.classList.add('show');
+          })
+          .catch(function() {
+            form.submit();
+          });
+      });
+    }
+  </script>
 </body>
 </html>
