@@ -79,6 +79,39 @@
     .button:hover, .nav-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
     .disabled-link { pointer-events: none; opacity: .82; }
 
+    /* ── Hamburger / mobile menu ── */
+    .mobile-menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.07);
+      color: var(--text);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .mobile-menu-toggle span {
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform .18s ease, opacity .18s ease;
+    }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+    .mobile-menu { display: none; }
+
     .hero { padding: 74px 0 34px; position: relative; }
     .hero-grid { display: grid; grid-template-columns: 1fr .9fr; align-items: center; gap: 54px; }
     .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 999px; color: var(--muted); background: rgba(255,255,255,.06); border: 1px solid var(--stroke); margin-bottom: 22px; }
@@ -214,15 +247,40 @@
       .screenshot-grid { grid-template-columns: repeat(2,1fr); }
       .cta-panel { flex-direction:column; align-items:flex-start; }
     }
-    @media (max-width: 680px) {
-      .links {
-        overflow-x: auto;
-        white-space: nowrap;
-        gap: 14px;
-        padding-bottom: 4px;
+    @media (max-width: 760px) {
+      .nav { min-height: 72px; }
+      .brand { min-width: 0; flex: 1; }
+      .brand span { white-space: nowrap; }
+      .links { display: none; }
+      .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
+      .mobile-menu {
+        display: grid;
+        gap: 10px;
+        padding: 0 18px 18px;
+        background: rgba(0,0,0,.92);
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        backdrop-filter: blur(20px);
       }
-      .links a:not(.nav-button) { display: inline-flex; }
-      .nav { align-items: center; }
+      .mobile-menu[hidden] { display: none; }
+      .mobile-menu a {
+        display: flex;
+        align-items: center;
+        min-height: 46px;
+        padding: 0 14px;
+        border-radius: 13px;
+        color: var(--text);
+        font-weight: 700;
+        background: rgba(255,255,255,.055);
+        border: 1px solid rgba(255,255,255,.08);
+      }
+      .mobile-menu a:hover { border-color: rgba(10,132,255,.45); }
+      .mobile-menu-button {
+        justify-content: center;
+        background: var(--blue) !important;
+        box-shadow: 0 14px 38px rgba(10,132,255,.28);
+      }
+    }
+    @media (max-width: 680px) {
       .brand { font-size:1.1rem; }
       .logo-icon { width:34px; height:34px; border-radius:10px; }
       .hero { padding-top:46px; }
@@ -251,6 +309,18 @@
         <a href="privacy.html">Privacy</a>
         <a class="nav-button" href="#waitlist">Join Waitlist</a>
       </nav>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#how">How It Works</a>
+      <a href="privacy.html">Privacy</a>
+      <a class="mobile-menu-button" href="#waitlist">Join Waitlist</a>
     </div>
   </header>
 
@@ -432,6 +502,22 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', function() {
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!isOpen));
+        mobileMenu.hidden = isOpen;
+      });
+      mobileMenu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          menuToggle.setAttribute('aria-expanded', 'false');
+          mobileMenu.hidden = true;
+        });
+      });
+    }
 
     const waitlistForm = document.getElementById('waitlistForm');
     const waitlistSuccess = document.getElementById('waitlistSuccess');
