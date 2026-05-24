@@ -168,11 +168,12 @@
       color: var(--muted); vertical-align: middle;
     }
 
-    /* ── Mobile ── */
-    @media (max-width: 680px) {
-      .links { display: none; }
+    /* ── Mobile nav (matches index.html + support.html breakpoint) ── */
+    @media (max-width: 760px) {
+      .nav { min-height: 72px; }
       .brand { min-width: 0; flex: 1; }
       .brand span { white-space: nowrap; }
+      .links { display: none; }
       .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
       .mobile-menu {
         display: grid; gap: 10px;
@@ -190,6 +191,11 @@
         border: 1px solid rgba(255,255,255,.08);
       }
       .mobile-menu a:hover { border-color: rgba(10,132,255,.45); }
+    }
+    /* ── Small screen content ── */
+    @media (max-width: 680px) {
+      .brand { font-size: 1.1rem; }
+      .logo-icon { width: 34px; height: 34px; border-radius: 10px; }
       .policy-section { padding: 22px 20px; }
       h1 { font-size: 2.3rem; }
       .cta-row .button { width: 100%; }
