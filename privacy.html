@@ -158,16 +158,6 @@
     .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .mobile-menu { display: none; }
 
-    /* Coming soon */
-    .btn-coming-soon { pointer-events: none; opacity: .52; cursor: default; }
-    .coming-soon-badge {
-      display: inline-block; font-size: .72rem; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase;
-      background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.18);
-      border-radius: 999px; padding: 3px 10px;
-      color: var(--muted); vertical-align: middle;
-    }
-
     /* ── Mobile nav (matches index.html + support.html breakpoint) ── */
     @media (max-width: 760px) {
       .nav { min-height: 72px; }
@@ -216,7 +206,7 @@
         <a href="index.html#screenshots">Screenshots</a>
         <a href="support.html">Support</a>
         <a href="privacy.html" aria-current="page">Privacy</a>
-        <span class="nav-button btn-coming-soon">Download <span class="coming-soon-badge">Pending Review</span></span>
+        <a class="nav-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
       </nav>
       <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span>
@@ -230,7 +220,7 @@
       <a href="index.html#screenshots">Screenshots</a>
       <a href="support.html">Support</a>
       <a href="privacy.html" aria-current="page">Privacy</a>
-      <span class="btn-coming-soon" style="display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:13px;font-weight:700;color:var(--text);background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);">Available on the App Store — Pending Review</span>
+      <a href="https://apps.apple.com/app/balancepilot/id6763011325" style="display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:13px;font-weight:700;color:white;background:var(--blue);border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 38px rgba(10,132,255,.28);">Download on the App Store</a>
     </div>
   </header>
 
