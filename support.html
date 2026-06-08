@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Get help with BalancePilot. Find answers about accounts, payoff strategies, due dates, payment logging, privacy, data storage, and how to contact support." />
+  <meta name="description" content="Get help with BalancePilot. Find answers about accounts, payoff strategies, due dates, payment logging, privacy, data storage, subscriptions, and how to contact support." />
   <meta name="theme-color" content="#000000" />
   <title>Support — BalancePilot</title>
   <link rel="icon" type="image/png" href="balancepilot-icon.png" />
   <link rel="apple-touch-icon" href="balancepilot-icon.png" />
   <link rel="canonical" href="https://balancepilot.net/support.html" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://balancepilot.net/support.html" />
   <meta property="og:title" content="Support — BalancePilot" />
@@ -25,7 +24,6 @@
       --muted: #a8adb8;
       --muted-2: #747b89;
       --blue: #0a84ff;
-      --green: #32d74b;
       --max: 900px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
     }
@@ -45,141 +43,64 @@
     img { max-width: 100%; display: block; }
     .container { width: min(100% - 36px, var(--max)); margin: 0 auto; }
 
-    /* ── Header ── */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(0,0,0,.72);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(20px);
-    }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,.72); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(20px); }
     .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
     .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; color: #fff; letter-spacing: -.045em; }
-    .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; display: block; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: #000; }
+    .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: #000; }
     .links { display: flex; align-items: center; gap: 22px; color: #f4f7fb; font-weight: 600; font-size: .94rem; }
     .links a { opacity: .88; }
-    .links a:hover { opacity: 1; color: var(--blue); }
-    .links a[aria-current="page"] { opacity: 1; color: var(--blue); }
+    .links a:hover, .links a[aria-current="page"] { opacity: 1; color: var(--blue); }
+    .nav-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 11px; border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .88rem; background: var(--blue); color: white; box-shadow: 0 14px 38px rgba(10,132,255,.28); transition: .18s ease; opacity: 1; }
 
-    /* Coming-soon nav button */
-    .nav-button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      min-height: 44px; padding: 0 18px; border-radius: 11px;
-      border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .88rem;
-      background: var(--blue); color: white;
-      box-shadow: 0 14px 38px rgba(10,132,255,.28); transition: .18s ease; opacity: 1;
-    }
-    /* ── Hamburger ── */
-    .mobile-menu-toggle {
-      display: none; width: 46px; height: 46px; border-radius: 13px;
-      border: 1px solid var(--stroke); background: rgba(255,255,255,.07);
-      color: var(--text); align-items: center; justify-content: center;
-      flex-direction: column; gap: 5px; cursor: pointer;
-    }
-    .mobile-menu-toggle span {
-      width: 20px; height: 2px; border-radius: 999px; background: currentColor;
-      transition: transform .18s ease, opacity .18s ease;
-    }
+    .mobile-menu-toggle { display: none; width: 46px; height: 46px; border-radius: 13px; border: 1px solid var(--stroke); background: rgba(255,255,255,.07); color: var(--text); align-items: center; justify-content: center; flex-direction: column; gap: 5px; cursor: pointer; }
+    .mobile-menu-toggle span { width: 20px; height: 2px; border-radius: 999px; background: currentColor; transition: transform .18s ease, opacity .18s ease; }
     .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
     .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .mobile-menu { display: none; }
 
-    /* ── Buttons ── */
-    .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      min-height: 48px; padding: 0 24px; border-radius: 11px;
-      border: 1px solid var(--stroke); font-weight: 800; font-size: .94rem; transition: .18s ease;
-    }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 11px; border: 1px solid var(--stroke); font-weight: 800; font-size: .94rem; transition: .18s ease; }
     .button.primary { background: var(--blue); color: white; border-color: rgba(255,255,255,.12); box-shadow: 0 14px 38px rgba(10,132,255,.28); }
     .button.secondary { background: rgba(255,255,255,.045); color: white; }
-    .button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    .button:hover, .nav-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
 
-    /* ── Page content ── */
     .content { padding: 64px 0 88px; }
-
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px; border-radius: 999px;
-      background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.28);
-      color: var(--blue); font-size: .82rem; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase; margin-bottom: 18px;
-    }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.28); color: var(--blue); font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 18px; }
     h1 { font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 1.04; letter-spacing: -.065em; margin-bottom: 14px; }
     .intro { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 640px; margin-bottom: 52px; }
-
-    /* ── Cards ── */
     .support-body { display: flex; flex-direction: column; gap: 16px; }
-
-    .support-section {
-      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border: 1px solid var(--stroke); border-radius: 20px; padding: 28px 32px;
-    }
-    .support-section > h2 {
-      font-size: 1.05rem; font-weight: 800; letter-spacing: -.025em;
-      margin-bottom: 16px; color: #fff;
-    }
+    .support-section { background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03)); border: 1px solid var(--stroke); border-radius: 20px; padding: 28px 32px; }
+    .support-section > h2 { font-size: 1.05rem; font-weight: 800; letter-spacing: -.025em; margin-bottom: 16px; color: #fff; }
     .support-section p { color: var(--muted); font-size: .98rem; line-height: 1.7; }
     .support-section p + p { margin-top: 10px; }
     .support-section a { color: var(--blue); }
     .support-section a:hover { text-decoration: underline; }
     .contact-action { margin-top: 18px; }
-
-    /* ── FAQ accordions ── */
     .faq-group { display: flex; flex-direction: column; gap: 8px; }
-
-    details.faq-item {
-      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
-      border: 1px solid rgba(255,255,255,.10); border-radius: 13px; overflow: hidden;
-    }
-    details.faq-item summary {
-      padding: 15px 20px; cursor: pointer; list-style: none;
-      font-weight: 700; font-size: .96rem; color: #fff;
-      display: flex; align-items: center; justify-content: space-between; gap: 14px;
-      user-select: none; -webkit-tap-highlight-color: transparent;
-    }
+    details.faq-item { background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)); border: 1px solid rgba(255,255,255,.10); border-radius: 13px; overflow: hidden; }
+    details.faq-item summary { padding: 15px 20px; cursor: pointer; list-style: none; font-weight: 700; font-size: .96rem; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 14px; user-select: none; -webkit-tap-highlight-color: transparent; }
     details.faq-item summary::-webkit-details-marker { display: none; }
-    details.faq-item summary::after {
-      content: '+'; font-size: 1.3rem; font-weight: 300; color: var(--blue);
-      flex-shrink: 0; line-height: 1;
-    }
+    details.faq-item summary::after { content: '+'; font-size: 1.3rem; font-weight: 300; color: var(--blue); flex-shrink: 0; line-height: 1; }
     details.faq-item[open] summary::after { content: '−'; }
     details.faq-item summary:hover { background: rgba(255,255,255,.04); }
-    details.faq-item .faq-answer {
-      padding: 14px 20px 18px; border-top: 1px solid rgba(255,255,255,.07);
-      color: var(--muted); font-size: .95rem; line-height: 1.7;
-    }
+    details.faq-item .faq-answer { padding: 14px 20px 18px; border-top: 1px solid rgba(255,255,255,.07); color: var(--muted); font-size: .95rem; line-height: 1.7; }
     details.faq-item .faq-answer a { color: var(--blue); }
-    details.faq-item .faq-answer a:hover { text-decoration: underline; }
-
-    /* ── Footer ── */
     footer { border-top: 1px solid rgba(255,255,255,.08); padding: 32px 0; color: var(--muted-2); font-size: .88rem; }
     .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
     .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
     .footer-links a { color: var(--muted-2); }
     .footer-links a:hover { color: var(--blue); }
 
-    /* ── Mobile ── */
     @media (max-width: 760px) {
       .nav { min-height: 72px; }
       .brand { min-width: 0; flex: 1; }
       .brand span { white-space: nowrap; }
       .links { display: none; }
       .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
-      .mobile-menu {
-        display: grid; gap: 10px; padding: 0 18px 18px;
-        background: rgba(0,0,0,.92); border-bottom: 1px solid rgba(255,255,255,.08);
-        backdrop-filter: blur(20px);
-      }
+      .mobile-menu { display: grid; gap: 10px; padding: 0 18px 18px; background: rgba(0,0,0,.92); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(20px); }
       .mobile-menu[hidden] { display: none; }
-      .mobile-menu a {
-        display: flex; align-items: center; min-height: 46px; padding: 0 14px;
-        border-radius: 13px; color: var(--text); font-weight: 700;
-        background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08);
-      }
-      .mobile-menu a:hover { border-color: rgba(10,132,255,.45); }
-      .mobile-menu-button {
-        justify-content: center; background: rgba(255,255,255,.055) !important;
-      }
+      .mobile-menu a { display: flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 13px; color: var(--text); font-weight: 700; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08); }
+      .mobile-menu-button { justify-content: center; background: var(--blue) !important; color: white !important; box-shadow: 0 14px 38px rgba(10,132,255,.28); }
     }
     @media (max-width: 680px) {
       .brand { font-size: 1.1rem; }
@@ -191,13 +112,9 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="container nav">
-      <a class="brand" href="index.html" aria-label="BalancePilot home">
-        <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" />
-        <span>BalancePilot</span>
-      </a>
+      <a class="brand" href="index.html" aria-label="BalancePilot home"><img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" /><span>BalancePilot</span></a>
       <nav class="links" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
@@ -206,11 +123,7 @@
         <a href="privacy.html">Privacy</a>
         <a class="nav-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
       </nav>
-      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
     </div>
     <div class="mobile-menu" id="mobileMenu" hidden>
       <a href="index.html">Home</a>
@@ -224,201 +137,86 @@
 
   <main>
     <div class="container content">
-
       <div class="eyebrow">BalancePilot Support</div>
       <h1>How can we help?</h1>
-      <p class="intro">Find answers to common questions about BalancePilot — what it does, how to use it, where your data is stored, and how to get in touch.</p>
+      <p class="intro">Find answers to common questions about BalancePilot — what it does, how to use it, where your data is stored, subscriptions, and how to get in touch.</p>
 
       <div class="support-body">
-
-        <!-- Contact -->
         <div class="support-section">
           <h2>Contact Support</h2>
-          <p>Need help or have feedback? Email us and we'll get back to you.</p>
-          <div class="contact-action">
-            <a class="button primary" href="mailto:hello@balancepilot.net?subject=BalancePilot%20Support">Email Support</a>
-          </div>
+          <p>Need help, found a bug, or have a feature idea? Email us and we'll get back to you.</p>
+          <div class="contact-action"><a class="button primary" href="mailto:hello@balancepilot.net?subject=BalancePilot%20Support">Email Support</a></div>
         </div>
 
-        <!-- A. Getting Started -->
         <div class="support-section">
           <h2>Getting Started</h2>
           <div class="faq-group">
-            <details class="faq-item">
-              <summary>What is BalancePilot?</summary>
-              <div class="faq-answer">
-                <p>BalancePilot is a debt payoff planning app that helps you organize balances, due dates, payoff strategies, payments, and progress in one place.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Is BalancePilot available on the App Store?</summary>
-              <div class="faq-answer">
-                <p>Yes. BalancePilot is free to download on the <a href="https://apps.apple.com/app/balancepilot/id6763011325">App Store</a>.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Does BalancePilot connect to my bank?</summary>
-              <div class="faq-answer">
-                <p>No. BalancePilot is manual-entry only and does not request bank login credentials or connect to financial accounts of any kind. You enter your own balances, payments, and account details directly.</p>
-              </div>
-            </details>
+            <details class="faq-item"><summary>What is BalancePilot?</summary><div class="faq-answer"><p>BalancePilot is a debt payoff planning app that helps you organize balances, due dates, payoff strategies, payments, cash planning, and progress in one place.</p></div></details>
+            <details class="faq-item"><summary>Is BalancePilot available on the App Store?</summary><div class="faq-answer"><p>Yes. BalancePilot is free to download on the <a href="https://apps.apple.com/app/balancepilot/id6763011325">App Store</a>.</p></div></details>
+            <details class="faq-item"><summary>Does BalancePilot connect to my bank?</summary><div class="faq-answer"><p>No. BalancePilot is manual-entry only and does not request bank login credentials or connect to financial accounts of any kind. You enter your own balances, payments, and account details directly.</p></div></details>
           </div>
         </div>
 
-        <!-- B. Accounts and Balances -->
         <div class="support-section">
           <h2>Accounts and Balances</h2>
           <div class="faq-group">
-            <details class="faq-item">
-              <summary>What account types can I track?</summary>
-              <div class="faq-answer">
-                <p>You can track debt accounts such as credit cards, loans, and other balances you want to organize for payoff planning.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Can I track checking cash or protected commitments?</summary>
-              <div class="faq-answer">
-                <p>Yes. BalancePilot can help account for checking and cash planning amounts and protected commitments so your payoff plan is more realistic about what money is actually available.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Do I have to enter exact account names?</summary>
-              <div class="faq-answer">
-                <p>No. You can use nicknames or labels that make sense to you.</p>
-              </div>
-            </details>
+            <details class="faq-item"><summary>What account types can I track?</summary><div class="faq-answer"><p>You can track debt accounts such as credit cards, auto loans, student loans, medical balances, personal loans, BNPL balances, and other accounts you want to organize for payoff planning. Some advanced categories may require BalancePilot Pro.</p></div></details>
+            <details class="faq-item"><summary>Can I track checking cash or protected commitments?</summary><div class="faq-answer"><p>Yes. BalancePilot can help account for checking cash, safety buffers, and protected commitments so your payoff plan is more realistic about what money may be available.</p></div></details>
+            <details class="faq-item"><summary>Do I have to enter exact account names?</summary><div class="faq-answer"><p>No. You can use nicknames or labels that make sense to you.</p></div></details>
           </div>
         </div>
 
-        <!-- C. Payoff Strategies -->
         <div class="support-section">
           <h2>Payoff Strategies</h2>
           <div class="faq-group">
-            <details class="faq-item">
-              <summary>What payoff strategies does BalancePilot support?</summary>
-              <div class="faq-answer">
-                <p>BalancePilot is designed to help compare strategies such as Avalanche, Snowball, Smart Hybrid, and Accelerated Payoff so you can see how each affects your timeline and total interest.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Does BalancePilot tell me what to pay first?</summary>
-              <div class="faq-answer">
-                <p>BalancePilot can highlight a suggested focus based on the information you enter and the strategy you choose, but it is a planning tool and not personalized financial advice.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>What is Accelerated Payoff?</summary>
-              <div class="faq-answer">
-                <p>Accelerated Payoff is designed to focus extra cash toward faster debt reduction while still helping you keep track of required payments and timing across all accounts.</p>
-              </div>
-            </details>
+            <details class="faq-item"><summary>What payoff strategies does BalancePilot support?</summary><div class="faq-answer"><p>BalancePilot helps compare strategies such as Avalanche, Snowball, Smart Hybrid, and Accelerated Payoff so you can understand how different approaches may affect your timeline and estimated interest.</p></div></details>
+            <details class="faq-item"><summary>Does BalancePilot tell me what to pay first?</summary><div class="faq-answer"><p>BalancePilot can highlight a suggested focus account based on the information you enter and the strategy you choose, but it is a planning tool and not personalized financial advice.</p></div></details>
+            <details class="faq-item"><summary>What is Accelerated Payoff?</summary><div class="faq-answer"><p>Accelerated Payoff is designed to focus extra cash toward faster debt reduction while still helping you keep track of required payments and timing across all accounts.</p></div></details>
           </div>
         </div>
 
-        <!-- D. Due Dates and Payments -->
         <div class="support-section">
           <h2>Due Dates and Payments</h2>
           <div class="faq-group">
-            <details class="faq-item">
-              <summary>Can BalancePilot track due dates?</summary>
-              <div class="faq-answer">
-                <p>Yes. BalancePilot is designed to help organize due dates, statement dates, urgent dates, and payoff timing across all your accounts.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Can I log payments?</summary>
-              <div class="faq-answer">
-                <p>Yes. BalancePilot is designed to let you log payments so progress and recent activity are easier to follow over time.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Can payment logging deduct from checking?</summary>
-              <div class="faq-answer">
-                <p>BalancePilot supports cash-aware planning where payment logging may optionally reflect checking and cash balance changes when that option is enabled.</p>
-              </div>
-            </details>
+            <details class="faq-item"><summary>Can BalancePilot track due dates?</summary><div class="faq-answer"><p>Yes. BalancePilot is designed to help organize due dates, statement dates, urgent dates, payday timing, and payoff timing across your accounts.</p></div></details>
+            <details class="faq-item"><summary>Can I log payments?</summary><div class="faq-answer"><p>Yes. BalancePilot lets you log payments so progress and recent activity are easier to follow over time.</p></div></details>
+            <details class="faq-item"><summary>Can payment logging deduct from checking?</summary><div class="faq-answer"><p>BalancePilot supports cash-aware planning where payment logging may optionally reflect checking and cash balance changes when that option is enabled.</p></div></details>
           </div>
         </div>
 
-        <!-- E. Privacy and Data -->
         <div class="support-section">
-          <h2>Privacy and Data</h2>
+          <h2>Privacy, Data, and Pro</h2>
           <div class="faq-group">
-            <details class="faq-item">
-              <summary>Where is my data stored?</summary>
-              <div class="faq-answer">
-                <p>In v1.0, BalancePilot stores app data locally on your device using standard iOS app storage. BalancePilot does not currently offer cloud sync, account-based backup, or bank syncing. App data can be deleted by deleting the app from your device.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Does BalancePilot sell my personal information?</summary>
-              <div class="faq-answer">
-                <p>No. BalancePilot does not sell personal information and does not use your financial data for advertising or profiling of any kind.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Is BalancePilot financial advice?</summary>
-              <div class="faq-answer">
-                <p>No. BalancePilot provides educational payoff estimates and planning tools only. It is not financial, legal, or tax advice. Always verify balances, due dates, APRs, minimum payments, and payment requirements with your lender, and consult a qualified professional for decisions that matter to your situation.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Is BalancePilot free?</summary>
-              <div class="faq-answer">
-                <p>BalancePilot v1.0 is launching free. Monetization and subscription features are not active in this release.</p>
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary>Where can I read the privacy policy?</summary>
-              <div class="faq-answer">
-                <p>You can read the full privacy policy on the <a href="privacy.html">Privacy page</a>.</p>
-              </div>
-            </details>
+            <details class="faq-item"><summary>Where is my data stored?</summary><div class="faq-answer"><p>BalancePilot stores app data locally on your device using standard iOS app storage. BalancePilot does not currently offer cloud sync, account-based backup, or bank syncing. App data can be deleted by deleting the app from your device.</p></div></details>
+            <details class="faq-item"><summary>Does BalancePilot sell my personal information?</summary><div class="faq-answer"><p>No. BalancePilot does not sell personal information and does not use your financial data for advertising or profiling of any kind.</p></div></details>
+            <details class="faq-item"><summary>Is BalancePilot financial advice?</summary><div class="faq-answer"><p>No. BalancePilot provides educational payoff estimates and planning tools only. It is not financial, legal, or tax advice. Always verify balances, due dates, APRs, minimum payments, and payment requirements with your lender, and consult a qualified professional for decisions that matter to your situation.</p></div></details>
+            <details class="faq-item"><summary>Is BalancePilot free?</summary><div class="faq-answer"><p>BalancePilot is free to download and includes core payoff planning features. BalancePilot Pro may offer additional premium features through an optional monthly subscription. Pricing and availability are shown in the app before purchase.</p></div></details>
+            <details class="faq-item"><summary>Where can I read the privacy policy?</summary><div class="faq-answer"><p>You can read the full privacy policy on the <a href="privacy.html">Privacy page</a>.</p></div></details>
           </div>
         </div>
 
-        <!-- F. Feedback -->
         <div class="support-section">
           <h2>Feedback</h2>
           <div class="faq-group">
-            <details class="faq-item">
-              <summary>How do I report a bug or request a feature?</summary>
-              <div class="faq-answer">
-                <p>Email <a href="mailto:hello@balancepilot.net?subject=BalancePilot%20Feedback">hello@balancepilot.net</a> with the subject "BalancePilot Feedback" and include details about what happened or what you would like to see. We read every message.</p>
-              </div>
-            </details>
+            <details class="faq-item"><summary>How do I report a bug or request a feature?</summary><div class="faq-answer"><p>Email <a href="mailto:hello@balancepilot.net?subject=BalancePilot%20Feedback">hello@balancepilot.net</a> with the subject "BalancePilot Feedback" and include details about what happened or what you would like to see. We read every message.</p></div></details>
           </div>
         </div>
-
       </div>
 
-      <div style="margin-top:48px; display:flex; flex-wrap:wrap; gap:14px;">
-        <a class="button secondary" href="index.html">Back to Home</a>
-      </div>
-
+      <div style="margin-top:48px; display:flex; flex-wrap:wrap; gap:14px;"><a class="button secondary" href="index.html">Back to Home</a></div>
     </div>
   </main>
 
   <footer>
     <div class="container footer-row">
-      <a class="brand" href="index.html">
-        <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" />
-        <span>BalancePilot</span>
-      </a>
-      <div class="footer-links">
-        <a href="index.html#features">Features</a>
-        <a href="index.html#screenshots">Screenshots</a>
-        <a href="index.html#how">How It Works</a>
-        <a href="support.html" aria-current="page">Support</a>
-        <a href="privacy.html">Privacy</a>
-      </div>
+      <a class="brand" href="index.html"><img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" /><span>BalancePilot</span></a>
+      <div class="footer-links"><a href="index.html#features">Features</a><a href="index.html#screenshots">Screenshots</a><a href="index.html#how">How It Works</a><a href="support.html" aria-current="page">Support</a><a href="privacy.html">Privacy</a></div>
       <small style="color:var(--muted-2);">© <span id="year"></span> BalancePilot. All rights reserved.</small>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobileMenu');
     if (menuToggle && mobileMenu) {
@@ -435,6 +233,5 @@
       });
     }
   </script>
-
 </body>
 </html>
