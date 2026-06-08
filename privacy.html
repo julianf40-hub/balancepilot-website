@@ -10,24 +10,20 @@
   <link rel="apple-touch-icon" href="balancepilot-icon.png" />
   <link rel="canonical" href="https://balancepilot.net/privacy.html" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://balancepilot.net/privacy.html" />
   <meta property="og:title" content="Privacy Policy — BalancePilot" />
-  <meta property="og:description" content="Read how BalancePilot handles privacy, user-entered information, contact emails, and third-party services." />
+  <meta property="og:description" content="Read how BalancePilot handles privacy, user-entered information, contact emails, local data storage, and third-party services." />
   <meta property="og:image" content="https://balancepilot.net/balancepilot-og.png" />
 
   <style>
     :root {
       --bg: #000000;
-      --panel: #0b0d10;
       --stroke: rgba(255,255,255,.13);
       --text: #ffffff;
       --muted: #a8adb8;
       --muted-2: #747b89;
       --blue: #0a84ff;
-      --green: #32d74b;
-      --radius: 28px;
       --max: 900px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
     }
@@ -47,142 +43,59 @@
     img { max-width: 100%; display: block; }
     .container { width: min(100% - 36px, var(--max)); margin: 0 auto; }
 
-    /* ── Header ── */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(0,0,0,.72);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(20px);
-    }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,.72); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(20px); }
     .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
     .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; color: #fff; letter-spacing: -.045em; }
-    .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; display: block; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: #000; }
+    .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: #000; }
     .links { display: flex; align-items: center; gap: 22px; color: #f4f7fb; font-weight: 600; font-size: .94rem; }
     .links a { opacity: .88; }
-    .links a:hover { opacity: 1; color: var(--blue); }
-    .nav-button {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 44px; padding: 0 20px; border-radius: 11px;
-      border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .9rem;
-      background: var(--blue); color: white;
-      box-shadow: 0 14px 38px rgba(10,132,255,.28); transition: .18s ease;
-      opacity: 1;
-    }
+    .links a:hover, .links a[aria-current="page"] { opacity: 1; color: var(--blue); }
+    .nav-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 20px; border-radius: 11px; border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .9rem; background: var(--blue); color: white; box-shadow: 0 14px 38px rgba(10,132,255,.28); transition: .18s ease; opacity: 1; }
     .nav-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
 
-    /* ── Buttons ── */
-    .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      min-height: 48px; padding: 0 24px; border-radius: 11px;
-      border: 1px solid var(--stroke); font-weight: 800; font-size: .94rem; transition: .18s ease;
-    }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 11px; border: 1px solid var(--stroke); font-weight: 800; font-size: .94rem; transition: .18s ease; }
     .button.primary { background: var(--blue); color: white; border-color: rgba(255,255,255,.12); box-shadow: 0 14px 38px rgba(10,132,255,.28); }
     .button.secondary { background: rgba(255,255,255,.045); color: white; }
     .button:hover { transform: translateY(-2px); filter: brightness(1.08); }
 
-    /* ── Page content ── */
-    .content { padding: 64px 0 88px; }
-
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px; border-radius: 999px;
-      background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.28);
-      color: var(--blue); font-size: .82rem; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      font-size: clamp(2.6rem, 5vw, 3.8rem);
-      line-height: 1.04; letter-spacing: -.065em;
-      margin-bottom: 10px;
-    }
-
-    .updated { color: var(--muted-2); font-size: .9rem; margin-bottom: 52px; }
-
-    /* ── Policy sections ── */
-    .policy-body { display: flex; flex-direction: column; gap: 16px; }
-
-    .policy-section {
-      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border: 1px solid var(--stroke);
-      border-radius: 20px;
-      padding: 28px 32px;
-    }
-
-    .policy-section h2 {
-      font-size: 1.05rem; font-weight: 800;
-      letter-spacing: -.025em; margin-bottom: 10px;
-      color: #fff;
-    }
-
-    .policy-section p { color: var(--muted); font-size: .98rem; line-height: 1.7; }
-    .policy-section p + p { margin-top: 10px; }
-    .policy-section a { color: var(--blue); }
-    .policy-section a:hover { text-decoration: underline; }
-
-    /* ── Bottom CTA ── */
-    .cta-row {
-      margin-top: 52px;
-      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
-    }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding: 32px 0;
-      color: var(--muted-2);
-      font-size: .88rem;
-    }
-    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
-    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-links a { color: var(--muted-2); }
-    .footer-links a:hover { color: var(--blue); }
-
-    /* ── Hamburger / mobile menu ── */
-    .mobile-menu-toggle {
-      display: none;
-      width: 46px; height: 46px; border-radius: 13px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.07);
-      color: var(--text);
-      align-items: center; justify-content: center; flex-direction: column; gap: 5px;
-      cursor: pointer;
-    }
-    .mobile-menu-toggle span {
-      width: 20px; height: 2px; border-radius: 999px;
-      background: currentColor; transition: transform .18s ease, opacity .18s ease;
-    }
+    .mobile-menu-toggle { display: none; width: 46px; height: 46px; border-radius: 13px; border: 1px solid var(--stroke); background: rgba(255,255,255,.07); color: var(--text); align-items: center; justify-content: center; flex-direction: column; gap: 5px; cursor: pointer; }
+    .mobile-menu-toggle span { width: 20px; height: 2px; border-radius: 999px; background: currentColor; transition: transform .18s ease, opacity .18s ease; }
     .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
     .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .mobile-menu { display: none; }
 
-    /* ── Mobile nav (matches index.html + support.html breakpoint) ── */
+    .content { padding: 64px 0 88px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.28); color: var(--blue); font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 18px; }
+    h1 { font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 1.04; letter-spacing: -.065em; margin-bottom: 10px; }
+    .updated { color: var(--muted-2); font-size: .9rem; margin-bottom: 52px; }
+    .policy-body { display: flex; flex-direction: column; gap: 16px; }
+    .policy-section { background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03)); border: 1px solid var(--stroke); border-radius: 20px; padding: 28px 32px; }
+    .policy-section h2 { font-size: 1.05rem; font-weight: 800; letter-spacing: -.025em; margin-bottom: 10px; color: #fff; }
+    .policy-section p { color: var(--muted); font-size: .98rem; line-height: 1.7; }
+    .policy-section p + p { margin-top: 10px; }
+    .policy-section a { color: var(--blue); }
+    .policy-section a:hover { text-decoration: underline; }
+    .policy-section ul { margin-top:12px; padding-left:20px; display:flex; flex-direction:column; gap:10px; color:var(--muted); font-size:.98rem; line-height:1.7; }
+    .policy-section strong { color: #fff; }
+    .cta-row { margin-top: 52px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    footer { border-top: 1px solid rgba(255,255,255,.08); padding: 32px 0; color: var(--muted-2); font-size: .88rem; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted-2); }
+    .footer-links a:hover { color: var(--blue); }
+
     @media (max-width: 760px) {
       .nav { min-height: 72px; }
       .brand { min-width: 0; flex: 1; }
       .brand span { white-space: nowrap; }
       .links { display: none; }
       .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
-      .mobile-menu {
-        display: grid; gap: 10px;
-        padding: 0 18px 18px;
-        background: rgba(0,0,0,.92);
-        border-bottom: 1px solid rgba(255,255,255,.08);
-        backdrop-filter: blur(20px);
-      }
+      .mobile-menu { display: grid; gap: 10px; padding: 0 18px 18px; background: rgba(0,0,0,.92); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(20px); }
       .mobile-menu[hidden] { display: none; }
-      .mobile-menu a {
-        display: flex; align-items: center;
-        min-height: 46px; padding: 0 14px; border-radius: 13px;
-        color: var(--text); font-weight: 700;
-        background: rgba(255,255,255,.055);
-        border: 1px solid rgba(255,255,255,.08);
-      }
-      .mobile-menu a:hover { border-color: rgba(10,132,255,.45); }
+      .mobile-menu a { display: flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 13px; color: var(--text); font-weight: 700; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08); }
+      .mobile-menu-button { justify-content: center; background: var(--blue) !important; color: white !important; box-shadow: 0 14px 38px rgba(10,132,255,.28); }
     }
-    /* ── Small screen content ── */
     @media (max-width: 680px) {
       .brand { font-size: 1.1rem; }
       .logo-icon { width: 34px; height: 34px; border-radius: 10px; }
@@ -193,13 +106,9 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="container nav">
-      <a class="brand" href="index.html" aria-label="BalancePilot home">
-        <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" />
-        <span>BalancePilot</span>
-      </a>
+      <a class="brand" href="index.html" aria-label="BalancePilot home"><img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" /><span>BalancePilot</span></a>
       <nav class="links" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
@@ -208,11 +117,7 @@
         <a href="privacy.html" aria-current="page">Privacy</a>
         <a class="nav-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
       </nav>
-      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
     </div>
     <div class="mobile-menu" id="mobileMenu" hidden>
       <a href="index.html">Home</a>
@@ -220,58 +125,63 @@
       <a href="index.html#screenshots">Screenshots</a>
       <a href="support.html">Support</a>
       <a href="privacy.html" aria-current="page">Privacy</a>
-      <a href="https://apps.apple.com/app/balancepilot/id6763011325" style="display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:13px;font-weight:700;color:white;background:var(--blue);border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 38px rgba(10,132,255,.28);">Download on the App Store</a>
+      <a class="mobile-menu-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
     </div>
   </header>
 
   <main>
     <div class="container content">
-
       <div class="eyebrow">BalancePilot Privacy</div>
       <h1>Privacy Policy</h1>
-      <p class="updated">Last updated: May 23, 2026</p>
+      <p class="updated">Last updated: June 8, 2026</p>
 
       <div class="policy-body">
-
         <div class="policy-section">
           <h2>Overview</h2>
-          <p>BalancePilot is a debt payoff planning app designed to help users organize debt accounts, balances, due dates, payoff strategies, payment progress, and related planning information. This policy explains what information the app and website may collect and how it is handled. BalancePilot does not sell your personal information and does not use it for advertising.</p>
+          <p>BalancePilot is a debt payoff planning app designed to help users organize debt accounts, balances, due dates, payoff strategies, payment progress, cash planning, and related information. This policy explains what information the app and website may collect and how it is handled.</p>
+          <p>BalancePilot does not sell your personal information and does not use your financial data for advertising or profiling.</p>
         </div>
 
         <div class="policy-section">
           <h2>Information You Enter</h2>
-          <p>BalancePilot is a manual-entry app. Users enter information such as account names, balances, APRs, due dates, statement dates, payment amounts, checking and cash planning amounts, protected commitments, notes, and payoff preferences. This information is entered by you and is used only to power the app's planning features.</p>
+          <p>BalancePilot is a manual-entry app. Users may enter information such as account names, balances, APRs, due dates, statement dates, payment amounts, checking and cash planning amounts, protected commitments, notes, and payoff preferences. This information is entered by you and is used to power the app's planning features.</p>
           <p>BalancePilot does not connect to bank accounts. BalancePilot does not request bank login credentials or direct access to financial accounts of any kind. Users should avoid entering sensitive personal information beyond what is needed for debt payoff planning.</p>
         </div>
 
         <div class="policy-section">
           <h2>How Information Is Used</h2>
-          <p>Information you enter is used to show balances, organize accounts, compare payoff strategies, calculate progress, estimate payoff timing, display due dates, and help you decide what to focus on next.</p>
-          <p>BalancePilot does not sell personal information. BalancePilot does not use your financial data for advertising, profiling, or analytics purposes.</p>
+          <p>Information you enter is used to show balances, organize accounts, compare payoff strategies, calculate progress, estimate payoff timing, display due dates, support payday-aware planning, and help you understand what to focus on next.</p>
+          <p>BalancePilot does not sell personal information. BalancePilot does not use your financial data for advertising, profiling, or third-party marketing purposes.</p>
         </div>
 
         <div class="policy-section">
           <h2>Data Storage</h2>
-          <p>BalancePilot stores app data locally on your device using standard iOS app storage. BalancePilot does not currently offer cloud sync or account-based backup. If cloud features are added in a future version, this policy will be updated to explain what data is collected and how it is handled.</p>
-          <p>BalancePilot does not currently offer account login, cloud sync, or bank syncing. App data can be deleted by deleting the app from your device.</p>
+          <p>BalancePilot stores app data locally on your device using standard iOS app storage. BalancePilot does not currently offer cloud sync, account-based backup, or bank syncing. If cloud features are added in a future version, this policy will be updated to explain what data is collected and how it is handled.</p>
+          <p>App data can be deleted by deleting the app from your device.</p>
         </div>
 
         <div class="policy-section">
           <h2>Email Contact</h2>
-          <p>If you contact BalancePilot by email, your email address may be used to send App Store launch notifications, support replies, and important app-related announcements. Your email address will not be sold or shared with third parties. You can request removal at any time by contacting <a href="mailto:hello@balancepilot.net">hello@balancepilot.net</a>.</p>
+          <p>If you contact BalancePilot by email, your email address and message contents may be used to respond to support requests, bug reports, feature requests, or important app-related questions. Your email address will not be sold or shared with third parties for advertising. You can request removal from support records by contacting <a href="mailto:hello@balancepilot.net">hello@balancepilot.net</a>.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>Subscriptions and Purchases</h2>
+          <p>BalancePilot may offer optional Pro features through in-app purchases or subscriptions. Purchases, billing, subscription management, refunds, and App Store account information are handled by Apple according to Apple's own policies and privacy practices.</p>
+          <p>BalancePilot does not receive your full payment card number from Apple.</p>
         </div>
 
         <div class="policy-section">
           <h2>No Financial Advice</h2>
-          <p>BalancePilot is a planning and organization tool. It does not provide personalized financial, legal, tax, or investment advice. The app and website help users organize information they already have — not to recommend specific financial products or strategies. Users are responsible for their own financial decisions and should consult a qualified professional when needed.</p>
+          <p>BalancePilot is a planning and organization tool. It does not provide personalized financial, legal, tax, or investment advice. The app and website help users organize information they enter and compare planning scenarios. Users are responsible for their own financial decisions and should consult a qualified professional when needed.</p>
         </div>
 
         <div class="policy-section">
           <h2>Third-Party Services</h2>
           <p>The following third-party services may be involved in operating this website or app:</p>
-          <ul style="margin-top:12px; padding-left:20px; display:flex; flex-direction:column; gap:10px; color:var(--muted); font-size:.98rem; line-height:1.7;">
-            <li><strong style="color:#fff;">GitHub Pages</strong> — This website is hosted using GitHub Pages. GitHub may process standard technical information, such as IP address, browser type, device information, and pages visited, as part of normal hosting, security, and analytics operations. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's Privacy Statement</a>.</li>
-            <li><strong style="color:#fff;">Apple App Store</strong> — When the app becomes available on the App Store, Apple may process app downloads or in-app purchases in accordance with their own privacy practices. See <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a>.</li>
+          <ul>
+            <li><strong>GitHub Pages</strong> — This website is hosted using GitHub Pages. GitHub may process standard technical information, such as IP address, browser type, device information, and pages visited, as part of normal hosting, security, and analytics operations. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's Privacy Statement</a>.</li>
+            <li><strong>Apple App Store</strong> — When you download the app or make an in-app purchase through the App Store, Apple may process app downloads, purchases, subscriptions, refunds, and related account activity in accordance with Apple's privacy practices. See <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a>.</li>
           </ul>
         </div>
 
@@ -282,43 +192,32 @@
 
         <div class="policy-section">
           <h2>Changes to This Policy</h2>
-          <p>This policy may be updated as the app evolves — for example, when new features are added or hosting arrangements change. Updates will be posted on this page with a new "Last updated" date. Continued use of the app or website after changes are posted constitutes acceptance of the updated policy.</p>
+          <p>This policy may be updated as the app evolves — for example, when new features are added, subscription features change, or hosting arrangements change. Updates will be posted on this page with a new "Last updated" date. Continued use of the app or website after changes are posted constitutes acceptance of the updated policy.</p>
         </div>
 
         <div class="policy-section">
           <h2>Contact</h2>
           <p>If you have questions about this Privacy Policy or how your information is handled, contact us at <a href="mailto:hello@balancepilot.net">hello@balancepilot.net</a>.</p>
         </div>
-
       </div>
 
       <div class="cta-row">
         <a class="button primary" href="index.html">Back to Home</a>
-        <a class="button secondary" href="index.html">Back to Home</a>
+        <a class="button secondary" href="support.html">Contact Support</a>
       </div>
-
     </div>
   </main>
 
   <footer>
     <div class="container footer-row">
-      <a class="brand" href="index.html">
-        <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" />
-        <span>BalancePilot</span>
-      </a>
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="index.html#features">Features</a>
-        <a href="support.html">Support</a>
-        <a href="privacy.html" aria-current="page">Privacy</a>
-      </div>
+      <a class="brand" href="index.html"><img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" /><span>BalancePilot</span></a>
+      <div class="footer-links"><a href="index.html">Home</a><a href="index.html#features">Features</a><a href="support.html">Support</a><a href="privacy.html" aria-current="page">Privacy</a></div>
       <small style="color:var(--muted-2);">© <span id="year"></span> BalancePilot. All rights reserved.</small>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobileMenu');
     if (menuToggle && mobileMenu) {
@@ -335,6 +234,5 @@
       });
     }
   </script>
-
 </body>
 </html>
