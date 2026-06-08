@@ -10,28 +10,23 @@
   <link rel="apple-touch-icon" href="balancepilot-icon.png" />
   <link rel="canonical" href="https://balancepilot.net/" />
 
-  <!-- Open Graph / Social sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://balancepilot.net/" />
   <meta property="og:title" content="BalancePilot — Take Control of Your Debt" />
   <meta property="og:description" content="Track balances, compare payoff strategies, manage due dates, log payments, and see your payoff progress clearly." />
   <meta property="og:image" content="https://balancepilot.net/balancepilot-og.png" />
+
   <style>
     :root {
       --bg: #000000;
       --panel: #0b0d10;
       --panel-2: #11151c;
-      --glass: rgba(255,255,255,.07);
-      --glass-strong: rgba(255,255,255,.12);
       --stroke: rgba(255,255,255,.13);
       --text: #ffffff;
       --muted: #a8adb8;
       --muted-2: #747b89;
       --blue: #0a84ff;
-      --blue-2: #0074ff;
       --green: #32d74b;
-      --red: #ff453a;
-      --yellow: #ffd60a;
       --radius: 28px;
       --max: 1180px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
@@ -60,7 +55,7 @@
     }
     .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
     .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; color: #ffffff; letter-spacing: -.045em; }
-    .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; display: block; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: #000; }
+    .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: #000; }
     .links { display: flex; align-items: center; gap: 26px; color: #f4f7fb; font-weight: 600; font-size: .94rem; }
     .links a:not(.nav-button){ opacity: .88; }
     .links a:not(.nav-button):hover { opacity: 1; color: var(--blue); }
@@ -72,39 +67,16 @@
     .nav-button, .button.primary { background: var(--blue); color: white; border-color: rgba(255,255,255,.12); box-shadow: 0 14px 38px rgba(10,132,255,.28); }
     .button.secondary { background: rgba(255,255,255,.045); color: white; }
     .button:hover, .nav-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
-    .disabled-link { pointer-events: none; opacity: .82; }
 
-    /* ── Hamburger / mobile menu ── */
     .mobile-menu-toggle {
-      display: none;
-      width: 46px;
-      height: 46px;
-      border-radius: 13px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.07);
-      color: var(--text);
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
+      display: none; width: 46px; height: 46px; border-radius: 13px;
+      border: 1px solid var(--stroke); background: rgba(255,255,255,.07); color: var(--text);
+      align-items: center; justify-content: center; flex-direction: column; gap: 5px; cursor: pointer;
     }
-    .mobile-menu-toggle span {
-      width: 20px;
-      height: 2px;
-      border-radius: 999px;
-      background: currentColor;
-      transition: transform .18s ease, opacity .18s ease;
-    }
-    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) {
-      opacity: 0;
-    }
-    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
+    .mobile-menu-toggle span { width: 20px; height: 2px; border-radius: 999px; background: currentColor; transition: transform .18s ease, opacity .18s ease; }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .mobile-menu { display: none; }
 
     .hero { padding: 74px 0 34px; position: relative; }
@@ -118,35 +90,9 @@
     .trust { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); font-size: .98rem; }
     .trust strong { color: white; }
 
-    .hero-visual { position: relative; display: grid; place-items: center; }
+    .hero-visual { position: relative; display: grid; place-items: center; min-height: 680px; }
     .orb { position: absolute; width: 510px; height: 510px; border-radius: 50%; background: radial-gradient(circle, rgba(10,132,255,.35), transparent 62%); filter: blur(18px); pointer-events: none; }
-
-    /* Image performance */
-    .shot-img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      height: auto;
-      border-radius: 21px;
-    }
-    .hero-visual {
-      position: relative;
-      display: grid;
-      place-items: center;
-      min-height: 680px;
-    }
-    .hero-screenshot {
-      position: relative;
-      z-index: 2;
-      width: min(100%, 520px);
-      height: auto;
-      max-height: 720px;
-      object-fit: contain;
-      display: block;
-      border-radius: 40px;
-      box-shadow: 0 38px 80px rgba(0,0,0,.66), 0 0 70px rgba(10,132,255,.24);
-      transform: rotate(3deg);
-    }
+    .hero-screenshot { position: relative; z-index: 2; width: min(100%, 520px); height: auto; max-height: 720px; object-fit: contain; border-radius: 40px; box-shadow: 0 38px 80px rgba(0,0,0,.66), 0 0 70px rgba(10,132,255,.24); transform: rotate(3deg); }
 
     section { padding: 76px 0; }
     .section-head { max-width: 780px; margin-bottom: 32px; }
@@ -157,27 +103,21 @@
     .section-head p { color: var(--muted); font-size:1.1rem; }
 
     .feature-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
-    .feature-card, .step, .disclaimer, .cta-panel { background: linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.045)); border:1px solid var(--stroke); border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,.22); }
+    .feature-card, .step, .disclaimer, .cta-panel, .why-panel, .pro-panel { background: linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.045)); border:1px solid var(--stroke); border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,.22); }
     .feature-card { padding: 24px; min-height: 210px; }
     .icon { width:48px; height:48px; border-radius:50%; display:grid; place-items:center; margin-bottom:18px; background: rgba(10,132,255,.14); border:1px solid rgba(10,132,255,.25); color:var(--blue); font-size:1.35rem; }
-    .feature-card h3, .step h3 { font-size:1.2rem; letter-spacing:-.035em; margin-bottom:8px; }
-    .feature-card p, .step p, .disclaimer p, .cta-panel p { color: var(--muted); }
+    .feature-card h3, .step h3, .why-point h3, .pro-point h3 { font-size:1.2rem; letter-spacing:-.035em; margin-bottom:8px; }
+    .feature-card p, .step p, .disclaimer p, .cta-panel p, .why-panel p, .pro-panel p { color: var(--muted); }
 
-    /* Screenshot grid */
+    .why-panel, .pro-panel { padding: clamp(28px, 5vw, 46px); }
+    .why-grid, .pro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+    .why-point, .pro-point { padding: 20px; border-radius: 22px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.08); }
+    .why-point p, .pro-point p { font-size: .98rem; }
+
     .screens { padding-top: 34px; }
-    .screenshot-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      align-items: start;
-    }
-    .shot {
-      border-radius: 26px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--stroke);
-      padding: 10px;
-      overflow: hidden;
-    }
+    .screenshot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: start; }
+    .shot { border-radius: 26px; background: rgba(255,255,255,.04); border: 1px solid var(--stroke); padding: 10px; overflow: hidden; }
+    .shot-img { width: 100%; height: auto; object-fit: cover; border-radius: 21px; }
     .shot-title { padding: 12px 4px 2px; color: white; font-weight: 800; letter-spacing: -.03em; font-size: .95rem; }
     .shot-caption { color: var(--muted); font-size: .85rem; padding: 0 4px 6px; }
     .mobile-swipe-hint { display: none; }
@@ -196,9 +136,9 @@
 
     @media (max-width: 980px) {
       .hero-grid { grid-template-columns:1fr; }
-      .hero-visual { padding: 28px 0 12px; }
+      .hero-visual { padding: 28px 0 12px; min-height: auto; }
       .hero-screenshot { transform: none; width: min(100%, 420px); max-height: none; }
-      .feature-grid, .steps { grid-template-columns:1fr 1fr; }
+      .feature-grid, .steps, .why-grid, .pro-grid { grid-template-columns:1fr 1fr; }
       .screenshot-grid { grid-template-columns: repeat(2,1fr); }
       .cta-panel { flex-direction:column; align-items:flex-start; }
     }
@@ -208,75 +148,31 @@
       .brand span { white-space: nowrap; }
       .links { display: none; }
       .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
-      .mobile-menu {
-        display: grid;
-        gap: 10px;
-        padding: 0 18px 18px;
-        background: rgba(0,0,0,.92);
-        border-bottom: 1px solid rgba(255,255,255,.08);
-        backdrop-filter: blur(20px);
-      }
+      .mobile-menu { display: grid; gap: 10px; padding: 0 18px 18px; background: rgba(0,0,0,.92); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(20px); }
       .mobile-menu[hidden] { display: none; }
-      .mobile-menu a {
-        display: flex;
-        align-items: center;
-        min-height: 46px;
-        padding: 0 14px;
-        border-radius: 13px;
-        color: var(--text);
-        font-weight: 700;
-        background: rgba(255,255,255,.055);
-        border: 1px solid rgba(255,255,255,.08);
-      }
-      .mobile-menu a:hover { border-color: rgba(10,132,255,.45); }
-      .mobile-menu-button {
-        justify-content: center;
-        background: var(--blue) !important;
-        box-shadow: 0 14px 38px rgba(10,132,255,.28);
-      }
+      .mobile-menu a { display: flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 13px; color: var(--text); font-weight: 700; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08); }
+      .mobile-menu-button { justify-content: center; background: var(--blue) !important; box-shadow: 0 14px 38px rgba(10,132,255,.28); }
     }
     @media (max-width: 680px) {
       .brand { font-size:1.1rem; }
       .logo-icon { width:34px; height:34px; border-radius:10px; }
-      .hero { padding-top:72px; }
+      .hero { padding-top:56px; padding-bottom: 18px; }
       h1 { font-size: clamp(3rem, 17vw, 4.3rem); }
-      .feature-grid, .steps { grid-template-columns:1fr; }
-      .mobile-swipe-hint {
-        display: block;
-        color: var(--muted);
-        font-size: .95rem;
-        margin-top: -18px;
-        margin-bottom: 18px;
-      }
-      .screenshot-grid {
-        display: flex;
-        gap: 16px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        scroll-padding-left: 18px;
-        padding: 4px 18px 18px;
-        margin-left: -18px;
-        margin-right: -18px;
-        -webkit-overflow-scrolling: touch;
-      }
+      .feature-grid, .steps, .why-grid, .pro-grid { grid-template-columns:1fr; }
+      .mobile-swipe-hint { display: block; color: var(--muted); font-size: .95rem; margin-top: -18px; margin-bottom: 18px; }
+      .screenshot-grid { display: flex; gap: 16px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding-left: 18px; padding: 4px 18px 18px; margin-left: -18px; margin-right: -18px; -webkit-overflow-scrolling: touch; }
       .screenshot-grid::-webkit-scrollbar { display: none; }
-      .shot {
-        flex: 0 0 min(82vw, 360px);
-        scroll-snap-align: center;
-      }
-      .shot-img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-      }
+      .shot { flex: 0 0 min(82vw, 360px); scroll-snap-align: center; }
+      .shot-img { object-fit: contain; }
       .actions .button { width:100%; }
+      .hero-visual { display: grid; padding-top: 18px; }
+      .hero-screenshot { width: min(76vw, 290px); border-radius: 28px; box-shadow: 0 24px 52px rgba(0,0,0,.55), 0 0 42px rgba(10,132,255,.18); }
+      .orb { width: 280px; height: 280px; }
+      .disclaimer { grid-template-columns:1fr; }
       #waitlist { padding: 52px 0; }
       #waitlist .cta-panel { padding: 28px 22px; border-radius: 24px; gap: 20px; }
       #waitlist .h2-cta, #waitlist h2 { font-size: clamp(2rem, 9vw, 2.7rem); line-height: 1; letter-spacing: -.06em; }
       #waitlist .cta-panel p { font-size: 1rem; line-height: 1.5; }
-      .hero-visual { display:none; }
-      .disclaimer { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -296,9 +192,7 @@
         <a class="nav-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
       </nav>
       <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
     <div class="mobile-menu" id="mobileMenu" hidden>
@@ -331,16 +225,7 @@
 
         <div class="hero-visual" role="img" aria-label="BalancePilot app dashboard preview">
           <div class="orb" aria-hidden="true"></div>
-          <img
-            class="hero-screenshot"
-            src="screenshot-overview.png"
-            width="863"
-            height="1202"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            alt="BalancePilot dashboard showing debt overview, paid this month, debt-free date, debt progress, and best next move"
-          />
+          <img class="hero-screenshot" src="screenshot-overview.png" width="863" height="1202" loading="eager" fetchpriority="high" decoding="async" alt="BalancePilot dashboard showing debt overview, paid this month, debt-free date, debt progress, and best next move" />
         </div>
       </div>
     </section>
@@ -348,16 +233,32 @@
     <section id="features">
       <div class="container">
         <div class="section-head">
-          <h2>Everything users need to stay focused.</h2>
+          <h2>Everything you need to stay focused.</h2>
           <p>BalancePilot keeps debt payoff planning clear: accounts, strategies, payment logging, calendars, and progress all in one place.</p>
         </div>
         <div class="feature-grid">
-          <article class="feature-card"><div class="icon" aria-hidden="true">♟</div><h3>Compare Strategies</h3><p>Compare payoff methods side-by-side to find the fastest, most cost-effective path forward.</p></article>
+          <article class="feature-card"><div class="icon" aria-hidden="true">♟</div><h3>Compare Strategies</h3><p>Compare payoff methods side-by-side to understand different paths forward.</p></article>
           <article class="feature-card"><div class="icon" aria-hidden="true">▣</div><h3>Manage Every Account</h3><p>Track balances, APRs, due dates, checking cash, and protected commitments from one organized view.</p></article>
           <article class="feature-card"><div class="icon" aria-hidden="true">$</div><h3>Log Payments in Seconds</h3><p>Quickly record payments, choose payoff amounts, and optionally deduct from checking.</p></article>
           <article class="feature-card"><div class="icon" aria-hidden="true">□</div><h3>Stay Ahead of Due Dates</h3><p>Use the calendar and timeline to track bills, statements, urgent dates, and payday.</p></article>
           <article class="feature-card"><div class="icon" aria-hidden="true">▮</div><h3>See Progress Clearly</h3><p>Monitor cash, monthly payments, recent activity, and your debt-free goal in one dashboard.</p></article>
-          <article class="feature-card"><div class="icon" aria-hidden="true">◎</div><h3>Smart Next-Move Guidance</h3><p>See a clear recommended focus account so users know where extra money should go next.</p></article>
+          <article class="feature-card"><div class="icon" aria-hidden="true">◎</div><h3>Smart Next-Move Guidance</h3><p>See a clear suggested focus account based on the strategy and details you enter.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="container">
+        <div class="why-panel">
+          <div class="section-head" style="margin-bottom:0;">
+            <h2>Built for real-life payoff planning.</h2>
+            <p>Most payoff calculators assume perfect numbers. BalancePilot helps you plan around due dates, checking cash, protected commitments, paydays, and the payments you actually make.</p>
+          </div>
+          <div class="why-grid">
+            <div class="why-point"><h3>Cash-aware planning</h3><p>See how checking cash, safety buffers, and set-asides affect what may be available for payments.</p></div>
+            <div class="why-point"><h3>Payday-aware timing</h3><p>Plan around when money comes in, not just when a balance exists.</p></div>
+            <div class="why-point"><h3>Manual by design</h3><p>No bank login required. You stay in control of what information you enter and track.</p></div>
+          </div>
         </div>
       </div>
     </section>
@@ -370,46 +271,14 @@
         </div>
         <p class="mobile-swipe-hint">Swipe to preview more screens →</p>
         <div class="screenshot-grid">
-          <article class="shot">
-            <img class="shot-img" src="screenshot-home.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot home dashboard showing debt overview and best next move" />
-            <h3 class="shot-title">Take Control of Your Debt</h3>
-            <p class="shot-caption">Debt overview, best next move, and cash at a glance.</p>
-          </article>
-          <article class="shot">
-            <img class="shot-img" src="screenshot-progress.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot progress dashboard showing monthly payments chart and recent activity" />
-            <h3 class="shot-title">See Your Progress Clearly</h3>
-            <p class="shot-caption">Cash, activity, charts, and debt-free target.</p>
-          </article>
-          <article class="shot">
-            <img class="shot-img" src="screenshot-accounts.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Accounts screen showing debt summary, checking balance, protected cash, and active balances" />
-            <h3 class="shot-title">Manage Every Account</h3>
-            <p class="shot-caption">Balances, APRs, due dates, and protected cash.</p>
-          </article>
-          <article class="shot">
-            <img class="shot-img" src="screenshot-strategy.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot payoff plan screen showing strategy selection" />
-            <h3 class="shot-title">Choose the Right Strategy</h3>
-            <p class="shot-caption">Avalanche, Snowball, Smart Hybrid, and Accelerated Payoff.</p>
-          </article>
-          <article class="shot">
-            <img class="shot-img" src="screenshot-compare.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot compare strategies screen showing payoff dates, interest costs, and savings side-by-side" />
-            <h3 class="shot-title">Compare Every Strategy</h3>
-            <p class="shot-caption">Payoff dates, interest costs, and savings side-by-side.</p>
-          </article>
-          <article class="shot">
-            <img class="shot-img" src="screenshot-payday.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot payday plan screen showing set-asides and payoff targets" />
-            <h3 class="shot-title">Plan Every Payday</h3>
-            <p class="shot-caption">Protect set-asides and act on your payoff target.</p>
-          </article>
-          <article class="shot">
-            <img class="shot-img" src="screenshot-upcoming.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot upcoming screen with calendar and due date timeline" />
-            <h3 class="shot-title">Stay Ahead of Every Due Date</h3>
-            <p class="shot-caption">Calendar dots for due dates, statements, and payday.</p>
-          </article>
-          <article class="shot">
-            <img class="shot-img" src="screenshot-log.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot log payment screen showing quick payment flow with checking deduction" />
-            <h3 class="shot-title">Log Payments in Seconds</h3>
-            <p class="shot-caption">Quick payment flow with checking deduction.</p>
-          </article>
+          <article class="shot"><img class="shot-img" src="screenshot-home.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot home dashboard showing debt overview and best next move" /><h3 class="shot-title">Take Control of Your Debt</h3><p class="shot-caption">Debt overview, best next move, and cash at a glance.</p></article>
+          <article class="shot"><img class="shot-img" src="screenshot-progress.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot progress dashboard showing monthly payments chart and recent activity" /><h3 class="shot-title">See Your Progress Clearly</h3><p class="shot-caption">Cash, activity, charts, and debt-free target.</p></article>
+          <article class="shot"><img class="shot-img" src="screenshot-accounts.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Accounts screen showing debt summary, checking balance, protected cash, and active balances" /><h3 class="shot-title">Manage Every Account</h3><p class="shot-caption">Balances, APRs, due dates, and protected cash.</p></article>
+          <article class="shot"><img class="shot-img" src="screenshot-strategy.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot payoff plan screen showing strategy selection" /><h3 class="shot-title">Choose the Right Strategy</h3><p class="shot-caption">Avalanche, Snowball, Smart Hybrid, and Accelerated Payoff.</p></article>
+          <article class="shot"><img class="shot-img" src="screenshot-compare.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot compare strategies screen showing payoff dates, interest costs, and savings side-by-side" /><h3 class="shot-title">Compare Every Strategy</h3><p class="shot-caption">Payoff dates, interest costs, and savings side-by-side.</p></article>
+          <article class="shot"><img class="shot-img" src="screenshot-payday.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot payday plan screen showing set-asides and payoff targets" /><h3 class="shot-title">Plan Every Payday</h3><p class="shot-caption">Protect set-asides and act on your payoff target.</p></article>
+          <article class="shot"><img class="shot-img" src="screenshot-upcoming.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot upcoming screen with calendar and due date timeline" /><h3 class="shot-title">Stay Ahead of Every Due Date</h3><p class="shot-caption">Calendar dots for due dates, statements, and payday.</p></article>
+          <article class="shot"><img class="shot-img" src="screenshot-log.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot log payment screen showing quick payment flow with checking deduction" /><h3 class="shot-title">Log Payments in Seconds</h3><p class="shot-caption">Quick payment flow with checking deduction.</p></article>
         </div>
       </div>
     </section>
@@ -424,6 +293,22 @@
           <article class="step"><div class="step-num">1</div><h3>Add Your Accounts</h3><p>Enter cards, loans, minimums, due dates, APRs, and checking cash in seconds.</p></article>
           <article class="step"><div class="step-num">2</div><h3>Choose a Strategy</h3><p>Compare payoff options and pick the plan that best fits your goals and motivation style.</p></article>
           <article class="step"><div class="step-num">3</div><h3>Follow Your Plan</h3><p>Log payments, track progress, and stay on top of due dates from one clean dashboard.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pro">
+      <div class="container">
+        <div class="pro-panel">
+          <div class="section-head" style="margin-bottom:0;">
+            <h2>Free to start. Pro when you need more.</h2>
+            <p>BalancePilot is free to download and includes core payoff planning tools. Optional BalancePilot Pro features support advanced planning, premium interface options, statement tools, and continued updates.</p>
+          </div>
+          <div class="pro-grid">
+            <div class="pro-point"><h3>Core tools included</h3><p>Track balances, due dates, payoff strategies, payments, and progress without needing a subscription.</p></div>
+            <div class="pro-point"><h3>Optional upgrade</h3><p>Pro is designed for users who want more advanced planning and premium tools inside the app.</p></div>
+            <div class="pro-point"><h3>Transparent pricing</h3><p>Subscription details are shown in the app before purchase. You can download and explore first.</p></div>
+          </div>
         </div>
       </div>
     </section>
@@ -493,7 +378,6 @@
         });
       });
     }
-
   </script>
 </body>
 </html>
