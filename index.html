@@ -3,74 +3,123 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="BalancePilot is a manual debt payoff planner that helps you understand what to pay next, preview loan impacts before borrowing, and build a realistic path to becoming debt free." />
-<meta name="keywords" content="debt payoff planner, debt payoff app, loan impact calculator, debt planning app, payoff strategy app, manual debt tracker, debt payoff calculator, credit utilization tracker" />
+<meta name="description" content="Plan your debt payoff, compare loan scenarios, preview financial decisions, and understand the impact before you borrow with BalancePilot." />
+<meta name="keywords" content="debt payoff planner, debt payoff app, loan impact calculator, debt planning app, payoff strategy app, manual debt tracker, credit utilization tracker, what-if debt planner" />
 <meta name="theme-color" content="#000000" />
-<title>BalancePilot — Plan Your Debt Payoff Before You Move Money</title>
+<title>BalancePilot – Debt Payoff Planner & Loan Impact Preview App</title>
 <link rel="icon" type="image/png" href="balancepilot-icon.png" />
 <link rel="apple-touch-icon" href="balancepilot-icon.png" />
 <link rel="canonical" href="https://balancepilot.net/" />
+<link rel="preload" as="image" href="screenshot-overview.png" fetchpriority="high" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://balancepilot.net/" />
-<meta property="og:title" content="BalancePilot — Plan Your Debt Payoff Before You Move Money" />
-<meta property="og:description" content="Understand what to pay next, preview loan impacts before borrowing, and build a realistic path to becoming debt free. No bank linking required." />
+<meta property="og:title" content="BalancePilot – Debt Payoff Planner & Loan Impact Preview App" />
+<meta property="og:description" content="Plan your debt payoff, compare loan scenarios, preview financial decisions, and understand the impact before you borrow." />
 <meta property="og:image" content="https://balancepilot.net/balancepilot-og.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "BalancePilot",
+  "description": "Plan your debt payoff, compare loan scenarios, preview financial decisions, and understand the impact before you borrow.",
+  "operatingSystem": "iOS",
+  "applicationCategory": "FinanceApplication",
+  "url": "https://balancepilot.net",
+  "downloadUrl": "https://apps.apple.com/app/balancepilot/id6763011325",
+  "offers": { "@type": "Offer", "price": "0.00", "priceCurrency": "USD" }
+}
+</script>
 <style>
 :root {
---bg: #000000;
---panel: #0b0d10;
---panel-2: #11151c;
---stroke: rgba(255,255,255,.13);
---text: #ffffff;
---muted: #a8adb8;
---muted-2: #747b89;
---blue: #0a84ff;
---green: #32d74b;
---radius: 28px;
---max: 1180px;
-font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  --bg: #000000;
+  --stroke: rgba(255,255,255,.12);
+  --text: #ffffff;
+  --muted: #a8adb8;
+  --muted-2: #747b89;
+  --blue: #0a84ff;
+  --green: #32d74b;
+  --radius: 28px;
+  --max: 1180px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body {
-background:
-  radial-gradient(circle at 76% 9%, rgba(10,132,255,.34), transparent 31rem),
-  radial-gradient(circle at 0% 42%, rgba(10,132,255,.18), transparent 25rem),
-  linear-gradient(180deg, #000 0%, #02050b 50%, #000 100%);
-color: var(--text);
-line-height: 1.55;
-overflow-x: hidden;
+  background:
+    radial-gradient(ellipse at 78% 4%, rgba(10,132,255,.38), transparent 34rem),
+    radial-gradient(ellipse at -4% 46%, rgba(10,132,255,.2), transparent 28rem),
+    linear-gradient(180deg, #000 0%, #020610 55%, #000 100%);
+  color: var(--text);
+  line-height: 1.55;
+  overflow-x: hidden;
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 .container { width: min(100% - 36px, var(--max)); margin: 0 auto; }
 
+/* ── Animations ── */
+@keyframes orb-drift {
+  0%, 100% { opacity: .75; transform: scale(1) translate(0,0); }
+  33%       { opacity: 1;   transform: scale(1.07) translate(4px,-6px); }
+  66%       { opacity: .85; transform: scale(.96)  translate(-4px,4px); }
+}
+@keyframes screenshot-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1);
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in-d1 { transition-delay: .08s; }
+.fade-in-d2 { transition-delay: .16s; }
+.fade-in-d3 { transition-delay: .24s; }
+.fade-in-d4 { transition-delay: .32s; }
+.fade-in-d5 { transition-delay: .10s; }
+.fade-in-d6 { transition-delay: .20s; }
+
 /* ── Nav ── */
 header {
-position: sticky; top: 0; z-index: 100;
-background: rgba(0,0,0,.72);
-border-bottom: 1px solid rgba(255,255,255,.08);
-backdrop-filter: blur(20px);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(0,0,0,.78);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
 }
 .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
-.brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; color: #ffffff; letter-spacing: -.045em; }
+.brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; color: #fff; letter-spacing: -.045em; }
 .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: #000; }
 .links { display: flex; align-items: center; gap: 26px; color: #f4f7fb; font-weight: 600; font-size: .94rem; }
-.links a:not(.nav-button){ opacity: .88; }
+.links a:not(.nav-button) { opacity: .82; transition: opacity .15s; }
 .links a:not(.nav-button):hover { opacity: 1; color: var(--blue); }
 .nav-button, .button {
-display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-min-height: 48px; padding: 0 22px; border-radius: 11px;
-border: 1px solid var(--stroke); font-weight: 800; font-size: .94rem; transition: .18s ease;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 22px; border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .94rem;
+  transition: transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s ease, filter .15s ease;
+  cursor: pointer; text-decoration: none;
 }
-.nav-button, .button.primary { background: var(--blue); color: white; border-color: rgba(255,255,255,.12); box-shadow: 0 14px 38px rgba(10,132,255,.28); }
-.button.secondary { background: rgba(255,255,255,.045); color: white; }
-.button:hover, .nav-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.nav-button, .button.primary {
+  background: var(--blue); color: white;
+  box-shadow: 0 10px 30px rgba(10,132,255,.3), inset 0 1px 0 rgba(255,255,255,.18);
+}
+.button.secondary { background: rgba(255,255,255,.06); color: white; border-color: rgba(255,255,255,.1); }
+.button:hover, .nav-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 44px rgba(10,132,255,.4), inset 0 1px 0 rgba(255,255,255,.18);
+  filter: brightness(1.06);
+}
+.button.secondary:hover { box-shadow: 0 12px 30px rgba(0,0,0,.25); filter: brightness(1.1); }
+.button:active, .nav-button:active { transform: translateY(0) !important; filter: brightness(.96) !important; transition-duration: .06s !important; }
 .mobile-menu-toggle {
-display: none; width: 46px; height: 46px; border-radius: 13px;
-border: 1px solid var(--stroke); background: rgba(255,255,255,.07); color: var(--text);
-align-items: center; justify-content: center; flex-direction: column; gap: 5px; cursor: pointer;
+  display: none; width: 46px; height: 46px; border-radius: 13px;
+  border: 1px solid var(--stroke); background: rgba(255,255,255,.07); color: var(--text);
+  align-items: center; justify-content: center; flex-direction: column; gap: 5px; cursor: pointer;
+  transition: background .15s;
 }
+.mobile-menu-toggle:hover { background: rgba(255,255,255,.12); }
 .mobile-menu-toggle span { width: 20px; height: 2px; border-radius: 999px; background: currentColor; transition: transform .18s ease, opacity .18s ease; }
 .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
@@ -79,207 +128,287 @@ align-items: center; justify-content: center; flex-direction: column; gap: 5px; 
 
 /* ── Badges ── */
 .badge-new {
-display: inline-flex; align-items: center;
-padding: 2px 9px; border-radius: 999px;
-background: rgba(10,132,255,.15); border: 1px solid rgba(10,132,255,.3);
-color: var(--blue); font-size: .67rem; font-weight: 800; letter-spacing: .08em;
-text-transform: uppercase; margin-left: 8px; vertical-align: middle;
-position: relative; top: -1px;
+  display: inline-flex; align-items: center;
+  padding: 2px 9px; border-radius: 999px;
+  background: rgba(10,132,255,.16); border: 1px solid rgba(10,132,255,.32);
+  color: var(--blue); font-size: .65rem; font-weight: 800; letter-spacing: .09em;
+  text-transform: uppercase; margin-left: 7px; vertical-align: middle; position: relative; top: -1px;
 }
 .badge-pro {
-display: inline-flex; align-items: center;
-padding: 2px 9px; border-radius: 999px;
-background: rgba(255,193,0,.12); border: 1px solid rgba(255,193,0,.28);
-color: #ffc100; font-size: .67rem; font-weight: 800; letter-spacing: .08em;
-text-transform: uppercase; margin-left: 8px; vertical-align: middle;
-position: relative; top: -1px;
+  display: inline-flex; align-items: center;
+  padding: 2px 9px; border-radius: 999px;
+  background: rgba(255,193,0,.12); border: 1px solid rgba(255,193,0,.3);
+  color: #ffc100; font-size: .65rem; font-weight: 800; letter-spacing: .09em;
+  text-transform: uppercase; margin-left: 7px; vertical-align: middle; position: relative; top: -1px;
 }
 
 /* ── Hero ── */
-.hero { padding: 56px 0 0; }
+.hero { padding: 60px 0 0; }
 .hero-grid-new {
   display: grid;
   grid-template-columns: 1fr 370px 1fr;
-  gap: 32px;
-  align-items: center;
+  gap: 32px; align-items: center;
 }
 .hero-left { display: flex; flex-direction: column; gap: 20px; }
 .hero-brand-inline {
   display: inline-flex; align-items: center; gap: 11px;
-  font-size: 1.1rem; font-weight: 800; letter-spacing: -.045em; color: #fff;
+  font-size: 1.05rem; font-weight: 800; letter-spacing: -.04em; color: rgba(255,255,255,.7);
 }
-.hero-brand-inline .logo-icon { width: 40px; height: 40px; border-radius: 11px; }
-h1 { font-size: clamp(2.8rem, 5.2vw, 4.8rem); line-height: .96; letter-spacing: -.07em; }
+.hero-brand-inline .logo-icon { width: 38px; height: 38px; border-radius: 10px; }
+h1 {
+  font-size: clamp(2.7rem, 5.1vw, 4.7rem);
+  line-height: .95; letter-spacing: -.072em;
+  text-wrap: balance;
+}
 .blue { color: var(--blue); }
 .hero-sub {
-  color: var(--muted); font-size: 1.08rem; line-height: 1.65;
-  max-width: 480px;
+  color: var(--muted); font-size: 1.08rem; line-height: 1.68;
+  max-width: 460px;
 }
+/* Mobile CTA — shown above bullets on small screens */
+.hero-mobile-cta { display: none; flex-direction: column; gap: 10px; }
+.hero-mobile-cta .button { width: 100%; justify-content: center; }
+.hero-mobile-cta-sub { color: var(--muted-2); font-size: .8rem; text-align: center; }
+
 .hero-bullets { list-style: none; display: flex; flex-direction: column; gap: 9px; }
 .hero-bullets li {
   display: flex; align-items: center; gap: 11px;
-  color: var(--muted); font-size: .97rem; line-height: 1.4;
+  color: var(--muted); font-size: .97rem;
 }
 .hero-bullets li::before {
   content: '';
-  width: 18px; height: 18px; border-radius: 50%;
-  background: rgba(10,132,255,.14); border: 1px solid rgba(10,132,255,.28);
-  display: inline-block; flex-shrink: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2 2 4-4' stroke='%230a84ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: center;
-}
-.hero-cta-row {
-  display: flex; flex-wrap: wrap; gap: 15px;
-  justify-content: center; padding: 32px 0 10px;
-}
-.hero-trust {
-  text-align: center; color: var(--muted-2);
-  font-size: .85rem; padding-bottom: 20px; letter-spacing: .01em;
+  width: 18px; height: 18px; min-width: 18px; border-radius: 50%;
+  background: rgba(10,132,255,.13) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M2 5l2.2 2.2L8 3' stroke='%230a84ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
+  border: 1px solid rgba(10,132,255,.25);
 }
 
 /* Center phone */
 .hero-visual { position: relative; display: grid; place-items: center; }
 .orb {
   position: absolute; width: 340px; height: 340px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(10,132,255,.38), transparent 62%);
-  filter: blur(18px); pointer-events: none;
+  background: radial-gradient(circle, rgba(10,132,255,.4), transparent 64%);
+  filter: blur(20px); pointer-events: none;
+  animation: orb-drift 9s ease-in-out infinite;
 }
 .hero-screenshot {
   position: relative; z-index: 2;
   width: min(100%, 370px); height: auto;
-  object-fit: contain; border-radius: 34px;
-  box-shadow: 0 38px 80px rgba(0,0,0,.66), 0 0 60px rgba(10,132,255,.22);
+  object-fit: contain; border-radius: 36px;
+  box-shadow: 0 40px 90px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.07), 0 0 64px rgba(10,132,255,.22);
+  animation: screenshot-float 7s ease-in-out infinite;
 }
 
-/* Right hero chips */
+/* Right chips */
 .hero-right { display: flex; flex-direction: column; gap: 18px; }
 .hero-feature-card {
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: flex-start; gap: 14px;
   padding: 18px 20px; border-radius: 20px;
-  background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.035));
-  border: 1px solid rgba(255,255,255,.12);
-  box-shadow: 0 14px 34px rgba(0,0,0,.30);
+  background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.11);
+  box-shadow: 0 14px 36px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.08);
+  transition: transform .2s ease, box-shadow .2s ease;
 }
+.hero-feature-card:hover { transform: translateX(4px); box-shadow: 0 18px 44px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.1); }
 .hfc-icon {
-  width: 46px; height: 46px; border-radius: 50%;
-  background: rgba(10,132,255,.15); border: 1px solid rgba(10,132,255,.28);
-  color: var(--blue); display: grid; place-items: center; flex-shrink: 0;
+  width: 42px; height: 42px; min-width: 42px; border-radius: 12px;
+  background: rgba(10,132,255,.14); border: 1px solid rgba(10,132,255,.26);
+  color: var(--blue); display: grid; place-items: center;
 }
-.hfc-title { font-size: .98rem; font-weight: 800; letter-spacing: -.03em; }
-.hfc-sub { color: var(--muted); font-size: .87rem; margin-top: 3px; line-height: 1.4; }
+.hfc-title { font-size: .97rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.3; }
+.hfc-sub { color: var(--muted); font-size: .85rem; margin-top: 4px; line-height: 1.45; }
 
-/* ── Page sections ── */
-section { padding: 76px 0; }
-.section-head { max-width: 780px; margin-bottom: 32px; }
-.section-head.center { text-align: center; margin-left:auto; margin-right:auto; }
-h2 { font-size: clamp(2.2rem, 5vw, 4.1rem); line-height:1.02; letter-spacing:-.065em; margin-bottom:14px; }
-.h2-sm { font-size: clamp(1.8rem, 3.5vw, 2.9rem); }
-.h2-cta { font-size: clamp(2rem, 4vw, 3.2rem); }
-.section-head p { color: var(--muted); font-size:1.1rem; }
+/* Desktop CTA row */
+.hero-cta-row {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  justify-content: center; padding: 34px 0 8px;
+}
+.hero-trust { text-align: center; color: var(--muted-2); font-size: .84rem; padding-bottom: 24px; }
+
+/* ── Section base ── */
+section { padding: 80px 0; }
+.section-head { max-width: 760px; margin-bottom: 36px; }
+.section-head.center { text-align: center; margin-left: auto; margin-right: auto; }
+h2 { font-size: clamp(2.1rem, 4.8vw, 4rem); line-height: 1.03; letter-spacing: -.065em; margin-bottom: 14px; }
+.h2-sm { font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: -.055em; }
+.h2-cta { font-size: clamp(2rem, 4vw, 3.1rem); letter-spacing: -.06em; }
+.section-head p { color: var(--muted); font-size: 1.08rem; line-height: 1.7; }
 .eyebrow-label {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 5px 13px; border-radius: 999px;
-  background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.26);
+  background: rgba(10,132,255,.11); border: 1px solid rgba(10,132,255,.25);
   color: var(--blue); font-size: .78rem; font-weight: 700; letter-spacing: .08em;
   text-transform: uppercase; margin-bottom: 14px;
 }
 
-/* Feature grid */
-.feature-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
-.feature-card, .step, .disclaimer, .cta-panel, .why-panel, .pro-panel, .loan-panel, .trust-panel { background: linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.045)); border:1px solid var(--stroke); border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,.22); }
-.feature-card { padding: 24px; min-height: 200px; position: relative; }
-.icon { width:48px; height:48px; border-radius:50%; display:grid; place-items:center; margin-bottom:18px; background: rgba(10,132,255,.14); border:1px solid rgba(10,132,255,.25); color:var(--blue); font-size:1.35rem; }
-.feature-card h3, .step h3, .why-point h3, .pro-point h3 { font-size:1.15rem; letter-spacing:-.03em; margin-bottom:8px; }
-.feature-card p, .step p, .disclaimer p, .cta-panel p, .why-panel p, .pro-panel p { color: var(--muted); line-height: 1.65; }
-
-/* Why panel */
-.why-panel, .pro-panel, .loan-panel, .trust-panel { padding: clamp(28px, 5vw, 46px); }
-.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
-.why-point { padding: 20px; border-radius: 22px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.08); }
-.why-point p { font-size: .98rem; }
-
-/* Loan Impact section */
-.loan-grid {
-  display: grid; grid-template-columns: 1fr 300px;
-  gap: 48px; align-items: center;
+/* ── Glass card base ── */
+.glass {
+  background: linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: var(--radius);
+  box-shadow: 0 22px 64px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.1);
 }
-.loan-bullets { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-top: 22px; }
+
+/* ── Feature grid ── */
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.feature-card {
+  padding: 26px; min-height: 190px;
+  background: linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: var(--radius);
+  box-shadow: 0 22px 64px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.1);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 72px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.18);
+}
+.icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  display: grid; place-items: center; margin-bottom: 20px;
+  background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.22);
+  color: var(--blue);
+}
+.feature-card h3 { font-size: 1.12rem; letter-spacing: -.03em; margin-bottom: 9px; font-weight: 800; }
+.feature-card p { color: var(--muted); font-size: .96rem; line-height: 1.68; }
+
+/* ── Why panel ── */
+.why-panel, .pro-panel, .loan-panel, .trust-panel {
+  background: linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: var(--radius);
+  box-shadow: 0 22px 64px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.1);
+  padding: clamp(28px, 5vw, 48px);
+}
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+.why-point {
+  padding: 20px 22px; border-radius: 20px;
+  background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.08);
+}
+.why-point h3 { font-size: 1.05rem; letter-spacing: -.03em; margin-bottom: 7px; font-weight: 800; }
+.why-point p { color: var(--muted); font-size: .95rem; line-height: 1.65; }
+
+/* ── Loan Impact ── */
+.loan-grid { display: grid; grid-template-columns: 1fr 290px; gap: 52px; align-items: center; }
+.loan-bullets { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-top: 24px; }
 .loan-bullets li {
   display: flex; align-items: center; gap: 12px;
-  color: var(--muted); font-size: .98rem; line-height: 1.4;
+  color: var(--muted); font-size: .97rem;
 }
 .loan-bullets li::before {
   content: '';
-  width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(10,132,255,.14) url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2 2 4-4' stroke='%230a84ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
-  border: 1px solid rgba(10,132,255,.28);
+  width: 20px; height: 20px; min-width: 20px; border-radius: 50%;
+  background: rgba(10,132,255,.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M2 5l2.2 2.2L8 3' stroke='%230a84ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
+  border: 1px solid rgba(10,132,255,.25);
 }
 .loan-visual { position: relative; display: grid; place-items: center; }
-.loan-screenshot {
-  width: min(100%, 300px); height: auto;
-  border-radius: 32px;
-  box-shadow: 0 32px 70px rgba(0,0,0,.6), 0 0 48px rgba(10,132,255,.2);
-  position: relative; z-index: 2;
-}
 .loan-orb {
   position: absolute; width: 260px; height: 260px; border-radius: 50%;
   background: radial-gradient(circle, rgba(10,132,255,.3), transparent 65%);
-  filter: blur(16px); pointer-events: none;
+  filter: blur(18px); pointer-events: none;
+  animation: orb-drift 11s ease-in-out infinite reverse;
+}
+.loan-screenshot {
+  position: relative; z-index: 2;
+  width: min(100%, 290px); height: auto; border-radius: 32px;
+  box-shadow: 0 32px 72px rgba(0,0,0,.62), 0 0 0 1px rgba(255,255,255,.07), 0 0 48px rgba(10,132,255,.18);
 }
 
-/* Screenshots */
-.screens { padding-top: 34px; }
-.screenshot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: start; }
-.shot { border-radius: 26px; background: rgba(255,255,255,.04); border: 1px solid var(--stroke); padding: 10px; overflow: hidden; }
-.shot-img { width: 100%; height: auto; object-fit: cover; border-radius: 21px; }
-.shot-title { padding: 12px 4px 2px; color: white; font-weight: 800; letter-spacing: -.03em; font-size: .95rem; }
-.shot-caption { color: var(--muted); font-size: .85rem; padding: 0 4px 6px; }
+/* ── Screenshots ── */
+.screens { padding-top: 40px; }
+.screenshot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
+.shot {
+  border-radius: 24px; overflow: hidden;
+  background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1);
+  box-shadow: 0 16px 48px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.08);
+  padding: 8px;
+  transition: transform .24s cubic-bezier(.22,1,.36,1), box-shadow .24s ease, border-color .24s ease;
+  cursor: default;
+}
+.shot:hover {
+  transform: translateY(-6px) scale(1.012);
+  box-shadow: 0 28px 64px rgba(0,0,0,.45), 0 0 0 1px rgba(10,132,255,.22), inset 0 1px 0 rgba(255,255,255,.1);
+  border-color: rgba(10,132,255,.22);
+}
+.shot-img { width: 100%; height: auto; border-radius: 18px; display: block; }
+.shot-title { padding: 11px 6px 2px; color: white; font-weight: 800; letter-spacing: -.03em; font-size: .93rem; line-height: 1.3; }
+.shot-caption { color: var(--muted); font-size: .82rem; padding: 3px 6px 8px; line-height: 1.45; }
 .mobile-swipe-hint { display: none; }
 
-/* Steps */
-.steps { display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; }
-.step { padding: 26px; position:relative; }
-.step-num { width:38px; height:38px; border-radius:50%; background:rgba(10,132,255,.15); color:var(--blue); border:1px solid rgba(10,132,255,.35); display:grid; place-items:center; font-weight:900; margin-bottom:18px; }
-
-/* Disclaimer */
-.disclaimer { padding: 28px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center; }
-.shield { width:64px; height:64px; border-radius:22px; display:grid; place-items:center; font-size:1.8rem; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.07); }
-
-/* Trust section */
-.trust-panel { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; }
-.trust-icon { width:72px; height:72px; border-radius:24px; display:grid; place-items:center; font-size:2rem; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.07); flex-shrink: 0; }
-.trust-panel h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: -.055em; margin-bottom: 12px; }
-.trust-panel > div > p { color: var(--muted); font-size: 1rem; line-height: 1.7; margin-bottom: 20px; }
-.trust-bullets { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.trust-bullets li {
-  display: flex; align-items: center; gap: 10px;
-  color: var(--muted); font-size: .95rem;
-  padding: 12px 16px; border-radius: 13px;
-  background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.08);
+/* ── Steps ── */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.step {
+  padding: 28px;
+  background: linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: var(--radius);
+  box-shadow: 0 22px 64px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.1);
 }
-.trust-bullets li::before { content: '✓'; color: var(--green); font-weight: 900; flex-shrink: 0; }
-
-/* Pro section */
-.pro-panel { }
-.pro-features-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 10px; margin-top: 28px;
+.step-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(10,132,255,.14); color: var(--blue);
+  border: 1px solid rgba(10,132,255,.32);
+  display: grid; place-items: center; font-weight: 900; font-size: 1rem;
+  margin-bottom: 18px;
 }
+.step h3 { font-size: 1.12rem; letter-spacing: -.03em; margin-bottom: 8px; font-weight: 800; }
+.step p { color: var(--muted); font-size: .96rem; line-height: 1.68; }
+
+/* ── Pro ── */
+.pro-features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 30px; }
 .pro-feat {
   display: flex; align-items: center; gap: 10px;
   padding: 13px 16px; border-radius: 14px;
   background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.08);
   font-size: .95rem; font-weight: 700; letter-spacing: -.02em;
+  transition: background .18s, border-color .18s;
 }
+.pro-feat:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.14); }
 .pro-feat::before { content: '✓'; color: var(--blue); font-weight: 900; flex-shrink: 0; }
 
-/* CTA panel */
-.cta-panel { padding: clamp(30px, 6vw, 56px); display:flex; align-items:center; justify-content:space-between; gap:24px; }
+/* ── Disclaimer ── */
+.disclaimer {
+  padding: 28px 32px; display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center;
+  background: linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
+  border: 1px solid rgba(255,255,255,.11); border-radius: var(--radius);
+  box-shadow: 0 22px 64px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.1);
+}
+.shield { width: 60px; height: 60px; border-radius: 20px; display: grid; place-items: center; font-size: 1.7rem; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.07); }
+.disclaimer h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); letter-spacing: -.04em; margin-bottom: 9px; }
+.disclaimer p { color: var(--muted); font-size: .97rem; line-height: 1.72; }
 
-footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(--muted); }
-.footer-row { display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
-.footer-links { display:flex; gap:20px; flex-wrap:wrap; }
-.fine { color: var(--muted-2); font-size:.85rem; max-width:920px; margin-top:20px; }
+/* ── Trust ── */
+.trust-panel { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; }
+.trust-icon { width: 68px; height: 68px; border-radius: 22px; display: grid; place-items: center; font-size: 1.9rem; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.06); flex-shrink: 0; }
+.trust-panel h2 { font-size: clamp(1.7rem, 3.2vw, 2.6rem); letter-spacing: -.055em; margin-bottom: 12px; }
+.trust-panel > div > p { color: var(--muted); font-size: 1rem; line-height: 1.72; margin-bottom: 22px; }
+.trust-bullets { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.trust-bullets li {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--muted); font-size: .93rem;
+  padding: 12px 16px; border-radius: 13px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+}
+.trust-bullets li::before { content: '✓'; color: var(--green); font-weight: 900; flex-shrink: 0; }
+
+/* ── CTA panel ── */
+.cta-panel {
+  padding: clamp(30px, 6vw, 56px);
+  display: flex; align-items: center; justify-content: space-between; gap: 28px;
+  background: linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,255,255,.11); border-radius: var(--radius);
+  box-shadow: 0 22px 64px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.1);
+}
+.cta-panel h2 { letter-spacing: -.06em; margin-bottom: 10px; }
+.cta-panel p { color: var(--muted); font-size: 1.05rem; line-height: 1.65; }
+
+/* ── Footer ── */
+footer { border-top: 1px solid rgba(255,255,255,.07); padding: 36px 0; color: var(--muted); }
+.footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-links a { color: var(--muted-2); font-size: .9rem; transition: color .15s; }
+.footer-links a:hover { color: var(--blue); }
+.fine { color: var(--muted-2); font-size: .83rem; max-width: 920px; margin-top: 20px; line-height: 1.6; }
 
 /* ── Responsive ── */
 @media (max-width: 1080px) {
@@ -287,50 +416,53 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   .hero-right { display: none; }
 }
 @media (max-width: 980px) {
-  .feature-grid, .steps, .why-grid { grid-template-columns:1fr 1fr; }
+  .feature-grid, .steps, .why-grid { grid-template-columns: 1fr 1fr; }
   .pro-features-grid { grid-template-columns: 1fr; }
-  .screenshot-grid { grid-template-columns: repeat(2,1fr); }
-  .cta-panel { flex-direction:column; align-items:flex-start; }
+  .screenshot-grid { grid-template-columns: repeat(2, 1fr); }
+  .cta-panel { flex-direction: column; align-items: flex-start; }
   .loan-grid { grid-template-columns: 1fr; }
   .loan-visual { order: -1; }
   .trust-bullets { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
-  .nav { min-height: 72px; }
   .brand { min-width: 0; flex: 1; }
   .brand span { white-space: nowrap; }
   .links { display: none; }
   .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
-  .mobile-menu { display: grid; gap: 10px; padding: 0 18px 18px; background: rgba(0,0,0,.92); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(20px); }
+  .mobile-menu { display: grid; gap: 9px; padding: 0 18px 18px; background: rgba(0,0,0,.94); border-bottom: 1px solid rgba(255,255,255,.07); backdrop-filter: blur(20px); }
   .mobile-menu[hidden] { display: none; }
   .mobile-menu a { display: flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 13px; color: var(--text); font-weight: 700; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08); }
-  .mobile-menu-button { justify-content: center; background: var(--blue) !important; box-shadow: 0 14px 38px rgba(10,132,255,.28); }
+  .mobile-menu-button { justify-content: center; background: var(--blue) !important; box-shadow: 0 10px 28px rgba(10,132,255,.32) !important; }
   .trust-panel { grid-template-columns: 1fr; }
+  .disclaimer { grid-template-columns: 1fr; padding: 22px 20px; }
 }
 @media (max-width: 680px) {
-  .hero { padding-top: 40px; }
+  .hero { padding-top: 36px; }
   .hero-grid-new { grid-template-columns: 1fr; text-align: center; }
   .hero-brand-inline { justify-content: center; }
   .hero-sub { max-width: 100%; }
   .hero-bullets { align-items: flex-start; text-align: left; }
-  .hero-visual { padding: 8px 0; }
-  .hero-screenshot { width: min(78vw, 300px); border-radius: 28px; }
-  .orb { width: 240px; height: 240px; }
+  .hero-mobile-cta { display: flex; }
+  .hero-cta-row { display: none; }
+  .hero-trust { display: none; }
+  .hero-visual { padding: 6px 0; }
+  .hero-screenshot { width: min(76vw, 300px); border-radius: 28px; animation: none; }
+  .orb { width: 220px; height: 220px; animation: none; }
   .hero-right { display: flex; }
-  .hero-cta-row { padding: 22px 0 10px; }
-  .hero-cta-row .button { width: 100%; }
-  h1 { font-size: clamp(2.6rem, 13vw, 3.8rem); }
-  .feature-grid, .steps, .why-grid { grid-template-columns:1fr; }
-  .mobile-swipe-hint { display: block; color: var(--muted); font-size: .95rem; margin-top: -18px; margin-bottom: 18px; }
-  .screenshot-grid { display: flex; gap: 16px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding-left: 18px; padding: 4px 18px 18px; margin-left: -18px; margin-right: -18px; -webkit-overflow-scrolling: touch; }
+  h1 { font-size: clamp(2.5rem, 13vw, 3.7rem); }
+  .feature-grid, .steps, .why-grid { grid-template-columns: 1fr; }
+  .mobile-swipe-hint { display: block; color: var(--muted); font-size: .92rem; margin-top: -20px; margin-bottom: 16px; }
+  .screenshot-grid { display: flex; gap: 14px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 4px 18px 20px; margin-left: -18px; margin-right: -18px; -webkit-overflow-scrolling: touch; }
   .screenshot-grid::-webkit-scrollbar { display: none; }
-  .shot { flex: 0 0 min(82vw, 360px); scroll-snap-align: center; }
-  .shot-img { object-fit: contain; }
-  .disclaimer { grid-template-columns:1fr; }
-  #waitlist { padding: 52px 0; }
-  #waitlist .cta-panel { padding: 28px 22px; border-radius: 24px; gap: 20px; }
-  #waitlist .h2-cta { font-size: clamp(2rem, 9vw, 2.7rem); line-height: 1; letter-spacing: -.06em; }
-  #waitlist .cta-panel p { font-size: 1rem; line-height: 1.5; }
+  .shot { flex: 0 0 min(80vw, 340px); scroll-snap-align: center; }
+  .shot:hover { transform: none; box-shadow: 0 16px 48px rgba(0,0,0,.28); border-color: rgba(255,255,255,.1); }
+  #waitlist .cta-panel { padding: 28px 22px; border-radius: 24px; }
+  #waitlist .h2-cta { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; transform: none; transition: none; }
+  .orb, .hero-screenshot { animation: none; }
+  .shot:hover, .feature-card:hover { transform: none; }
 }
 </style>
 </head>
@@ -339,7 +471,7 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
 <header>
   <div class="container nav">
     <a class="brand" href="#top" aria-label="BalancePilot home">
-      <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" />
+      <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" loading="eager" decoding="sync" />
       <span>BalancePilot</span>
     </a>
     <nav class="links" aria-label="Main navigation">
@@ -373,14 +505,20 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
     <div class="container">
       <div class="hero-grid-new">
 
-        <!-- Left column -->
         <div class="hero-left">
-          <div class="hero-brand-inline">
-            <img class="logo-icon" src="balancepilot-icon.png" width="40" height="40" alt="BalancePilot app icon" />
+          <div class="hero-brand-inline" aria-hidden="true">
+            <img class="logo-icon" src="balancepilot-icon.png" width="38" height="38" alt="" loading="eager" decoding="sync" />
             <span>BalancePilot</span>
           </div>
           <h1>Plan Your Debt Payoff<br>Before You <span class="blue">Move Money.</span></h1>
-          <p class="hero-sub">BalancePilot helps you understand what to pay next, preview financial decisions before committing, and build a realistic path toward becoming debt free.</p>
+          <p class="hero-sub">For anyone managing credit cards, personal loans, or any personal debt — BalancePilot helps you understand what to pay next, preview financial decisions before committing, and build a realistic path to becoming debt free.</p>
+
+          <!-- Mobile-only above-fold CTA -->
+          <div class="hero-mobile-cta" aria-label="Download BalancePilot">
+            <a class="button primary" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
+            <p class="hero-mobile-cta-sub">Free to download &bull; No bank login required</p>
+          </div>
+
           <ul class="hero-bullets" aria-label="Key features">
             <li>Personalized payment recommendations</li>
             <li>Available Cash planning and tracking</li>
@@ -391,37 +529,36 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
           </ul>
         </div>
 
-        <!-- Center: app screenshot -->
         <div class="hero-visual" role="img" aria-label="BalancePilot app dashboard preview">
           <div class="orb" aria-hidden="true"></div>
-          <img class="hero-screenshot" src="screenshot-overview.png" width="863" height="1202" loading="eager" fetchpriority="high" decoding="async" alt="BalancePilot dashboard showing debt overview, best next move, and payoff progress" />
+          <img class="hero-screenshot" src="screenshot-overview.png" width="863" height="1202"
+            loading="eager" fetchpriority="high" decoding="async"
+            alt="BalancePilot dashboard showing debt overview, best next move, and payoff progress" />
         </div>
 
-        <!-- Right column: feature chips -->
         <div class="hero-right">
           <div class="hero-feature-card">
             <div class="hfc-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             </div>
             <div>
               <div class="hfc-title">Loan Impact Preview <span class="badge-new">New</span></div>
-              <div class="hfc-sub">See how a potential loan affects your payoff before you commit</div>
+              <div class="hfc-sub">See how a potential loan affects your entire payoff plan before you commit</div>
             </div>
           </div>
           <div class="hero-feature-card">
             <div class="hfc-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.08-4.43"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
             </div>
             <div>
               <div class="hfc-title">What-If Scenarios</div>
-              <div class="hfc-sub">Experiment with extra payments and different cash amounts</div>
+              <div class="hfc-sub">Experiment with extra payments and different cash amounts before moving money</div>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- CTA + trust row -->
       <div class="hero-cta-row">
         <a class="button primary" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
         <a class="button secondary" href="#features">Explore Features</a>
@@ -433,48 +570,53 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   <!-- ── FEATURES ── -->
   <section id="features">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head fade-in">
         <h2>Built for proactive debt planning.</h2>
-        <p>BalancePilot goes beyond tracking. Understand what to focus on, model decisions before making them, and stay ahead of your payoff timeline.</p>
+        <p>BalancePilot goes beyond tracking. Understand what to focus on, model decisions before making them, and stay ahead of your payoff timeline — all without connecting a bank account.</p>
       </div>
       <div class="feature-grid">
-
-        <article class="feature-card">
-          <div class="icon" aria-hidden="true">♟</div>
+        <article class="feature-card fade-in fade-in-d1">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
           <h3>Smart Payoff Planning</h3>
           <p>Understand which account may need attention next based on balances, due dates, utilization, and available cash.</p>
         </article>
-
-        <article class="feature-card">
-          <div class="icon" aria-hidden="true">◎</div>
+        <article class="feature-card fade-in fade-in-d2">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
           <h3>Credit Score Focus <span class="badge-new">New</span></h3>
           <p>Prioritize utilization improvements and identify opportunities that may positively influence your credit profile while staying aligned with your payoff strategy.</p>
         </article>
-
-        <article class="feature-card">
-          <div class="icon" aria-hidden="true">↺</div>
+        <article class="feature-card fade-in fade-in-d3">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/></svg>
+          </div>
           <h3>What-If Planning</h3>
           <p>Experiment with extra payments, different cash amounts, and alternative payoff scenarios before making real-world decisions.</p>
         </article>
-
-        <article class="feature-card">
-          <div class="icon" aria-hidden="true">⏱</div>
+        <article class="feature-card fade-in fade-in-d4">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
           <h3>Promotional Interest Protection</h3>
           <p>Track promotional balances and avoid costly deferred-interest surprises by understanding important dates and obligations.</p>
         </article>
-
-        <article class="feature-card">
-          <div class="icon" aria-hidden="true">▤</div>
+        <article class="feature-card fade-in fade-in-d5">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
           <h3>Statement PDF Analyzer <span class="badge-pro">Pro</span></h3>
           <p>Import supported credit card statements locally on your device to help populate account information and promotional plans.</p>
         </article>
-
-        <article class="feature-card">
-          <div class="icon" aria-hidden="true">▲</div>
+        <article class="feature-card fade-in fade-in-d6">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+          </div>
           <h3>Plan Before You Borrow <span class="badge-new">New</span></h3>
           <p>Preview how a potential loan could affect your payment plan, payoff timeline, monthly obligations, and overall strategy before committing.</p>
         </article>
-
       </div>
     </div>
   </section>
@@ -482,12 +624,12 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   <!-- ── LOAN IMPACT ── -->
   <section id="loan-impact">
     <div class="container">
-      <div class="loan-panel">
+      <div class="loan-panel fade-in">
         <div class="loan-grid">
           <div>
             <div class="eyebrow-label">Plan Before You Borrow</div>
-            <h2 class="h2-sm">See the Impact Before You Commit.</h2>
-            <p style="color:var(--muted);font-size:1.05rem;line-height:1.7;margin-top:10px;">Thinking about financing a purchase or taking out a personal loan? BalancePilot lets you preview how a potential loan could affect your monthly payments, debt-free date, interest costs, and overall payoff strategy before making a decision.</p>
+            <h2 class="h2-sm">See the Impact<br>Before You Commit.</h2>
+            <p style="color:var(--muted);font-size:1.05rem;line-height:1.72;margin-top:12px;">Thinking about financing a purchase or taking out a personal loan? BalancePilot lets you preview how a potential loan could affect your monthly payments, debt-free date, interest costs, and overall payoff strategy — before making a decision.</p>
             <ul class="loan-bullets" aria-label="Loan impact features">
               <li>Full Loan Impact Preview</li>
               <li>Compare up to three loan offers</li>
@@ -499,7 +641,9 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
           </div>
           <div class="loan-visual" aria-label="Loan Impact Preview app screen">
             <div class="loan-orb" aria-hidden="true"></div>
-            <img class="loan-screenshot" src="screenshot-loan-impact.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Loan Impact Preview screen showing how a potential loan affects monthly payments and payoff timeline" />
+            <img class="loan-screenshot" src="screenshot-home.png" width="390" height="844"
+              loading="lazy" decoding="async"
+              alt="BalancePilot app showing loan impact preview and payoff planning" />
           </div>
         </div>
       </div>
@@ -509,13 +653,13 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   <!-- ── WHY ── -->
   <section id="why">
     <div class="container">
-      <div class="why-panel">
+      <div class="why-panel fade-in">
         <div class="section-head" style="margin-bottom:0;">
           <h2>Built for real-life payoff planning.</h2>
           <p>Most payoff tools assume perfect numbers. BalancePilot helps you plan around available cash, due dates, protected commitments, paydays, and the financial decisions you face before making them.</p>
         </div>
         <div class="why-grid">
-          <div class="why-point"><h3>Available Cash planning</h3><p>See how available cash, safety buffers, and set-asides affect what may be realistic for payments each month.</p></div>
+          <div class="why-point"><h3>Available Cash planning</h3><p>See how available cash, safety buffers, and set-asides affect what's realistic for payments each month.</p></div>
           <div class="why-point"><h3>Payday-aware timing</h3><p>Plan around when money comes in, not just when a balance exists.</p></div>
           <div class="why-point"><h3>Manual by design</h3><p>No bank login required. You control what information you enter and track — always.</p></div>
         </div>
@@ -526,44 +670,44 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   <!-- ── SCREENSHOTS ── -->
   <section id="screenshots" class="screens">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head fade-in">
         <h2>See BalancePilot in action.</h2>
         <p>Real screens from the app — OLED dark interface, blue accents, and everything you need to plan, track, and stay ahead of your debt payoff.</p>
       </div>
       <p class="mobile-swipe-hint">Swipe to preview more screens →</p>
       <div class="screenshot-grid">
-        <article class="shot">
+        <article class="shot fade-in fade-in-d1">
           <img class="shot-img" src="screenshot-home.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot home dashboard showing debt overview, best next move, and payoff progress" />
           <h3 class="shot-title">Home Dashboard</h3>
           <p class="shot-caption">See what needs attention and understand your progress.</p>
         </article>
-        <article class="shot">
-          <img class="shot-img" src="screenshot-credit.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Credit Score Focus screen showing utilization opportunities and payoff priorities" />
+        <article class="shot fade-in fade-in-d2">
+          <img class="shot-img" src="screenshot-credit.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Credit Score Focus screen showing utilization opportunities" />
           <h3 class="shot-title">Credit Score Focus <span class="badge-new">New</span></h3>
           <p class="shot-caption">Identify utilization opportunities and payoff priorities.</p>
         </article>
-        <article class="shot">
+        <article class="shot fade-in fade-in-d3">
           <img class="shot-img" src="screenshot-whatif.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot What-If Plan screen showing different payment scenarios" />
           <h3 class="shot-title">What-If Plan</h3>
           <p class="shot-caption">Experiment with different payment strategies.</p>
         </article>
-        <article class="shot">
+        <article class="shot fade-in fade-in-d4">
           <img class="shot-img" src="screenshot-loan-impact.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Loan Impact Preview showing how a potential loan affects payoff timeline" />
           <h3 class="shot-title">Loan Impact Preview <span class="badge-new">New</span></h3>
           <p class="shot-caption">Understand the impact before borrowing.</p>
         </article>
-        <article class="shot">
-          <img class="shot-img" src="screenshot-compare-loans.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Compare Loan Offers screen showing payment, interest, and payoff effects side by side" />
+        <article class="shot fade-in fade-in-d1">
+          <img class="shot-img" src="screenshot-compare-loans.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Compare Loan Offers screen" />
           <h3 class="shot-title">Compare Loan Offers <span class="badge-new">New</span></h3>
           <p class="shot-caption">Compare payment, interest, and payoff effects.</p>
         </article>
-        <article class="shot">
-          <img class="shot-img" src="screenshot-planned-loans.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Planned Loans screen showing saved loan ideas for later activation" />
+        <article class="shot fade-in fade-in-d2">
+          <img class="shot-img" src="screenshot-planned-loans.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Planned Loans screen showing saved loan ideas" />
           <h3 class="shot-title">Planned Loans <span class="badge-new">New</span></h3>
           <p class="shot-caption">Save ideas now and activate them later.</p>
         </article>
-        <article class="shot">
-          <img class="shot-img" src="screenshot-statement.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Statement Analyzer screen showing PDF import for account information" />
+        <article class="shot fade-in fade-in-d3">
+          <img class="shot-img" src="screenshot-statement.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Statement Analyzer screen showing PDF import" />
           <h3 class="shot-title">Statement Analyzer <span class="badge-pro">Pro</span></h3>
           <p class="shot-caption">Import supported statements locally on your device.</p>
         </article>
@@ -574,22 +718,22 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   <!-- ── HOW IT WORKS ── -->
   <section id="how">
     <div class="container">
-      <div class="section-head center">
-        <h2>Simple, proactive, and built around you.</h2>
-        <p>Add your accounts, choose a strategy, then use BalancePilot to plan every financial move before you make it.</p>
+      <div class="section-head center fade-in">
+        <h2>Simple, proactive, built around you.</h2>
+        <p>Add your accounts, choose a strategy, then use BalancePilot to understand and plan every financial move before you make it.</p>
       </div>
       <div class="steps">
-        <article class="step">
+        <article class="step fade-in fade-in-d1">
           <div class="step-num">1</div>
           <h3>Add Your Accounts</h3>
-          <p>Enter cards, loans, minimums, due dates, APRs, and available cash. No bank linking required — you enter what matters.</p>
+          <p>Enter cards, loans, minimums, due dates, APRs, and available cash. No bank linking required — you enter what matters to your plan.</p>
         </article>
-        <article class="step">
+        <article class="step fade-in fade-in-d2">
           <div class="step-num">2</div>
-          <h3>Choose a Strategy</h3>
-          <p>Compare payoff approaches, run What-If scenarios, and preview loan impacts before making any real-world decision.</p>
+          <h3>Plan Before You Commit</h3>
+          <p>Compare payoff approaches, run What-If scenarios, and preview loan impacts before making any real-world financial decision.</p>
         </article>
-        <article class="step">
+        <article class="step fade-in fade-in-d3">
           <div class="step-num">3</div>
           <h3>Follow Your Plan</h3>
           <p>Log payments, track progress, and stay ahead of due dates — with a clear picture of where you stand and what to do next.</p>
@@ -601,22 +745,22 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   <!-- ── PRO ── -->
   <section id="pro">
     <div class="container">
-      <div class="pro-panel">
+      <div class="pro-panel fade-in">
         <div class="section-head" style="margin-bottom:0;">
           <div class="eyebrow-label">BalancePilot Pro</div>
           <h2>Plan before you commit.</h2>
-          <p>BalancePilot is free to download with core planning tools included. Pro unlocks advanced forecasting, loan modeling, statement tools, and premium features for users who want to go deeper.</p>
+          <p>Free to download with core planning tools included. Pro unlocks loan impact modeling, advanced forecasting, statement imports, and premium features for users who want to go deeper.</p>
         </div>
         <div class="pro-features-grid">
           <div class="pro-feat">Full Loan Impact Preview <span class="badge-new">New</span></div>
           <div class="pro-feat">Compare Loan Offers <span class="badge-new">New</span></div>
           <div class="pro-feat">Planned Loans <span class="badge-new">New</span></div>
-          <div class="pro-feat">Statement PDF Analyzer <span style="color:var(--muted-2);font-size:.82rem;font-weight:600;">(U.S. only)</span></div>
+          <div class="pro-feat">Statement PDF Analyzer <span style="color:var(--muted-2);font-size:.8rem;font-weight:600;margin-left:4px;">(U.S. only)</span></div>
           <div class="pro-feat">Export Payoff Summary</div>
           <div class="pro-feat">Premium Interface</div>
           <div class="pro-feat">Advanced payoff insights</div>
         </div>
-        <p style="color:var(--muted-2);font-size:.88rem;margin-top:22px;">Subscription details are shown in the app before purchase. Download free and explore first.</p>
+        <p style="color:var(--muted-2);font-size:.86rem;margin-top:22px;line-height:1.55;">Subscription details are shown in the app before purchase. Download free and explore first.</p>
       </div>
     </div>
   </section>
@@ -624,7 +768,7 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   <!-- ── TRUST ── -->
   <section id="trust">
     <div class="container">
-      <div class="trust-panel">
+      <div class="trust-panel fade-in">
         <div class="trust-icon" aria-hidden="true">◇</div>
         <div>
           <h2>Built Around Privacy.</h2>
@@ -643,11 +787,11 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   <!-- ── DISCLAIMER ── -->
   <section id="disclaimer">
     <div class="container">
-      <div class="disclaimer">
+      <div class="disclaimer fade-in">
         <div class="shield" aria-hidden="true">◇</div>
         <div>
-          <h2 style="font-size:clamp(1.5rem,2.5vw,2.1rem);letter-spacing:-.04em;margin-bottom:10px;">BalancePilot is a planning tool, not financial advice.</h2>
-          <p>BalancePilot helps users organize accounts, compare payoff strategies, and preview financial decisions based on information they enter. Always consult a qualified financial professional for personalized advice. Loan impact previews are estimates based on the information you provide and are not guaranteed outcomes.</p>
+          <h2>BalancePilot is a planning tool, not financial advice.</h2>
+          <p>BalancePilot helps users organize accounts, compare payoff strategies, and preview financial decisions based on information they enter. Loan impact previews are estimates based on the information you provide and are not guaranteed outcomes. Always consult a qualified financial professional for personalized advice.</p>
         </div>
       </div>
     </div>
@@ -656,13 +800,14 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
   <!-- ── CTA ── -->
   <section id="waitlist">
     <div class="container">
-      <div class="cta-panel">
-        <div style="flex:1; max-width:640px;">
+      <div class="cta-panel fade-in">
+        <div style="flex:1;max-width:620px;">
           <h2 class="h2-cta">Plan your debt payoff.<br>Download BalancePilot.</h2>
           <p>Free to download. Understand what to pay next, model your options, and build a realistic path to becoming debt free.</p>
-          <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:26px;">
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:28px;">
             <a class="button primary" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
           </div>
+          <p style="color:var(--muted-2);font-size:.83rem;margin-top:12px;">Free to download &bull; No bank login required</p>
         </div>
       </div>
     </div>
@@ -673,7 +818,10 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
 <footer>
   <div class="container">
     <div class="footer-row">
-      <a class="brand" href="#top"><img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" /><span>BalancePilot</span></a>
+      <a class="brand" href="#top">
+        <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" loading="lazy" decoding="async" />
+        <span>BalancePilot</span>
+      </a>
       <div class="footer-links">
         <a href="#features">Features</a>
         <a href="strategies.html">Strategies</a>
@@ -682,30 +830,51 @@ footer { border-top:1px solid rgba(255,255,255,.08); padding:34px 0; color:var(-
         <a href="support.html">Support</a>
         <a href="privacy.html">Privacy</a>
       </div>
-      <small>© <span id="year"></span> BalancePilot. All rights reserved.</small>
+      <small style="color:var(--muted-2);">© <span id="year"></span> BalancePilot. All rights reserved.</small>
     </div>
-    <p class="fine">BalancePilot provides educational payoff estimates and planning tools only. It is not financial, legal, or tax advice. Always verify balances, due dates, APRs, minimum payments, and payment requirements with your lender. Loan impact previews are estimates only.</p>
+    <p class="fine">BalancePilot provides educational payoff estimates and planning tools only. It is not financial, legal, or tax advice. Always verify balances, due dates, APRs, minimum payments, and payment requirements with your lender. Loan impact previews are estimates only and do not constitute financial advice.</p>
   </div>
 </footer>
 
 <script>
+// Year
 document.getElementById('year').textContent = new Date().getFullYear();
-if ("scrollRestoration" in history) { history.scrollRestoration = "manual"; }
-window.addEventListener("load", function() { if (!window.location.hash) { window.scrollTo(0, 0); } });
+
+// Scroll restoration
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('load', function() { if (!location.hash) window.scrollTo(0,0); });
+
+// Mobile menu
 const menuToggle = document.querySelector('.mobile-menu-toggle');
 const mobileMenu = document.getElementById('mobileMenu');
 if (menuToggle && mobileMenu) {
   menuToggle.addEventListener('click', function() {
-    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', String(!isOpen));
-    mobileMenu.hidden = isOpen;
+    const open = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!open));
+    mobileMenu.hidden = open;
   });
-  mobileMenu.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      menuToggle.setAttribute('aria-expanded', 'false');
+  mobileMenu.querySelectorAll('a').forEach(function(l) {
+    l.addEventListener('click', function() {
+      menuToggle.setAttribute('aria-expanded','false');
       mobileMenu.hidden = true;
     });
   });
+}
+
+// Scroll fade-in with IntersectionObserver
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.fade-in').forEach(function(el) { io.observe(el); });
+} else {
+  // Fallback: show everything immediately
+  document.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
 }
 </script>
 
