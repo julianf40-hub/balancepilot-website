@@ -427,6 +427,114 @@ h1.hero-headline { margin-bottom:24px; font-size:clamp(2.8rem,5.5vw,5.2rem); }
 }
 
 /* ════════════════════════════
+   1c · PAYOFF PLAN SECTION
+════════════════════════════ */
+#payoff-plan { background:var(--bg); }
+.pp-grid {
+  display:grid; grid-template-columns:46fr 54fr;
+  gap:64px; align-items:center;
+}
+.pp-showcase {
+  position:relative; display:flex; justify-content:center; align-items:center;
+  min-height:680px;
+}
+.pp-glow {
+  position:absolute; width:580px; height:580px; border-radius:50%;
+  background:radial-gradient(circle, rgba(10,132,255,.06) 0%, rgba(10,132,255,.02) 50%, transparent 70%);
+  filter:blur(72px); pointer-events:none; z-index:0;
+  animation:glowPulse 11s 1s ease-in-out infinite;
+}
+[data-theme="dark"] .pp-glow {
+  background:radial-gradient(circle,
+    rgba(10,100,255,.20) 0%,
+    rgba(0,40,160,.10) 38%,
+    rgba(0,200,255,.04) 60%,
+    transparent 72%);
+}
+[data-theme="light"] .pp-glow {
+  background:radial-gradient(circle, rgba(10,132,255,.055) 0%, rgba(10,132,255,.015) 55%, transparent 72%);
+}
+.pp-phone {
+  position:relative; z-index:2; width:316px; flex-shrink:0;
+  animation:float 13s 0.5s ease-in-out infinite;
+  filter:
+    drop-shadow(0 6px 4px rgba(0,0,0,.04))
+    drop-shadow(0 20px 20px rgba(0,0,0,.06))
+    drop-shadow(0 56px 80px rgba(0,0,0,.11))
+    drop-shadow(0 0 44px rgba(10,132,255,.09));
+}
+[data-theme="dark"] .pp-phone {
+  filter:
+    drop-shadow(0 6px 6px rgba(0,0,0,.18))
+    drop-shadow(0 24px 40px rgba(0,0,0,.44))
+    drop-shadow(0 64px 96px rgba(0,0,0,.58))
+    drop-shadow(0 0 64px rgba(10,132,255,.18));
+}
+
+/* Payoff Plan floating cards */
+.pfc {
+  position:absolute; z-index:4;
+  background:var(--surface);
+  border:1px solid var(--card-border);
+  border-radius:18px;
+  box-shadow:var(--card-shadow), 0 0 0 0.5px rgba(255,255,255,.05);
+  padding:13px 15px;
+  transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease;
+  backdrop-filter:blur(12px);
+  min-width:158px;
+}
+[data-theme="light"] .pfc {
+  background:rgba(255,255,255,.96);
+  box-shadow:0 8px 32px rgba(0,0,0,.09), 0 2px 8px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.05);
+}
+.pfc:hover { transform:translateY(-3px) scale(1.015); box-shadow:var(--card-shadow-h); }
+
+/* 4-corner positions — 20px overlap onto phone edges */
+.pfc-1 { top:9%;     left:0px;   animation:floatB 9s ease-in-out infinite; }
+.pfc-2 { bottom:9%;  left:-20px; animation:floatB 10.5s 1s ease-in-out infinite; }
+.pfc-3 { top:9%;     left:434px; animation:floatB 8s 1.8s ease-in-out infinite; max-width:182px; }
+.pfc-4 { bottom:9%;  left:434px; animation:floatB 11s 0.5s ease-in-out infinite; max-width:182px; }
+
+.pfc-lbl  { font-size:.67rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:5px; }
+.pfc-val  { font-size:1.32rem; font-weight:800; letter-spacing:-.04em; line-height:1; }
+.pfc-note { font-size:.74rem; color:var(--muted); margin-top:4px; line-height:1.4; }
+.pfc-val-blue  { color:var(--blue); }
+.pfc-val-green { color:var(--green); }
+[data-theme="light"] .pfc-val-green { color:#16a34a; }
+.pfc-val-orange { color:#ff9f0a; }
+.pfc-chk { color:var(--green); }
+[data-theme="light"] .pfc-chk { color:#16a34a; }
+
+/* Feature list */
+.pp-feats { display:flex; flex-direction:column; gap:10px; margin-top:32px; }
+.pp-feat {
+  display:flex; align-items:flex-start; gap:13px; padding:14px 16px; border-radius:15px;
+  background:var(--subtle-bg); border:1px solid var(--subtle-border);
+  transition:background .15s, border-color .15s;
+}
+.pp-feat:hover { background:var(--subtle-bg-h); border-color:var(--subtle-border-h); }
+.pp-feat-icon {
+  width:34px; height:34px; border-radius:10px; flex-shrink:0; display:grid; place-items:center;
+  background:rgba(10,132,255,.10); border:1px solid rgba(10,132,255,.18); color:var(--blue);
+}
+.pp-feat-name { font-size:.93rem; font-weight:800; letter-spacing:-.02em; margin-bottom:2px; }
+.pp-feat-desc { font-size:.82rem; color:var(--muted); line-height:1.5; }
+
+@media (max-width:980px) {
+  .pp-grid { grid-template-columns:1fr; gap:48px; }
+  .pp-showcase { order:-1; min-height:540px; }
+  .pfc-1 { left:1%; }
+  .pfc-2 { left:2%; }
+  .pfc-3 { left:auto; right:1%; }
+  .pfc-4 { left:auto; right:1%; bottom:18%; }
+}
+@media (max-width:580px) {
+  .pfc { display:none; }
+  .pp-showcase { min-height:360px; }
+  .pp-phone { width:min(62vw,210px); animation:none; }
+}
+
+/* ════════════════════════════
    2 · FEATURE HIGHLIGHTS
 ════════════════════════════ */
 #features { background:var(--bg-2); }
@@ -1033,6 +1141,100 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
 
       </div><!-- /accts-showcase -->
     </div><!-- /accts-grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     1c · PAYOFF PLAN
+══════════════════════════════════════ -->
+<section id="payoff-plan">
+  <div class="container">
+    <div class="pp-grid">
+
+      <!-- Left: text + features -->
+      <div class="pp-text">
+        <div class="eyebrow fade-in">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Payoff Plan
+        </div>
+        <h2 class="fade-in d1">See your debt-free<br>future.</h2>
+        <p class="sec-sub fade-in d2" style="margin-top:16px;max-width:440px">Plan smarter with Avalanche, Snowball, Smart Hybrid, and Credit Score Focus. Compare payoff strategies, protect minimum payments, and preview your debt-free timeline before making another payment.</p>
+
+        <div class="pp-feats fade-in d3">
+          <div class="pp-feat">
+            <div class="pp-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
+            <div>
+              <div class="pp-feat-name">Compare Strategies</div>
+              <div class="pp-feat-desc">Choose Avalanche, Snowball, Smart Hybrid, or Accelerated Payoff — see which saves the most.</div>
+            </div>
+          </div>
+          <div class="pp-feat">
+            <div class="pp-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="pp-feat-name">Visual Payoff Timeline</div>
+              <div class="pp-feat-desc">Watch your projected debt decrease over time with a clear month-by-month breakdown.</div>
+            </div>
+          </div>
+          <div class="pp-feat">
+            <div class="pp-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="pp-feat-name">Credit Score Focus</div>
+              <div class="pp-feat-desc">Reduce utilization sooner while protecting required minimum payments on all accounts.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: phone + 4 floating cards -->
+      <div class="pp-showcase fade-in d2">
+        <div class="pp-glow" aria-hidden="true"></div>
+
+        <!-- iPhone frame -->
+        <div class="pp-phone">
+          <div class="iphone-body">
+            <div class="iphone-screen">
+              <img src="03-payoff-plan-light.png" alt="BalancePilot payoff plan screen showing debt-free date, strategy comparison, and projected timeline" width="316" loading="lazy" />
+              <div class="iphone-island" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upper Left: Debt-Free By -->
+        <div class="pfc pfc-1" aria-hidden="true">
+          <div class="pfc-lbl">Debt-Free By</div>
+          <div class="pfc-val pfc-val-green">Mar 2029</div>
+          <div class="pfc-note">Stay on track.</div>
+        </div>
+
+        <!-- Upper Right: Monthly Plan -->
+        <div class="pfc pfc-3" aria-hidden="true">
+          <div class="pfc-lbl">Monthly Plan</div>
+          <div class="pfc-val pfc-val-blue">$1,119</div>
+          <div class="pfc-note">Optimized payment.</div>
+        </div>
+
+        <!-- Lower Left: Minimums -->
+        <div class="pfc pfc-2" aria-hidden="true">
+          <div class="pfc-lbl">Minimums</div>
+          <div class="pfc-val pfc-val-green"><span class="pfc-chk">✓</span> Covered</div>
+          <div class="pfc-note">Protected automatically.</div>
+        </div>
+
+        <!-- Lower Right: Interest -->
+        <div class="pfc pfc-4" aria-hidden="true">
+          <div class="pfc-lbl">Interest</div>
+          <div class="pfc-val pfc-val-orange">$6,247</div>
+          <div class="pfc-note">Projected lifetime cost.</div>
+        </div>
+
+      </div><!-- /pp-showcase -->
+    </div><!-- /pp-grid -->
   </div>
 </section>
 
