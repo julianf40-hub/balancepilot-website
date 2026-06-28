@@ -535,6 +535,113 @@ h1.hero-headline { margin-bottom:24px; font-size:clamp(2.8rem,5.5vw,5.2rem); }
 }
 
 /* ════════════════════════════
+   1d · CREDIT SCORE FOCUS
+════════════════════════════ */
+#credit-focus { background:var(--bg-2); }
+.cf-grid {
+  display:grid; grid-template-columns:54fr 46fr;
+  gap:64px; align-items:center;
+}
+.cf-showcase {
+  position:relative; display:flex; justify-content:center; align-items:center;
+  min-height:680px;
+}
+.cf-glow {
+  position:absolute; width:580px; height:580px; border-radius:50%;
+  background:radial-gradient(circle, rgba(10,132,255,.06) 0%, rgba(10,132,255,.02) 50%, transparent 70%);
+  filter:blur(72px); pointer-events:none; z-index:0;
+  animation:glowPulse 12s 0.5s ease-in-out infinite;
+}
+[data-theme="dark"] .cf-glow {
+  background:radial-gradient(circle,
+    rgba(10,100,255,.20) 0%,
+    rgba(0,40,160,.10) 38%,
+    rgba(0,200,255,.04) 60%,
+    transparent 72%);
+}
+[data-theme="light"] .cf-glow {
+  background:radial-gradient(circle, rgba(10,132,255,.055) 0%, rgba(10,132,255,.015) 55%, transparent 72%);
+}
+.cf-phone {
+  position:relative; z-index:2; width:316px; flex-shrink:0;
+  animation:float 14s ease-in-out infinite;
+  filter:
+    drop-shadow(0 6px 4px rgba(0,0,0,.04))
+    drop-shadow(0 20px 20px rgba(0,0,0,.06))
+    drop-shadow(0 56px 80px rgba(0,0,0,.11))
+    drop-shadow(0 0 44px rgba(10,132,255,.09));
+}
+[data-theme="dark"] .cf-phone {
+  filter:
+    drop-shadow(0 6px 6px rgba(0,0,0,.18))
+    drop-shadow(0 24px 40px rgba(0,0,0,.44))
+    drop-shadow(0 64px 96px rgba(0,0,0,.58))
+    drop-shadow(0 0 64px rgba(10,132,255,.18));
+}
+
+/* Credit Focus floating cards */
+.cfc {
+  position:absolute; z-index:4;
+  background:var(--surface);
+  border:1px solid var(--card-border);
+  border-radius:18px;
+  box-shadow:var(--card-shadow), 0 0 0 0.5px rgba(255,255,255,.05);
+  padding:13px 15px;
+  transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease;
+  backdrop-filter:blur(12px);
+  min-width:158px;
+}
+[data-theme="light"] .cfc {
+  background:rgba(255,255,255,.96);
+  box-shadow:0 8px 32px rgba(0,0,0,.09), 0 2px 8px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.05);
+}
+.cfc:hover { transform:translateY(-3px) scale(1.015); box-shadow:var(--card-shadow-h); }
+
+/* 4-corner positions — 20px overlap onto phone edges */
+.cfc-1 { top:9%;     left:0px;  animation:floatB 9s 0.3s ease-in-out infinite; }
+.cfc-2 { bottom:9%;  left:0px;  animation:floatB 10.5s 1.3s ease-in-out infinite; }
+.cfc-3 { top:9%;     left:434px; animation:floatB 8s 2s ease-in-out infinite; max-width:184px; }
+.cfc-4 { bottom:9%;  left:434px; animation:floatB 11s 0.8s ease-in-out infinite; max-width:184px; }
+
+.cfc-lbl  { font-size:.67rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:5px; }
+.cfc-val  { font-size:1.32rem; font-weight:800; letter-spacing:-.04em; line-height:1.1; }
+.cfc-note { font-size:.74rem; color:var(--muted); margin-top:4px; line-height:1.4; }
+.cfc-val-blue   { color:var(--blue); }
+.cfc-val-green  { color:var(--green); }
+[data-theme="light"] .cfc-val-green  { color:#16a34a; }
+.cfc-val-orange { color:#ff9f0a; }
+.cfc-arr { color:var(--muted); font-size:1rem; margin:0 3px; }
+
+/* Feature list */
+.cf-feats { display:flex; flex-direction:column; gap:10px; margin-top:32px; }
+.cf-feat {
+  display:flex; align-items:flex-start; gap:13px; padding:14px 16px; border-radius:15px;
+  background:var(--subtle-bg); border:1px solid var(--subtle-border);
+  transition:background .15s, border-color .15s;
+}
+.cf-feat:hover { background:var(--subtle-bg-h); border-color:var(--subtle-border-h); }
+.cf-feat-icon {
+  width:34px; height:34px; border-radius:10px; flex-shrink:0; display:grid; place-items:center;
+  background:rgba(10,132,255,.10); border:1px solid rgba(10,132,255,.18); color:var(--blue);
+}
+.cf-feat-name { font-size:.93rem; font-weight:800; letter-spacing:-.02em; margin-bottom:2px; }
+.cf-feat-desc { font-size:.82rem; color:var(--muted); line-height:1.5; }
+
+@media (max-width:980px) {
+  .cf-grid { grid-template-columns:1fr; gap:48px; }
+  .cf-showcase { order:-1; min-height:540px; }
+  .cfc-1 { left:1%; }
+  .cfc-2 { left:2%; }
+  .cfc-3 { left:auto; right:1%; }
+  .cfc-4 { left:auto; right:1%; bottom:18%; }
+}
+@media (max-width:580px) {
+  .cfc { display:none; }
+  .cf-showcase { min-height:360px; }
+  .cf-phone { width:min(62vw,210px); animation:none; }
+}
+
+/* ════════════════════════════
    2 · FEATURE HIGHLIGHTS
 ════════════════════════════ */
 #features { background:var(--bg-2); }
@@ -1235,6 +1342,101 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
 
       </div><!-- /pp-showcase -->
     </div><!-- /pp-grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     1d · CREDIT SCORE FOCUS
+══════════════════════════════════════ -->
+<section id="credit-focus">
+  <div class="container">
+    <div class="cf-grid">
+
+      <!-- Left: phone + 4 floating cards -->
+      <div class="cf-showcase fade-in">
+        <div class="cf-glow" aria-hidden="true"></div>
+
+        <!-- iPhone frame -->
+        <div class="cf-phone">
+          <div class="iphone-body">
+            <div class="iphone-screen">
+              <img src="04-credit-score-focus-light.png" alt="BalancePilot credit score focus screen showing utilization heat map and milestone targets" width="316" loading="lazy" />
+              <div class="iphone-island" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upper Left: Utilization -->
+        <div class="cfc cfc-1" aria-hidden="true">
+          <div class="cfc-lbl">Utilization</div>
+          <div class="cfc-val"><span class="cfc-val-orange">92%</span><span class="cfc-arr">→</span><span class="cfc-val-green">89%</span></div>
+          <div class="cfc-note">Crosses 90%</div>
+        </div>
+
+        <!-- Lower Left: Milestone -->
+        <div class="cfc cfc-2" aria-hidden="true">
+          <div class="cfc-lbl">Milestone</div>
+          <div class="cfc-val cfc-val-green">Below 90%</div>
+          <div class="cfc-note">Next step</div>
+        </div>
+
+        <!-- Upper Right: Target Card -->
+        <div class="cfc cfc-3" aria-hidden="true">
+          <div class="cfc-lbl">Target Card</div>
+          <div class="cfc-val cfc-val-blue" style="font-size:1.1rem">Citi Custom Cash</div>
+          <div class="cfc-note">Highest impact</div>
+        </div>
+
+        <!-- Lower Right: Goal -->
+        <div class="cfc cfc-4" aria-hidden="true">
+          <div class="cfc-lbl">Goal</div>
+          <div class="cfc-val cfc-val-blue">Below 30%</div>
+          <div class="cfc-note">Long-term target</div>
+        </div>
+
+      </div><!-- /cf-showcase -->
+
+      <!-- Right: text + features -->
+      <div class="cf-text">
+        <div class="eyebrow fade-in">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Credit Score Focus
+        </div>
+        <h2 class="fade-in d1">Plan for your credit score,<br>not just payoff.</h2>
+        <p class="sec-sub fade-in d2" style="margin-top:16px;max-width:440px">BalancePilot can prioritize utilization milestones, identify high-impact cards, and adjust your payoff order while protecting minimum payments first.</p>
+
+        <div class="cf-feats fade-in d3">
+          <div class="cf-feat">
+            <div class="cf-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <div>
+              <div class="cf-feat-name">Utilization Heat Map</div>
+              <div class="cf-feat-desc">See which cards are above key utilization thresholds at a glance.</div>
+            </div>
+          </div>
+          <div class="cf-feat">
+            <div class="cf-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="cf-feat-name">Milestone-Based Payments</div>
+              <div class="cf-feat-desc">Target 90%, 70%, 50%, and 30% utilization levels in sequence.</div>
+            </div>
+          </div>
+          <div class="cf-feat">
+            <div class="cf-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="cf-feat-name">Minimums Protected</div>
+              <div class="cf-feat-desc">Required payments are covered before any extra cash is redirected.</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /cf-text -->
+
+    </div><!-- /cf-grid -->
   </div>
 </section>
 
