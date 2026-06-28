@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" href="balancepilot-icon.png" />
 <link rel="apple-touch-icon" href="balancepilot-icon.png" />
 <link rel="canonical" href="https://balancepilot.net/" />
-<link rel="preload" as="image" href="screenshot-overview.png" fetchpriority="high" />
+<link rel="preload" as="image" href="01-home-dashboard-light.png" fetchpriority="high" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://balancepilot.net/" />
 <meta property="og:title" content="BalancePilot – Debt Payoff Planner & Loan Impact Preview App" />
@@ -41,8 +41,8 @@ img { max-width: 100%; display: block; }
 .container { width: min(100% - 40px, var(--max)); margin: 0 auto; }
 
 /* ── Animations ── */
-@keyframes float    { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-9px)} }
-@keyframes floatB   { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-5px)} }
+@keyframes float    { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-4px)} }
+@keyframes floatB   { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-3px)} }
 @keyframes glowPulse{ 0%,100%{opacity:.45;transform:scale(1)} 50%{opacity:.75;transform:scale(1.08)} }
 .fade-in { opacity:0; transform:translateY(26px); transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1); }
 .fade-in.visible { opacity:1; transform:translateY(0); }
@@ -140,79 +140,175 @@ h2 { font-size:clamp(2.2rem,4.6vw,4rem); line-height:.95; letter-spacing:-.07em;
    1 · HERO
 ════════════════════════════ */
 .hero {
-  padding:88px 0 100px; position:relative; overflow:hidden; background:var(--bg);
+  padding:160px 0 240px; position:relative; overflow:hidden; background:var(--bg);
 }
 .hero::before {
   content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
   background:
-    radial-gradient(ellipse 80% 70% at 72% -8%,  var(--orb-1), transparent),
-    radial-gradient(ellipse 55% 50% at -5%  65%,  var(--orb-2), transparent);
+    radial-gradient(ellipse 90% 80% at 78%  -6%, var(--orb-1), transparent),
+    radial-gradient(ellipse 60% 55% at -8%  70%, var(--orb-2), transparent),
+    radial-gradient(ellipse 50% 40% at 50% 110%, var(--orb-2), transparent);
 }
 .hero .container { position:relative; z-index:1; }
 .hero-grid {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:60px; align-items:center;
+  display:grid; grid-template-columns:42fr 58fr;
+  gap:48px; align-items:center;
 }
-.hero-kicker { margin-bottom:20px; }
-h1.hero-headline { margin-bottom:22px; }
-.hero-sub { color:var(--muted); font-size:1.1rem; line-height:1.76; max-width:490px; margin-bottom:36px; }
+.hero-kicker { margin-bottom:22px; }
+h1.hero-headline { margin-bottom:24px; font-size:clamp(2.8rem,5.5vw,5.2rem); }
+.hero-sub { color:var(--muted); font-size:1.08rem; line-height:1.78; max-width:480px; margin-bottom:36px; }
 .hero-ctas { display:flex; align-items:center; gap:13px; flex-wrap:wrap; }
 .hero-trust {
-  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
-  margin-top:22px; color:var(--muted-2); font-size:.82rem;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  margin-top:22px; color:var(--muted-2); font-size:.8rem; font-weight:500;
 }
-.hero-trust-sep { width:3px; height:3px; border-radius:50%; background:var(--muted-2); opacity:.4; }
+.hero-trust-item { display:flex; align-items:center; gap:5px; }
+.hero-trust-item svg { color:var(--green); flex-shrink:0; }
+[data-theme="light"] .hero-trust-item svg { color:#16a34a; }
+.hero-trust-sep { width:3px; height:3px; border-radius:50%; background:var(--muted-2); opacity:.35; }
 .hero-mob-ctas { display:none; flex-direction:column; align-items:center; gap:10px; padding-top:4px; }
 .hero-mob-ctas .btn-primary { width:100%; }
 .hero-mob-note { color:var(--muted-2); font-size:.8rem; }
 
-/* Device showcase */
+/* ── Device showcase ── */
 .showcase {
   position:relative; display:flex; justify-content:center; align-items:center;
-  min-height:580px;
+  min-height:700px;
 }
 .showcase-glow {
-  position:absolute; width:400px; height:400px; border-radius:50%;
-  background:radial-gradient(circle, var(--orb-1), transparent 66%);
-  filter:blur(44px); pointer-events:none; z-index:0;
+  position:absolute; width:460px; height:460px; border-radius:50%;
+  background:radial-gradient(circle, var(--orb-1), transparent 64%);
+  filter:blur(56px); pointer-events:none; z-index:0;
   animation:glowPulse 9s ease-in-out infinite;
 }
-.showcase-phone {
-  position:relative; z-index:2; width:218px; flex-shrink:0;
-  animation:float 7.5s ease-in-out infinite;
+
+/* ── iPhone 17 Pro Max CSS frame ── */
+.iphone {
+  position:relative; z-index:2; width:320px; flex-shrink:0;
+  animation:float 11s ease-in-out infinite;
+  filter:
+    drop-shadow(0 52px 80px rgba(0,0,0,.22))
+    drop-shadow(0 0 56px rgba(10,132,255,.16));
 }
-.showcase-phone img {
-  width:100%; border-radius:46px;
-  box-shadow:0 52px 96px rgba(0,0,0,.20),0 0 0 1px rgba(0,0,0,.07);
+[data-theme="dark"] .iphone {
+  filter:
+    drop-shadow(0 56px 96px rgba(0,0,0,.72))
+    drop-shadow(0 0 72px rgba(10,132,255,.26));
 }
-[data-theme="dark"] .showcase-phone img {
-  box-shadow:0 52px 96px rgba(0,0,0,.70),0 0 0 1px rgba(255,255,255,.08),0 0 64px rgba(10,132,255,.18);
+.iphone-body {
+  position:relative; border-radius:52px;
+  padding:10px 9px;
+  background:linear-gradient(160deg, #2c2c30 0%, #1c1c1e 45%, #131315 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.15),
+    inset 0 1px 0 rgba(255,255,255,.26),
+    inset 0 -1px 0 rgba(0,0,0,.5),
+    0 0 0 1px rgba(0,0,0,.65);
 }
+[data-theme="light"] .iphone-body {
+  background:linear-gradient(160deg, #f4f4f8 0%, #e4e4ea 45%, #dadadf 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.95),
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(0,0,0,.06),
+    0 0 0 1px rgba(0,0,0,.08);
+}
+/* Left side: volume + mute buttons */
+.iphone-body::before {
+  content:'';
+  position:absolute; left:-3px; top:108px;
+  width:3px; height:34px;
+  border-radius:2px 0 0 2px;
+  background:linear-gradient(90deg, #0a0a0c 0%, #1e1e22 100%);
+  box-shadow:0 52px 0 currentColor, 0 96px 0 currentColor;
+  color:#0a0a0c;
+}
+[data-theme="light"] .iphone-body::before {
+  background:linear-gradient(90deg, #a8a8b0 0%, #c4c4cc 100%);
+  box-shadow:0 52px 0 #b0b0b8, 0 96px 0 #b0b0b8;
+}
+/* Right side: power button */
+.iphone-body::after {
+  content:'';
+  position:absolute; right:-3px; top:142px;
+  width:3px; height:68px;
+  border-radius:0 2px 2px 0;
+  background:linear-gradient(270deg, #0a0a0c 0%, #1e1e22 100%);
+}
+[data-theme="light"] .iphone-body::after {
+  background:linear-gradient(270deg, #a8a8b0 0%, #c4c4cc 100%);
+}
+.iphone-screen {
+  position:relative; border-radius:42px; overflow:hidden;
+  background:#000; line-height:0;
+}
+.iphone-screen img {
+  width:100%; display:block;
+  border-radius:42px;
+}
+.iphone-island {
+  position:absolute; top:10px; left:50%; transform:translateX(-50%);
+  width:118px; height:30px; background:#000;
+  border-radius:18px; z-index:10; pointer-events:none;
+  box-shadow:0 0 0 1px rgba(255,255,255,.05);
+}
+
+/* ── Floating metric cards ── */
 .fc {
-  position:absolute; z-index:3;
-  background:var(--surface); border:1px solid var(--card-border);
-  border-radius:18px; box-shadow:var(--card-shadow);
-  padding:14px 16px; min-width:176px;
+  position:absolute; z-index:4;
+  background:var(--surface);
+  border:1px solid var(--card-border);
+  border-radius:20px;
+  box-shadow:
+    var(--card-shadow),
+    0 0 0 0.5px rgba(255,255,255,.06);
+  padding:14px 16px; min-width:172px;
+  transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease;
+  backdrop-filter:blur(12px);
 }
-.fc-1 { top:10%; left:-14%; animation:floatB 9.5s ease-in-out infinite; }
-.fc-2 { bottom:14%; left:-10%; animation:floatB 11s 1.2s ease-in-out infinite; }
-.fc-3 { top:18%; right:-16%; animation:floatB 8.5s 2s ease-in-out infinite; }
-.fc-lbl { font-size:.68rem; font-weight:700; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; margin-bottom:6px; }
-.fc-val { font-size:1.45rem; font-weight:800; letter-spacing:-.04em; line-height:1; }
-.fc-bar { height:5px; border-radius:999px; background:var(--subtle-border); margin-top:10px; overflow:hidden; }
-.fc-bar-fill { height:100%; border-radius:999px; background:var(--blue); }
-.fc-note { color:var(--muted); font-size:.75rem; margin-top:5px; }
-.fc-row { display:flex; align-items:center; gap:10px; margin-top:6px; }
-.fc-icon { width:30px; height:30px; border-radius:9px; flex-shrink:0; display:grid; place-items:center; background:rgba(10,132,255,.12); border:1px solid rgba(10,132,255,.22); color:var(--blue); }
-.fc-name { font-size:.84rem; font-weight:700; letter-spacing:-.02em; }
+[data-theme="light"] .fc {
+  background:rgba(255,255,255,.96);
+  box-shadow:0 8px 32px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.06), 0 0 0 1px rgba(0,0,0,.05);
+}
+.fc:hover { transform:translateY(-3px) scale(1.015); box-shadow:var(--card-shadow-h); }
+
+/* Primary card — largest, most visual weight */
+.fc-1 { top:9%;     left:-5%;  animation:floatB 9.5s ease-in-out infinite; padding:16px 18px; min-width:200px; }
+/* Medium card — right side, overlaps phone slightly */
+.fc-2 { bottom:11%; left:67%;  animation:floatB 11s 1.5s ease-in-out infinite; min-width:178px; max-width:195px; }
+/* Supporting cards — smaller */
+.fc-3 { top:21%;    left:68%;  animation:floatB 8.5s 2.2s ease-in-out infinite; padding:12px 14px; min-width:160px; max-width:190px; font-size:.95em; }
+.fc-4 { bottom:24%; left:-5%;  animation:floatB 10s 0.8s ease-in-out infinite; padding:12px 14px; min-width:160px; font-size:.95em; }
+
+.fc-lbl { font-size:.67rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; }
+.fc-val { font-size:1.42rem; font-weight:800; letter-spacing:-.04em; line-height:1; }
+.fc-note { color:var(--muted); font-size:.73rem; margin-top:5px; line-height:1.4; }
+.fc-row { display:flex; align-items:center; gap:9px; margin-top:7px; }
+.fc-icon {
+  width:32px; height:32px; border-radius:10px; flex-shrink:0;
+  display:grid; place-items:center;
+}
+.fc-icon-blue { background:rgba(10,132,255,.12); border:1px solid rgba(10,132,255,.22); color:var(--blue); }
+.fc-icon-purple { background:rgba(191,90,242,.12); border:1px solid rgba(191,90,242,.22); color:#bf5af2; }
+.fc-icon-gold { background:rgba(255,193,0,.12); border:1px solid rgba(255,193,0,.25); color:#d4a017; }
+[data-theme="light"] .fc-icon-gold { color:#a07800; }
+.fc-icon-green { background:rgba(50,215,75,.12); border:1px solid rgba(50,215,75,.22); color:#32d74b; }
+[data-theme="light"] .fc-icon-green { background:rgba(22,163,74,.10); border-color:rgba(22,163,74,.22); color:#16a34a; }
+.fc-name { font-size:.86rem; font-weight:800; letter-spacing:-.025em; }
 .fc-detail { font-size:.73rem; color:var(--muted); margin-top:1px; }
-.fc-amt { font-size:1.1rem; font-weight:800; color:var(--blue); letter-spacing:-.03em; margin-left:auto; }
+.fc-amt { font-size:1.08rem; font-weight:800; color:var(--blue); letter-spacing:-.03em; margin-left:auto; }
+.fc-val-purple { color:#bf5af2; }
+.fc-val-green  { color:var(--green); }
+[data-theme="light"] .fc-val-green { color:#16a34a; }
+.fc-arrow-row { display:flex; align-items:center; gap:5px; margin-top:8px; font-size:.78rem; color:var(--muted); }
+.fc-arrow-row strong { color:var(--fc-icon-gold,#d4a017); font-weight:700; }
+
 .chip {
   display:inline-flex; align-items:center; gap:5px; padding:3px 9px;
   border-radius:999px; font-size:.73rem; font-weight:700;
 }
-.chip-blue { background:rgba(10,132,255,.12); color:var(--blue); border:1px solid rgba(10,132,255,.22); }
-.chip-green { background:rgba(50,215,75,.12); color:#32d74b; border:1px solid rgba(50,215,75,.25); }
+.chip-blue  { background:rgba(10,132,255,.12); color:var(--blue);   border:1px solid rgba(10,132,255,.22); }
+.chip-green { background:rgba(50,215,75,.12);  color:#32d74b;        border:1px solid rgba(50,215,75,.25); }
 [data-theme="light"] .chip-green { background:rgba(22,163,74,.10); color:#16a34a; border-color:rgba(22,163,74,.22); }
 
 /* ════════════════════════════
@@ -485,12 +581,17 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
 /* ════════════════════════════
    RESPONSIVE
 ════════════════════════════ */
-@media (max-width:1080px) {
-  .fc-1 { left:-6%; } .fc-3 { right:-6%; }
+@media (max-width:1180px) {
+  /* Left cards: pull slightly inward */
+  .fc-1 { left:-2%; }
+  .fc-4 { left:-2%; }
+  /* Right cards: already using left-based positioning, nudge inward */
+  .fc-2 { left:64%; }
+  .fc-3 { left:65%; }
 }
 @media (max-width:980px) {
   .hero-grid { grid-template-columns:1fr; gap:56px; }
-  .hero-grid > .showcase { order:-1; min-height:460px; }
+  .hero-grid > .showcase { order:-1; min-height:520px; }
   .hero-sub { max-width:100%; }
   .payoff-grid,.borrow-grid,.credit-grid { grid-template-columns:1fr; gap:48px; }
   .payoff-visual,.borrow-vis { order:-1; }
@@ -498,7 +599,10 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
   .privacy-pillars { grid-template-columns:repeat(2,1fr); }
   .plans-wrap { grid-template-columns:1fr; max-width:460px; }
   .shot-grid { grid-template-columns:repeat(3,1fr); }
-  .fc-1 { left:2%; top:4%; } .fc-2 { left:2%; bottom:4%; } .fc-3 { right:2%; top:14%; }
+  .fc-1 { left:1%;  top:3%; }
+  .fc-2 { left:auto; right:1%; bottom:5%; }
+  .fc-3 { left:auto; right:1%; top:18%; }
+  .fc-4 { left:1%;  bottom:22%; }
 }
 @media (max-width:760px) {
   .links { display:none; }
@@ -515,14 +619,14 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
     background:var(--mob-item-bg); border:1px solid var(--mob-item-border);
   }
   .mob-menu-dl { justify-content:center; background:var(--blue) !important; color:white !important; box-shadow:0 8px 24px rgba(10,132,255,.32) !important; }
-  .hero { padding:56px 0 72px; }
+  .hero { padding:72px 0 88px; }
   .hero-text { text-align:center; align-items:center; }
   .hero-sub { text-align:center; }
   .hero-ctas,.hero-trust { display:none; }
   .hero-mob-ctas { display:flex; }
   section { padding:72px 0; }
-  .showcase { min-height:380px; }
-  .showcase-phone { width:180px; }
+  .showcase { min-height:460px; }
+  .iphone { width:248px; }
   .disc { flex-direction:column; padding:22px 20px; }
 }
 @media (max-width:580px) {
@@ -537,8 +641,8 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
   .shot:hover { transform:none; }
   .swipe-hint { display:block; }
   .fc,.bc1,.bc2 { display:none; }
-  .showcase { min-height:300px; }
-  .showcase-phone { width:min(60vw,190px); animation:none; }
+  .showcase { min-height:320px; }
+  .iphone { width:min(60vw,220px); animation:none; }
   .borrow-phone { animation:none; }
   .final-cta { padding:80px 0; }
 }
@@ -547,8 +651,8 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
 }
 @media (prefers-reduced-motion:reduce) {
   .fade-in { opacity:1; transform:none; transition:none; }
-  .showcase-phone,.borrow-phone,.showcase-glow,.payoff-glow,.fc { animation:none; }
-  .shot:hover,.feat-card:hover { transform:none; }
+  .iphone,.borrow-phone,.showcase-glow,.payoff-glow,.fc { animation:none; }
+  .shot:hover,.feat-card:hover,.fc:hover { transform:none; }
 }
 </style>
 </head>
@@ -606,81 +710,120 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
       <!-- Left: Text -->
       <div class="hero-text">
         <div class="hero-kicker">
-          <span class="eyebrow">iOS App · Free to Download</span>
+          <span class="eyebrow">iPhone App · Free to Download</span>
         </div>
-        <h1 class="hero-headline">Build the fastest path to becoming<br><span class="accent">debt-free.</span></h1>
-        <p class="hero-sub">BalancePilot helps you organize credit cards and loans, compare payoff strategies, preview new loans before you borrow, and stay on track — all without connecting your bank account.</p>
+        <h1 class="hero-headline fade-in d1">Build the fastest path to becoming <span class="accent">debt-free.</span></h1>
+        <p class="hero-sub fade-in d2">Organize every account, compare payoff strategies, preview loans before borrowing, and build a smarter path to becoming debt-free—all without connecting your bank account.</p>
 
         <!-- Desktop CTAs -->
-        <div class="hero-ctas">
+        <div class="hero-ctas fade-in d3">
           <a class="btn btn-primary" href="https://apps.apple.com/app/balancepilot/id6763011325">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
             Download on the App Store
           </a>
           <a class="btn btn-secondary" href="#features">
-            Learn More
+            Explore Features
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
-        <div class="hero-trust">
-          <span>Free to download</span>
-          <span class="hero-trust-sep"></span>
-          <span>No bank login required</span>
-          <span class="hero-trust-sep"></span>
-          <span>iOS only</span>
+        <div class="hero-trust fade-in d4">
+          <span class="hero-trust-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Free to download
+          </span>
+          <span class="hero-trust-sep" aria-hidden="true"></span>
+          <span class="hero-trust-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            No bank login required
+          </span>
+          <span class="hero-trust-sep" aria-hidden="true"></span>
+          <span class="hero-trust-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Private by design
+          </span>
+          <span class="hero-trust-sep" aria-hidden="true"></span>
+          <span class="hero-trust-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            iPhone
+          </span>
         </div>
 
         <!-- Mobile CTAs -->
         <div class="hero-mob-ctas">
-          <a class="btn btn-primary" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
-          <p class="hero-mob-note">Free · No bank login required · iOS</p>
+          <a class="btn btn-primary" href="https://apps.apple.com/app/balancepilot/id6763011325">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download on the App Store
+          </a>
+          <p class="hero-mob-note">Free · No bank login · Private · iPhone</p>
         </div>
       </div>
 
-      <!-- Right: Device showcase -->
-      <div class="showcase" role="img" aria-label="BalancePilot app previews">
+      <!-- Right: Device + floating cards -->
+      <div class="showcase" aria-label="BalancePilot app running on iPhone">
         <div class="showcase-glow" aria-hidden="true"></div>
 
-        <!-- Float card 1: Payoff Progress (top-left) -->
+        <!-- Card 1: Best Next Move (top-left) -->
         <div class="fc fc-1" aria-hidden="true">
-          <div class="fc-lbl">Total Debt</div>
-          <div class="fc-val">$33,291</div>
-          <div class="fc-bar"><div class="fc-bar-fill" style="width:47%"></div></div>
-          <div class="fc-note">47% paid · 18 months remaining</div>
-        </div>
-
-        <!-- Phone -->
-        <div class="showcase-phone">
-          <img src="screenshot-overview.png" width="863" height="1202"
-            loading="eager" fetchpriority="high" decoding="async"
-            alt="BalancePilot dashboard showing debt overview and payoff progress" />
-        </div>
-
-        <!-- Float card 2: Best Next Move (bottom-left) -->
-        <div class="fc fc-2" aria-hidden="true">
           <div class="fc-lbl">Best Next Move</div>
           <div class="fc-row">
-            <div class="fc-icon">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            <div class="fc-icon fc-icon-blue">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
             </div>
             <div>
-              <div class="fc-name">Chase Sapphire</div>
-              <div class="fc-detail">26% APR · $4,200</div>
+              <div class="fc-name">Best Buy Card</div>
+              <div class="fc-detail">$35 today</div>
             </div>
-            <div class="fc-amt">$380</div>
           </div>
         </div>
 
-        <!-- Float card 3: Loan Impact (top-right) -->
+        <!-- iPhone device frame -->
+        <div class="iphone">
+          <div class="iphone-body">
+            <div class="iphone-screen">
+              <img src="01-home-dashboard-light.png"
+                loading="eager" fetchpriority="high" decoding="async"
+                alt="BalancePilot home screen showing debt overview, best next move, and payoff progress" />
+              <div class="iphone-island" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Debt-Free (bottom-right, purple) -->
+        <div class="fc fc-2" aria-hidden="true">
+          <div class="fc-lbl">Debt-Free By</div>
+          <div class="fc-val fc-val-purple" style="margin-top:4px">Mar 2029</div>
+          <div class="fc-note">See the light at the<br>end of the plan.</div>
+        </div>
+
+        <!-- Card 3: Credit Score Focus (top-right, gold) -->
         <div class="fc fc-3" aria-hidden="true">
-          <div class="fc-lbl">Loan Impact Preview</div>
-          <div style="display:flex;align-items:center;gap:7px;margin-top:7px;">
-            <span class="chip chip-blue">+4 months</span>
+          <div class="fc-lbl">Credit Score Focus</div>
+          <div class="fc-row">
+            <div class="fc-icon fc-icon-gold">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="fc-name" style="color:var(--badge-pro-color)">Lower Utilization</div>
+              <div class="fc-detail">92% → 89%</div>
+            </div>
           </div>
-          <div class="fc-note" style="margin-top:6px;">Borrow $5,000 @ 9.9% APR</div>
         </div>
-      </div>
 
+        <!-- Card 4: Monthly Progress (bottom-left, green) -->
+        <div class="fc fc-4" aria-hidden="true">
+          <div class="fc-lbl">Monthly Progress</div>
+          <div class="fc-row" style="margin-top:4px;align-items:flex-end">
+            <div>
+              <div class="fc-val fc-val-green">$310</div>
+              <div class="fc-note" style="margin-top:3px">Paid this month</div>
+            </div>
+            <div class="fc-icon fc-icon-green" style="margin-left:auto;margin-bottom:4px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /showcase -->
     </div>
   </div>
 </section>
