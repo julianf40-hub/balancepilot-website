@@ -42,24 +42,24 @@
     .container { width: min(100% - 36px, var(--max)); margin: 0 auto; }
 
     /* ── Nav (matches homepage) ── */
-    header { position: sticky; top: 0; z-index: 100; background: var(--header-bg); border-bottom: 1px solid var(--header-border); backdrop-filter: blur(24px) saturate(1.6); -webkit-backdrop-filter: blur(24px) saturate(1.6); }
-    .nav { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; color: var(--text); letter-spacing: -.04em; flex-shrink: 0; }
-    .logo-icon { width: 38px; height: 38px; border-radius: 11px; object-fit: cover; background: var(--logo-bg); box-shadow: 0 4px 14px rgba(0,0,0,.14), 0 0 0 1px rgba(0,0,0,.06); }
-    [data-theme="dark"] .logo-icon { box-shadow: 0 6px 18px rgba(0,0,0,.50), 0 0 0 1px rgba(255,255,255,.10); }
-    .links { display: flex; align-items: center; gap: 2px; }
-    .links a:not(.nav-btn) { padding: 6px 10px; border-radius: 8px; color: var(--nav-link-color); font-weight: 600; font-size: .88rem; opacity: .82; transition: opacity .15s, color .15s; white-space: nowrap; }
-    .links a:not(.nav-btn):hover { opacity: 1; color: var(--blue); }
-    .links a[aria-current="page"] { opacity: 1; color: var(--blue); }
-    .nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; height: 36px; padding: 0 14px; border-radius: 10px; margin-left: 8px; border: none; font-weight: 700; font-size: .85rem; background: var(--blue); color: white; box-shadow: 0 4px 16px rgba(10,132,255,.28); cursor: pointer; transition: transform .15s, box-shadow .15s, filter .15s; white-space: nowrap; }
-    .nav-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 26px rgba(10,132,255,.38); filter: brightness(1.06); }
-    .nav-btn:active { transform: translateY(0); filter: brightness(.96); }
-    .mob-toggle { display: none; width: 40px; height: 40px; border-radius: 11px; border: 1px solid var(--stroke); background: var(--mob-toggle-bg); color: var(--text); align-items: center; justify-content: center; flex-direction: column; gap: 5px; cursor: pointer; }
-    .mob-toggle span { width: 18px; height: 1.5px; border-radius: 999px; background: currentColor; transition: transform .18s ease, opacity .18s ease; }
-    .mob-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .mob-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-    .mob-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu { display: none; }
+    header { position:sticky; top:0; z-index:100; background:var(--header-bg); border-bottom:1px solid var(--header-border); backdrop-filter:blur(24px) saturate(1.6); -webkit-backdrop-filter:blur(24px) saturate(1.6); }
+    .nav { min-height:68px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .brand { display:inline-flex; align-items:center; gap:10px; font-size:1.2rem; font-weight:800; color:var(--text); letter-spacing:-.04em; flex-shrink:0; }
+    .logo-icon { width:38px; height:38px; border-radius:11px; object-fit:cover; background:var(--logo-bg); box-shadow:0 4px 14px rgba(0,0,0,.14),0 0 0 1px rgba(0,0,0,.06); }
+    [data-theme="dark"] .logo-icon { box-shadow:0 6px 18px rgba(0,0,0,.50),0 0 0 1px rgba(255,255,255,.10); }
+    .links { display:flex; align-items:center; gap:2px; }
+    .links a:not(.nav-btn) { padding:6px 10px; border-radius:8px; color:var(--nav-link-color); font-weight:600; font-size:.88rem; opacity:.82; transition:opacity .15s,color .15s; white-space:nowrap; }
+    .links a:not(.nav-btn):hover { opacity:1; color:var(--blue); }
+    .links a[aria-current="page"] { opacity:1; color:var(--blue); }
+    .nav-btn { display:inline-flex; align-items:center; justify-content:center; gap:7px; height:36px; padding:0 14px; border-radius:10px; margin-left:8px; border:none; font-weight:700; font-size:.85rem; background:var(--blue); color:white; box-shadow:0 4px 16px rgba(10,132,255,.28); cursor:pointer; transition:transform .15s,box-shadow .15s,filter .15s; white-space:nowrap; }
+    .nav-btn:hover { transform:translateY(-1px); box-shadow:0 8px 26px rgba(10,132,255,.38); filter:brightness(1.06); }
+    .nav-btn:active { transform:translateY(0); filter:brightness(.96); }
+    .mob-toggle { display:none; width:40px; height:40px; border-radius:11px; border:1px solid var(--stroke); background:var(--mob-toggle-bg); color:var(--text); align-items:center; justify-content:center; flex-direction:column; gap:5px; cursor:pointer; }
+    .mob-toggle span { width:18px; height:1.5px; border-radius:999px; background:currentColor; transition:transform .18s ease,opacity .18s ease; }
+    .mob-toggle[aria-expanded="true"] span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+    .mob-toggle[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .mob-toggle[aria-expanded="true"] span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu { display:none; }
 
     .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 11px; border: 1px solid var(--stroke); font-weight: 800; font-size: .94rem; transition: .18s ease; }
     .button.primary { background: var(--blue); color: white; border-color: rgba(255,255,255,.12); box-shadow: 0 14px 38px rgba(10,132,255,.28); }
@@ -187,18 +187,16 @@
     /* ── Responsive ── */
     @media (max-width: 760px) {
       .nav { min-height: 72px; }
-      .brand { min-width: 0; flex: 1; }
-      .brand span { white-space: nowrap; }
-      .links { display: none; }
-      .mob-toggle { display: inline-flex; flex: 0 0 auto; }
-      .mobile-menu { display: grid; gap: 10px; padding: 0 18px 18px; background: var(--mob-menu-bg); border-bottom: 1px solid var(--mob-menu-border); backdrop-filter: blur(20px); }
-      .mobile-menu[hidden] { display: none; }
-      .mobile-menu a { display: flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 13px; color: var(--text); font-weight: 700; background: var(--mob-item-bg); border: 1px solid var(--mob-item-border); }
-      .mob-menu-dl { justify-content: center; background: var(--blue) !important; color: white !important; box-shadow: 0 8px 24px rgba(10,132,255,.32) !important; }
+      .links { display:none; }
+      .mob-toggle { display:inline-flex; }
+      .mobile-menu { display:grid; gap:8px; padding:0 16px 16px; background:var(--mob-menu-bg); border-bottom:1px solid var(--mob-menu-border); backdrop-filter:blur(20px); }
+      .mobile-menu[hidden] { display:none; }
+      .mobile-menu a { display:flex; align-items:center; min-height:46px; padding:0 14px; border-radius:12px; color:var(--text); font-weight:700; background:var(--mob-item-bg); border:1px solid var(--mob-item-border); }
+      .mob-menu-dl { justify-content:center; background:var(--blue) !important; color:white !important; box-shadow:0 8px 24px rgba(10,132,255,.32) !important; }
     }
     @media (max-width: 680px) {
       .brand { font-size: 1.1rem; }
-      .logo-icon { width: 32px; height: 32px; border-radius: 9px; }
+      .logo-icon { width:32px; height:32px; border-radius:9px; }
       .strategy-card { grid-template-columns: 1fr; gap: 14px; padding: 22px 20px; }
       .strat-icon { width: 48px; height: 48px; border-radius: 14px; font-size: .68rem; }
       .disclaimer-card { grid-template-columns: 1fr; padding: 22px 20px; }
@@ -217,10 +215,10 @@
       <span>BalancePilot</span>
     </a>
     <nav class="links" aria-label="Main navigation">
-      <a href="index.html#accounts">Why BalancePilot</a>
-      <a href="strategies.html" aria-current="page">Strategies</a>
-      <a href="support.html">Support</a>
-      <a href="privacy.html">Privacy</a>
+        <a href="index.html#accounts">Why BalancePilot</a>
+        <a href="strategies.html" aria-current="page">Strategies</a>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy</a>
       <div class="theme-switch" aria-label="Color theme">
         <button class="theme-opt" data-theme-val="light" aria-pressed="false" aria-label="Light mode">☀️ <span class="theme-label">Light</span></button>
         <button class="theme-opt" data-theme-val="dark" aria-pressed="false" aria-label="Dark mode">🌙 <span class="theme-label">Dark</span></button>
