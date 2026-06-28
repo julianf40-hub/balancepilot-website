@@ -46,6 +46,8 @@ img { max-width: 100%; display: block; }
 @keyframes glowPulse{ 0%,100%{opacity:.45;transform:scale(1)} 50%{opacity:.75;transform:scale(1.08)} }
 .fade-in { opacity:0; transform:translateY(26px); transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1); }
 .fade-in.visible { opacity:1; transform:translateY(0); }
+/* Dark mode: floor opacity so content is never completely invisible during fade-in */
+[data-theme="dark"] .fade-in:not(.visible) { opacity:0.12; }
 .d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
 .d4{transition-delay:.28s} .d5{transition-delay:.35s} .d6{transition-delay:.42s}
 
@@ -1684,7 +1686,7 @@ if ('IntersectionObserver' in window) {
     entries.forEach(function(e) {
       if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
+  }, { threshold: 0.06, rootMargin: '0px 0px 200px 0px' });
   document.querySelectorAll('.fade-in').forEach(function(el) { io.observe(el); });
 } else {
   document.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
