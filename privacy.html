@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Privacy Policy for BalancePilot, a debt payoff planning app that helps users track balances, due dates, payoff strategies, and progress." />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#09090B" />
   <title>Privacy Policy — BalancePilot</title>
+  <!-- Anti-flash: apply saved/system theme before first paint -->
+  <script>
+  (function(){var t=localStorage.getItem('bp-theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}());
+  </script>
+  <link rel="stylesheet" href="theme.css" />
   <link rel="icon" type="image/png" href="balancepilot-icon.png" />
   <link rel="apple-touch-icon" href="balancepilot-icon.png" />
   <link rel="canonical" href="https://balancepilot.net/privacy.html" />
@@ -18,12 +23,6 @@
 
   <style>
     :root {
-      --bg: #000000;
-      --stroke: rgba(255,255,255,.13);
-      --text: #ffffff;
-      --muted: #a8adb8;
-      --muted-2: #747b89;
-      --blue: #0a84ff;
       --max: 900px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
     }
@@ -32,9 +31,9 @@
     html { scroll-behavior: smooth; }
     body {
       background:
-        radial-gradient(circle at 76% 9%, rgba(10,132,255,.22), transparent 31rem),
-        radial-gradient(circle at 0% 60%, rgba(10,132,255,.12), transparent 25rem),
-        linear-gradient(180deg, #000 0%, #02050b 50%, #000 100%);
+        radial-gradient(circle at 76% 9%, var(--orb-1), transparent 31rem),
+        radial-gradient(circle at 0% 60%, var(--orb-2), transparent 25rem),
+        linear-gradient(180deg, var(--body-base) 0%, var(--body-mid) 50%, var(--body-base) 100%);
       color: var(--text);
       line-height: 1.65;
       overflow-x: hidden;
@@ -43,11 +42,11 @@
     img { max-width: 100%; display: block; }
     .container { width: min(100% - 36px, var(--max)); margin: 0 auto; }
 
-    header { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,.72); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(20px); }
-    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
-    .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; color: #fff; letter-spacing: -.045em; }
-    .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: #000; }
-    .links { display: flex; align-items: center; gap: 22px; color: #f4f7fb; font-weight: 600; font-size: .94rem; }
+    header { position: sticky; top: 0; z-index: 100; background: var(--header-bg); border-bottom: 1px solid var(--header-border); backdrop-filter: blur(20px); }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; color: var(--text); letter-spacing: -.045em; }
+    .logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: var(--logo-bg); }
+    .links { display: flex; align-items: center; gap: 22px; color: var(--nav-link-color); font-weight: 600; font-size: .94rem; }
     .links a { opacity: .88; }
     .links a:hover, .links a[aria-current="page"] { opacity: 1; color: var(--blue); }
     .nav-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 20px; border-radius: 11px; border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .9rem; background: var(--blue); color: white; box-shadow: 0 14px 38px rgba(10,132,255,.28); transition: .18s ease; opacity: 1; }
@@ -55,10 +54,10 @@
 
     .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 11px; border: 1px solid var(--stroke); font-weight: 800; font-size: .94rem; transition: .18s ease; }
     .button.primary { background: var(--blue); color: white; border-color: rgba(255,255,255,.12); box-shadow: 0 14px 38px rgba(10,132,255,.28); }
-    .button.secondary { background: rgba(255,255,255,.045); color: white; }
+    .button.secondary { background: var(--btn-sec-bg); color: var(--btn-sec-color); border-color: var(--btn-sec-border); }
     .button:hover { transform: translateY(-2px); filter: brightness(1.08); }
 
-    .mobile-menu-toggle { display: none; width: 46px; height: 46px; border-radius: 13px; border: 1px solid var(--stroke); background: rgba(255,255,255,.07); color: var(--text); align-items: center; justify-content: center; flex-direction: column; gap: 5px; cursor: pointer; }
+    .mobile-menu-toggle { display: none; width: 46px; height: 46px; border-radius: 13px; border: 1px solid var(--stroke); background: var(--mob-toggle-bg); color: var(--text); align-items: center; justify-content: center; flex-direction: column; gap: 5px; cursor: pointer; }
     .mobile-menu-toggle span { width: 20px; height: 2px; border-radius: 999px; background: currentColor; transition: transform .18s ease, opacity .18s ease; }
     .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
@@ -70,16 +69,16 @@
     h1 { font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 1.04; letter-spacing: -.065em; margin-bottom: 10px; }
     .updated { color: var(--muted-2); font-size: .9rem; margin-bottom: 52px; }
     .policy-body { display: flex; flex-direction: column; gap: 16px; }
-    .policy-section { background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03)); border: 1px solid var(--stroke); border-radius: 20px; padding: 28px 32px; }
-    .policy-section h2 { font-size: 1.05rem; font-weight: 800; letter-spacing: -.025em; margin-bottom: 10px; color: #fff; }
+    .policy-section { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 28px 32px; box-shadow: var(--card-shadow); }
+    .policy-section h2 { font-size: 1.05rem; font-weight: 800; letter-spacing: -.025em; margin-bottom: 10px; color: var(--text); }
     .policy-section p { color: var(--muted); font-size: .98rem; line-height: 1.7; }
     .policy-section p + p { margin-top: 10px; }
     .policy-section a { color: var(--blue); }
     .policy-section a:hover { text-decoration: underline; }
     .policy-section ul { margin-top:12px; padding-left:20px; display:flex; flex-direction:column; gap:10px; color:var(--muted); font-size:.98rem; line-height:1.7; }
-    .policy-section strong { color: #fff; }
+    .policy-section strong { color: var(--text); }
     .cta-row { margin-top: 52px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-    footer { border-top: 1px solid rgba(255,255,255,.08); padding: 32px 0; color: var(--muted-2); font-size: .88rem; }
+    footer { border-top: 1px solid var(--footer-border); padding: 32px 0; color: var(--muted-2); font-size: .88rem; }
     .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
     .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
     .footer-links a { color: var(--muted-2); }
@@ -91,9 +90,9 @@
       .brand span { white-space: nowrap; }
       .links { display: none; }
       .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
-      .mobile-menu { display: grid; gap: 10px; padding: 0 18px 18px; background: rgba(0,0,0,.92); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(20px); }
+      .mobile-menu { display: grid; gap: 10px; padding: 0 18px 18px; background: var(--mob-menu-bg); border-bottom: 1px solid var(--mob-menu-border); backdrop-filter: blur(20px); }
       .mobile-menu[hidden] { display: none; }
-      .mobile-menu a { display: flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 13px; color: var(--text); font-weight: 700; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08); }
+      .mobile-menu a { display: flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 13px; color: var(--text); font-weight: 700; background: var(--mob-item-bg); border: 1px solid var(--mob-item-border); }
       .mobile-menu-button { justify-content: center; background: var(--blue) !important; color: white !important; box-shadow: 0 14px 38px rgba(10,132,255,.28); }
     }
     @media (max-width: 680px) {
@@ -116,7 +115,11 @@
         <a href="index.html#screenshots">Screenshots</a>
         <a href="support.html">Support</a>
         <a href="privacy.html" aria-current="page">Privacy</a>
-        <a class="nav-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
+        <div class="theme-switch" aria-label="Color theme">
+        <button class="theme-opt" data-theme-val="light" aria-pressed="false" aria-label="Light mode">☀️ <span class="theme-label">Light</span></button>
+        <button class="theme-opt" data-theme-val="dark" aria-pressed="false" aria-label="Dark mode">🌙 <span class="theme-label">Dark</span></button>
+      </div>
+      <a class="nav-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
       </nav>
       <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
     </div>
@@ -128,6 +131,10 @@
       <a href="support.html">Support</a>
       <a href="privacy.html" aria-current="page">Privacy</a>
       <a class="mobile-menu-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
+      <div class="theme-switch mobile-visible" aria-label="Color theme">
+        <button class="theme-opt" data-theme-val="light" aria-pressed="false" aria-label="Light mode">☀️ <span class="theme-label">Light</span></button>
+        <button class="theme-opt" data-theme-val="dark" aria-pressed="false" aria-label="Dark mode">🌙 <span class="theme-label">Dark</span></button>
+      </div>
     </div>
   </header>
 
@@ -224,6 +231,7 @@
     </div>
   </footer>
 
+  <script src="theme.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     const menuToggle = document.querySelector('.mobile-menu-toggle');

@@ -1,0 +1,318 @@
+/* ══════════════════════════════════════════════════
+   BalancePilot — Light & Dark Theme System
+   All pages import this file. Anti-flash script
+   must be inline in <head> before this link tag.
+══════════════════════════════════════════════════ */
+
+/* ── Design Tokens: Dark (default) ── */
+:root,
+[data-theme="dark"] {
+  /* Core palette */
+  --bg:             #09090B;
+  --bg-2:           #111113;
+  --surface:        #18181B;
+  --surface-elev:   #1F1F23;
+  --stroke:         rgba(255,255,255,.09);
+  --text:           #FFFFFF;
+  --muted:          #A1A1AA;
+  --muted-2:        #71717A;
+  --blue:           #0a84ff;
+  --green:          #32d74b;
+
+  /* Body background pieces */
+  --orb-1:          rgba(10,132,255,.38);
+  --orb-2:          rgba(10,132,255,.20);
+  --body-base:      #000000;
+  --body-mid:       #020610;
+
+  /* Logo */
+  --logo-bg:        #000000;
+
+  /* Navigation */
+  --header-bg:      rgba(0,0,0,.78);
+  --header-border:  rgba(255,255,255,.07);
+  --nav-link-color: #f4f7fb;
+
+  /* Mobile menu */
+  --mob-menu-bg:          rgba(0,0,0,.94);
+  --mob-menu-border:      rgba(255,255,255,.07);
+  --mob-item-bg:          rgba(255,255,255,.055);
+  --mob-item-border:      rgba(255,255,255,.08);
+  --mob-toggle-bg:        rgba(255,255,255,.07);
+
+  /* Cards / glass surfaces */
+  --card-bg:        linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.04));
+  --card-bg-alt:    linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
+  --card-border:    rgba(255,255,255,.11);
+  --card-shadow:    0 22px 64px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.10);
+  --card-shadow-h:  0 32px 72px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.14);
+  --card-border-h:  rgba(255,255,255,.18);
+
+  /* Subtle inner backgrounds (why-point, pro-feat, trust-bullets li) */
+  --subtle-bg:      rgba(255,255,255,.045);
+  --subtle-border:  rgba(255,255,255,.08);
+  --subtle-bg-h:    rgba(255,255,255,.07);
+  --subtle-border-h:rgba(255,255,255,.14);
+
+  /* Secondary button */
+  --btn-sec-bg:     rgba(255,255,255,.06);
+  --btn-sec-border: rgba(255,255,255,.10);
+  --btn-sec-color:  #ffffff;
+
+  /* Hero */
+  --hero-brand-color:   rgba(255,255,255,.70);
+  --hero-feat-bg:       linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+  --hero-feat-border:   rgba(255,255,255,.11);
+  --hero-feat-shadow:   0 14px 36px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.08);
+  --hero-feat-shadow-h: 0 18px 44px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.10);
+  --hero-ss-shadow:     0 40px 90px rgba(0,0,0,.70), 0 0 0 1px rgba(255,255,255,.07), 0 0 64px rgba(10,132,255,.22);
+  --loan-ss-shadow:     0 32px 72px rgba(0,0,0,.62), 0 0 0 1px rgba(255,255,255,.07), 0 0 48px rgba(10,132,255,.18);
+
+  /* Screenshot grid */
+  --shot-bg:        rgba(255,255,255,.045);
+  --shot-border:    rgba(255,255,255,.10);
+  --shot-shadow:    0 16px 48px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.08);
+  --shot-title-color: #ffffff;
+  --shot-border-h:  rgba(10,132,255,.22);
+  --shot-shadow-h:  0 28px 64px rgba(0,0,0,.45), 0 0 0 1px rgba(10,132,255,.22), inset 0 1px 0 rgba(255,255,255,.10);
+
+  /* Icon boxes (shield, trust icon) */
+  --icon-box-bg:    rgba(255,255,255,.06);
+  --icon-box-border:rgba(255,255,255,.14);
+
+  /* Table */
+  --table-wrap-bg:  linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+  --table-wrap-border: rgba(255,255,255,.13);
+  --table-head-border: rgba(255,255,255,.10);
+  --table-row-border:  rgba(255,255,255,.055);
+  --table-first-col:   #ffffff;
+  --table-row-hover:   rgba(255,255,255,.03);
+
+  /* FAQ / details */
+  --faq-bg:           linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+  --faq-border:       rgba(255,255,255,.10);
+  --faq-answer-border:rgba(255,255,255,.07);
+  --faq-summary-hover:rgba(255,255,255,.04);
+
+  /* Footer */
+  --footer-border: rgba(255,255,255,.07);
+
+  /* Theme switch widget */
+  --ts-bg:           rgba(255,255,255,.07);
+  --ts-border:       rgba(255,255,255,.13);
+  --ts-color:        rgba(255,255,255,.55);
+  --ts-active-bg:    rgba(255,255,255,.16);
+  --ts-active-color: #ffffff;
+  --ts-active-shadow:0 1px 4px rgba(0,0,0,.25);
+}
+
+/* ── Design Tokens: Light ── */
+[data-theme="light"] {
+  --bg:             #FFFFFF;
+  --bg-2:           #F7F7F8;
+  --surface:        #FFFFFF;
+  --surface-elev:   #FAFAFA;
+  --stroke:         #E5E7EB;
+  --text:           #111827;
+  --muted:          #4B5563;
+  --muted-2:        #6B7280;
+  --blue:           #0a84ff;
+  --green:          #16a34a;
+
+  /* Body background */
+  --orb-1:          rgba(10,132,255,.07);
+  --orb-2:          rgba(10,132,255,.04);
+  --body-base:      #FFFFFF;
+  --body-mid:       #F5F8FF;
+
+  /* Logo */
+  --logo-bg:        #FFFFFF;
+
+  /* Navigation */
+  --header-bg:      rgba(255,255,255,.92);
+  --header-border:  rgba(0,0,0,.07);
+  --nav-link-color: #374151;
+
+  /* Mobile menu */
+  --mob-menu-bg:          rgba(255,255,255,.98);
+  --mob-menu-border:      rgba(0,0,0,.07);
+  --mob-item-bg:          rgba(0,0,0,.04);
+  --mob-item-border:      rgba(0,0,0,.06);
+  --mob-toggle-bg:        rgba(0,0,0,.05);
+
+  /* Cards */
+  --card-bg:        #FFFFFF;
+  --card-bg-alt:    #FAFAFA;
+  --card-border:    #E5E7EB;
+  --card-shadow:    0 1px 3px rgba(0,0,0,.04), 0 6px 24px rgba(0,0,0,.06);
+  --card-shadow-h:  0 4px 12px rgba(0,0,0,.06), 0 16px 40px rgba(0,0,0,.09);
+  --card-border-h:  #D1D5DB;
+
+  /* Subtle inner backgrounds */
+  --subtle-bg:      #F7F7F8;
+  --subtle-border:  #E5E7EB;
+  --subtle-bg-h:    #F0F0F3;
+  --subtle-border-h:#D1D5DB;
+
+  /* Secondary button */
+  --btn-sec-bg:     rgba(0,0,0,.05);
+  --btn-sec-border: #E5E7EB;
+  --btn-sec-color:  #111827;
+
+  /* Hero */
+  --hero-brand-color:   rgba(0,0,0,.45);
+  --hero-feat-bg:       #FFFFFF;
+  --hero-feat-border:   #E5E7EB;
+  --hero-feat-shadow:   0 2px 8px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.04);
+  --hero-feat-shadow-h: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.05);
+  --hero-ss-shadow:     0 24px 60px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.06);
+  --loan-ss-shadow:     0 16px 48px rgba(0,0,0,.10), 0 0 0 1px rgba(0,0,0,.05);
+
+  /* Screenshot grid */
+  --shot-bg:        #FFFFFF;
+  --shot-border:    #E5E7EB;
+  --shot-shadow:    0 2px 8px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.04);
+  --shot-title-color: #111827;
+  --shot-border-h:  #CBD5E1;
+  --shot-shadow-h:  0 8px 24px rgba(0,0,0,.09), 0 2px 6px rgba(0,0,0,.05);
+
+  /* Icon boxes */
+  --icon-box-bg:    #F3F4F6;
+  --icon-box-border:#E5E7EB;
+
+  /* Table */
+  --table-wrap-bg:  #FFFFFF;
+  --table-wrap-border: #E5E7EB;
+  --table-head-border: #E5E7EB;
+  --table-row-border:  #F3F4F6;
+  --table-first-col:   #111827;
+  --table-row-hover:   rgba(0,0,0,.02);
+
+  /* FAQ / details */
+  --faq-bg:           #FFFFFF;
+  --faq-border:       #E5E7EB;
+  --faq-answer-border:#F3F4F6;
+  --faq-summary-hover:rgba(0,0,0,.02);
+
+  /* Footer */
+  --footer-border: #E5E7EB;
+
+  /* Theme switch widget */
+  --ts-bg:           #F3F4F6;
+  --ts-border:       #E5E7EB;
+  --ts-color:        #6B7280;
+  --ts-active-bg:    #FFFFFF;
+  --ts-active-color: #111827;
+  --ts-active-shadow:0 1px 4px rgba(0,0,0,.10);
+}
+
+/* ── Smooth theme transitions ──
+   Apply to elements that change color/bg on switch.
+   Intentionally excludes transform/layout so existing
+   hover animations remain unaffected. */
+body,
+header,
+footer,
+.brand,
+.links,
+.logo-icon,
+.mobile-menu,
+.mobile-menu a,
+.mobile-menu-toggle,
+.button.secondary,
+.nav-button,
+.feature-card,
+.glass,
+.why-panel, .pro-panel, .loan-panel, .trust-panel,
+.why-point,
+.step,
+.cta-panel,
+.disclaimer,
+.shot,
+.pro-feat,
+.trust-bullets li,
+.hero-brand-inline,
+.hero-feature-card,
+.strategy-card,
+.table-wrap,
+.disclaimer-card,
+.cta-card,
+.support-section,
+.policy-section,
+details.faq-item,
+details.faq-item summary,
+details.faq-item .faq-answer,
+table, thead tr, td,
+.theme-switch,
+.theme-opt {
+  transition:
+    background-color 250ms ease-in-out,
+    background 250ms ease-in-out,
+    border-color 250ms ease-in-out,
+    color 250ms ease-in-out,
+    box-shadow 250ms ease-in-out !important;
+}
+
+/* Exception: elements with important layout/transform transitions
+   get those preserved (browser merges via specificity) */
+.feature-card,
+.hero-feature-card,
+.shot,
+.button,
+.nav-button {
+  transition:
+    background-color 250ms ease-in-out,
+    background 250ms ease-in-out,
+    border-color 250ms ease-in-out,
+    color 250ms ease-in-out,
+    box-shadow 250ms ease-in-out,
+    transform 200ms cubic-bezier(.22,1,.36,1),
+    filter 150ms ease !important;
+}
+
+/* ── Theme Switch Widget ── */
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--ts-bg);
+  border: 1px solid var(--ts-border);
+  flex-shrink: 0;
+}
+
+.theme-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--ts-color);
+  font-family: inherit;
+  font-size: .8rem;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.theme-opt[aria-pressed="true"] {
+  background: var(--ts-active-bg);
+  color: var(--ts-active-color);
+  box-shadow: var(--ts-active-shadow);
+}
+
+/* Mobile: hide text labels, show only in mobile menu */
+@media (max-width: 760px) {
+  .theme-switch {
+    display: none; /* hidden on mobile nav bar — appears in mobile menu instead */
+  }
+  .theme-switch.mobile-visible {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+  }
+  .theme-opt { padding: 8px 20px; font-size: .9rem; }
+}
