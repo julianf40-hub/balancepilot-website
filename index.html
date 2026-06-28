@@ -535,6 +535,196 @@ h1.hero-headline { margin-bottom:24px; font-size:clamp(2.8rem,5.5vw,5.2rem); }
 }
 
 /* ════════════════════════════
+   1e · LOAN IMPACT PREVIEW
+════════════════════════════ */
+#loan-impact { background:var(--bg-2); }
+.li-grid {
+  display:grid; grid-template-columns:46fr 54fr;
+  gap:64px; align-items:center;
+}
+.li-showcase {
+  position:relative; display:flex; justify-content:center; align-items:center;
+  min-height:680px;
+}
+.li-glow {
+  position:absolute; width:580px; height:580px; border-radius:50%;
+  background:radial-gradient(circle, rgba(10,132,255,.06) 0%, rgba(10,132,255,.02) 50%, transparent 70%);
+  filter:blur(72px); pointer-events:none; z-index:0;
+  animation:glowPulse 10s 1.5s ease-in-out infinite;
+}
+[data-theme="dark"] .li-glow {
+  background:radial-gradient(circle,
+    rgba(10,100,255,.20) 0%,
+    rgba(0,40,160,.10) 38%,
+    rgba(0,200,255,.04) 60%,
+    transparent 72%);
+}
+[data-theme="light"] .li-glow {
+  background:radial-gradient(circle, rgba(10,132,255,.055) 0%, rgba(10,132,255,.015) 55%, transparent 72%);
+}
+.li-phone {
+  position:relative; z-index:2; width:316px; flex-shrink:0;
+  animation:float 11.5s ease-in-out infinite;
+  filter:
+    drop-shadow(0 6px 4px rgba(0,0,0,.04))
+    drop-shadow(0 20px 20px rgba(0,0,0,.06))
+    drop-shadow(0 56px 80px rgba(0,0,0,.11))
+    drop-shadow(0 0 44px rgba(10,132,255,.09));
+}
+[data-theme="dark"] .li-phone {
+  filter:
+    drop-shadow(0 6px 6px rgba(0,0,0,.18))
+    drop-shadow(0 24px 40px rgba(0,0,0,.44))
+    drop-shadow(0 64px 96px rgba(0,0,0,.58))
+    drop-shadow(0 0 64px rgba(10,132,255,.18));
+}
+
+/* Loan Impact floating cards */
+.lic {
+  position:absolute; z-index:4;
+  background:var(--surface);
+  border:1px solid var(--card-border);
+  border-radius:18px;
+  box-shadow:var(--card-shadow), 0 0 0 0.5px rgba(255,255,255,.05);
+  padding:13px 15px;
+  transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease;
+  backdrop-filter:blur(12px);
+  min-width:158px;
+}
+[data-theme="light"] .lic {
+  background:rgba(255,255,255,.96);
+  box-shadow:0 8px 32px rgba(0,0,0,.09), 0 2px 8px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.05);
+}
+.lic:hover { transform:translateY(-3px) scale(1.015); box-shadow:var(--card-shadow-h); }
+
+/* 4-corner positions — 20px overlap onto phone edges */
+.lic-1 { top:9%;     left:0px;   animation:floatB 9s 0.4s ease-in-out infinite; }
+.lic-2 { bottom:9%;  left:0px;   animation:floatB 10.5s 1.4s ease-in-out infinite; }
+.lic-3 { top:9%;     left:434px; animation:floatB 8s 2.1s ease-in-out infinite; max-width:184px; }
+.lic-4 { bottom:9%;  left:434px; animation:floatB 11s 0.9s ease-in-out infinite; max-width:184px; }
+
+.lic-lbl  { font-size:.67rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:5px; }
+.lic-val  { font-size:1.32rem; font-weight:800; letter-spacing:-.04em; line-height:1.15; }
+.lic-note { font-size:.74rem; color:var(--muted); margin-top:4px; line-height:1.4; }
+.lic-arrow { font-size:.72rem; color:var(--muted); display:block; margin:1px 0; }
+.lic-val-green  { color:var(--green); }
+[data-theme="light"] .lic-val-green  { color:#16a34a; }
+.lic-val-blue   { color:var(--blue); }
+.lic-val-purple { color:#bf5af2; }
+[data-theme="light"] .lic-val-purple { color:#8944b8; }
+.lic-val-orange { color:#ff9f0a; }
+
+/* Feature list */
+.li-feats { display:flex; flex-direction:column; gap:10px; margin-top:32px; }
+.li-feat {
+  display:flex; align-items:flex-start; gap:13px; padding:14px 16px; border-radius:15px;
+  background:var(--subtle-bg); border:1px solid var(--subtle-border);
+  transition:background .15s, border-color .15s;
+}
+.li-feat:hover { background:var(--subtle-bg-h); border-color:var(--subtle-border-h); }
+.li-feat-icon {
+  width:34px; height:34px; border-radius:10px; flex-shrink:0; display:grid; place-items:center;
+  background:rgba(10,132,255,.10); border:1px solid rgba(10,132,255,.18); color:var(--blue);
+}
+.li-feat-name { font-size:.93rem; font-weight:800; letter-spacing:-.02em; margin-bottom:2px; }
+.li-feat-desc { font-size:.82rem; color:var(--muted); line-height:1.5; }
+
+@media (max-width:980px) {
+  .li-grid { grid-template-columns:1fr; gap:48px; }
+  .li-showcase { order:-1; min-height:540px; }
+  .lic-1 { left:1%; }
+  .lic-2 { left:2%; }
+  .lic-3 { left:auto; right:1%; }
+  .lic-4 { left:auto; right:1%; bottom:18%; }
+}
+@media (max-width:580px) {
+  .lic { display:none; }
+  .li-showcase { min-height:360px; }
+  .li-phone { width:min(62vw,210px); animation:none; }
+}
+
+/* ════════════════════════════
+   1e · COMPARE LOAN OFFERS
+════════════════════════════ */
+#compare-offers { background:var(--bg); }
+.co-grid {
+  display:grid; grid-template-columns:54fr 46fr;
+  gap:64px; align-items:center;
+}
+.co-showcase {
+  position:relative; display:flex; justify-content:center; align-items:center;
+  min-height:680px;
+}
+.co-glow {
+  position:absolute; width:580px; height:580px; border-radius:50%;
+  background:radial-gradient(circle, rgba(10,132,255,.06) 0%, rgba(10,132,255,.02) 50%, transparent 70%);
+  filter:blur(72px); pointer-events:none; z-index:0;
+  animation:glowPulse 10s ease-in-out infinite;
+}
+[data-theme="dark"] .co-glow {
+  background:radial-gradient(circle,
+    rgba(10,100,255,.20) 0%, rgba(0,40,160,.10) 38%,
+    rgba(0,200,255,.04) 60%, transparent 72%);
+}
+[data-theme="light"] .co-glow {
+  background:radial-gradient(circle, rgba(10,132,255,.055) 0%, rgba(10,132,255,.015) 55%, transparent 72%);
+}
+.co-phone {
+  position:relative; z-index:2; width:316px; flex-shrink:0;
+  animation:float 7s ease-in-out infinite;
+  filter: drop-shadow(0 6px 4px rgba(0,0,0,.04)) drop-shadow(0 20px 20px rgba(0,0,0,.06))
+          drop-shadow(0 56px 80px rgba(0,0,0,.11)) drop-shadow(0 0 44px rgba(10,132,255,.09));
+}
+[data-theme="dark"] .co-phone {
+  filter: drop-shadow(0 6px 6px rgba(0,0,0,.18)) drop-shadow(0 24px 40px rgba(0,0,0,.44))
+          drop-shadow(0 64px 96px rgba(0,0,0,.58)) drop-shadow(0 0 64px rgba(10,132,255,.18));
+}
+.coc {
+  position:absolute; z-index:4; background:var(--surface);
+  border:1px solid var(--card-border); border-radius:18px;
+  box-shadow:var(--card-shadow), 0 0 0 0.5px rgba(255,255,255,.05);
+  padding:13px 15px;
+  transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease;
+  backdrop-filter:blur(12px); min-width:158px;
+}
+[data-theme="light"] .coc {
+  background:rgba(255,255,255,.96);
+  box-shadow:0 8px 32px rgba(0,0,0,.09), 0 2px 8px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.05);
+}
+.coc:hover { transform:translateY(-3px) scale(1.015); box-shadow:var(--card-shadow-h); }
+.coc-label { font-size:11px; font-weight:600; letter-spacing:.04em; color:var(--muted); margin-bottom:4px; }
+.coc-val { font-size:20px; font-weight:700; letter-spacing:-.02em; line-height:1; }
+.coc-sub { font-size:11px; color:var(--muted); margin-top:3px; }
+/* card positions — phone left (54fr) layout */
+.coc-1 { left:0px;   top:14%; }
+.coc-2 { left:434px; top:14%; }
+.coc-3 { left:0px;   bottom:22%; }
+.coc-4 { left:434px; bottom:22%; }
+.co-text { }
+.co-feats { display:flex; flex-direction:column; gap:20px; margin-top:40px; }
+.co-feat { display:flex; align-items:flex-start; gap:16px; }
+.co-feat-icon {
+  width:44px; height:44px; border-radius:14px; display:flex; align-items:center;
+  justify-content:center; flex-shrink:0;
+  background:var(--subtle-bg); border:1px solid var(--subtle-border);
+}
+.co-feat-name { font-size:15px; font-weight:600; margin-bottom:3px; }
+.co-feat-desc { font-size:14px; color:var(--muted); line-height:1.5; }
+@media (max-width:980px) {
+  .co-grid { grid-template-columns:1fr; gap:48px; }
+  .co-showcase { order:-1; min-height:540px; }
+  .coc-1 { left:1%; }
+  .coc-2 { left:auto; right:1%; }
+  .coc-3 { left:1%; }
+  .coc-4 { left:auto; right:1%; bottom:18%; }
+}
+@media (max-width:580px) {
+  .coc { display:none; }
+  .co-showcase { min-height:360px; }
+  .co-phone { width:min(62vw,210px); animation:none; }
+}
+
+/* ════════════════════════════
    1d · CREDIT SCORE FOCUS
 ════════════════════════════ */
 #credit-focus { background:var(--bg-2); }
@@ -1342,6 +1532,182 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
 
       </div><!-- /pp-showcase -->
     </div><!-- /pp-grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     1e · LOAN IMPACT PREVIEW
+══════════════════════════════════════ -->
+<section id="loan-impact">
+  <div class="container">
+    <div class="li-grid">
+
+      <!-- Left: text + features -->
+      <div class="li-text">
+        <div class="eyebrow fade-in">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Loan Impact Preview
+        </div>
+        <h2 class="fade-in d1">Borrow with<br>confidence.</h2>
+        <p class="sec-sub fade-in d2" style="margin-top:16px;max-width:440px">See how any loan changes your monthly payment, payoff timeline, total debt, and long-term financial plan before you commit.</p>
+
+        <div class="li-feats fade-in d3">
+          <div class="li-feat">
+            <div class="li-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div>
+              <div class="li-feat-name">Preview Before Borrowing</div>
+              <div class="li-feat-desc">See the real financial impact before accepting a loan offer.</div>
+            </div>
+          </div>
+          <div class="li-feat">
+            <div class="li-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="li-feat-name">Debt-Free Forecast</div>
+              <div class="li-feat-desc">Understand how borrowing changes your payoff timeline before signing.</div>
+            </div>
+          </div>
+          <div class="li-feat">
+            <div class="li-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div>
+              <div class="li-feat-name">Compare Multiple Offers</div>
+              <div class="li-feat-desc">Evaluate multiple loan offers side-by-side before making a decision.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: phone + 4 floating cards -->
+      <div class="li-showcase fade-in d2">
+        <div class="li-glow" aria-hidden="true"></div>
+
+        <!-- iPhone frame -->
+        <div class="li-phone">
+          <div class="iphone-body">
+            <div class="iphone-screen">
+              <img src="05-loan-impact-preview-light.png" alt="BalancePilot loan impact preview screen showing monthly payment, timeline, and total interest" width="316" loading="lazy" />
+              <div class="iphone-island" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upper Left: Monthly Payment -->
+        <div class="lic lic-1" aria-hidden="true">
+          <div class="lic-lbl">Monthly Payment</div>
+          <div class="lic-val lic-val-green">$168</div>
+          <div class="lic-note">Fits your budget</div>
+        </div>
+
+        <!-- Lower Left: Safe To Add -->
+        <div class="lic lic-2" aria-hidden="true">
+          <div class="lic-lbl">Safe To Add</div>
+          <div class="lic-val lic-val-blue">Yes</div>
+          <div class="lic-note">No timeline impact</div>
+        </div>
+
+        <!-- Upper Right: Payoff Date -->
+        <div class="lic lic-3" aria-hidden="true">
+          <div class="lic-lbl">Payoff Date</div>
+          <div class="lic-val lic-val-purple">Mar 2029</div>
+          <span class="lic-arrow">↓</span>
+          <div class="lic-val lic-val-green" style="font-size:1.1rem">Feb 2029</div>
+        </div>
+
+        <!-- Lower Right: Total Interest -->
+        <div class="lic lic-4" aria-hidden="true">
+          <div class="lic-lbl">Total Interest</div>
+          <div class="lic-val lic-val-orange">$533</div>
+          <div class="lic-note">Loan lifetime</div>
+        </div>
+
+      </div><!-- /li-showcase -->
+    </div><!-- /li-grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     1e · COMPARE LOAN OFFERS
+══════════════════════════════════════ -->
+<section id="compare-offers">
+  <div class="container">
+    <div class="co-grid">
+      <!-- LEFT: phone showcase -->
+      <div class="co-showcase fade-in">
+        <div class="co-glow" aria-hidden="true"></div>
+        <div class="co-phone">
+          <div class="iphone-body">
+            <div class="iphone-screen">
+              <img src="06-compare-loan-offers-light.png" alt="BalancePilot compare loan offers screen showing side-by-side loan comparison" width="316" loading="lazy" />
+              <div class="iphone-island" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Floating cards -->
+        <div class="coc coc-1" aria-hidden="true">
+          <div class="coc-label">LOWEST PAYMENT</div>
+          <div class="coc-val" style="color:var(--green)">$168</div>
+          <div class="coc-sub">per month</div>
+        </div>
+        <div class="coc coc-2" aria-hidden="true">
+          <div class="coc-label">BEST OVERALL</div>
+          <div class="coc-val" style="color:var(--blue)">Offer A</div>
+          <div class="coc-sub">recommended</div>
+        </div>
+        <div class="coc coc-3" aria-hidden="true">
+          <div class="coc-label">COMPARE</div>
+          <div class="coc-val" style="color:var(--blue)">2 Offers</div>
+          <div class="coc-sub">side by side</div>
+        </div>
+        <div class="coc coc-4" aria-hidden="true">
+          <div class="coc-label">TOTAL INTEREST</div>
+          <div class="coc-val" style="color:#ff9f0a">$533</div>
+          <div class="coc-sub">saved vs offer B</div>
+        </div>
+      </div>
+      <!-- RIGHT: text + features -->
+      <div class="co-text">
+        <div class="eyebrow fade-in">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          COMPARE LOAN OFFERS
+        </div>
+        <h2 class="fade-in d1">Choose the best loan, not just the cheapest.</h2>
+        <p class="sec-sub fade-in d2" style="margin-top:16px;max-width:440px">Compare multiple loan offers side-by-side before committing. See how different monthly payments, interest costs, payoff dates, and long-term financial impact affect your debt payoff strategy before selecting the option that's right for you.</p>
+        <div class="co-feats fade-in d3">
+          <div class="co-feat">
+            <div class="co-feat-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg>
+            </div>
+            <div>
+              <div class="co-feat-name">Side-by-Side Comparison</div>
+              <div class="co-feat-desc">View multiple loan offers together to immediately see which terms serve your payoff goals best.</div>
+            </div>
+          </div>
+          <div class="co-feat">
+            <div class="co-feat-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <div class="co-feat-name">Save the Best Option</div>
+              <div class="co-feat-desc">Bookmark your preferred offer and return to it anytime while you continue shopping around.</div>
+            </div>
+          </div>
+          <div class="co-feat">
+            <div class="co-feat-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="co-feat-name">Plan Before You Commit</div>
+              <div class="co-feat-desc">Understand the full cost of each loan over time so you commit with confidence, not guesswork.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /co-grid -->
   </div>
 </section>
 
