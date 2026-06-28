@@ -46,6 +46,8 @@ img { max-width: 100%; display: block; }
 @keyframes glowPulse{ 0%,100%{opacity:.45;transform:scale(1)} 50%{opacity:.75;transform:scale(1.08)} }
 .fade-in { opacity:0; transform:translateY(26px); transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1); }
 .fade-in.visible { opacity:1; transform:translateY(0); }
+/* Dark mode: floor opacity so content is never completely invisible during fade-in */
+[data-theme="dark"] .fade-in:not(.visible) { opacity:0.12; }
 .d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
 .d4{transition-delay:.28s} .d5{transition-delay:.35s} .d6{transition-delay:.42s}
 
@@ -310,6 +312,119 @@ h1.hero-headline { margin-bottom:24px; font-size:clamp(2.8rem,5.5vw,5.2rem); }
 .chip-blue  { background:rgba(10,132,255,.12); color:var(--blue);   border:1px solid rgba(10,132,255,.22); }
 .chip-green { background:rgba(50,215,75,.12);  color:#32d74b;        border:1px solid rgba(50,215,75,.25); }
 [data-theme="light"] .chip-green { background:rgba(22,163,74,.10); color:#16a34a; border-color:rgba(22,163,74,.22); }
+
+/* ════════════════════════════
+   1b · ACCOUNTS SECTION
+════════════════════════════ */
+#accounts { background:var(--bg-2); }
+.accts-grid {
+  display:grid; grid-template-columns:46fr 54fr;
+  gap:64px; align-items:center;
+}
+.accts-text { }
+.accts-showcase {
+  position:relative; display:flex; justify-content:center; align-items:center;
+  min-height:640px;
+}
+.accts-glow {
+  position:absolute; width:580px; height:580px; border-radius:50%;
+  background:radial-gradient(circle, rgba(10,132,255,.06) 0%, rgba(10,132,255,.02) 50%, transparent 70%);
+  filter:blur(72px); pointer-events:none; z-index:0;
+  animation:glowPulse 10s ease-in-out infinite;
+}
+[data-theme="dark"] .accts-glow {
+  background:radial-gradient(circle,
+    rgba(10,100,255,.20) 0%,
+    rgba(0,40,160,.10) 38%,
+    rgba(0,200,255,.04) 60%,
+    transparent 72%);
+}
+[data-theme="light"] .accts-glow {
+  background:radial-gradient(circle, rgba(10,132,255,.055) 0%, rgba(10,132,255,.015) 55%, transparent 72%);
+}
+.accts-phone {
+  position:relative; z-index:2; width:316px; flex-shrink:0;
+  animation:float 12s ease-in-out infinite;
+  filter:
+    drop-shadow(0 6px 4px rgba(0,0,0,.04))
+    drop-shadow(0 20px 20px rgba(0,0,0,.06))
+    drop-shadow(0 56px 80px rgba(0,0,0,.11))
+    drop-shadow(0 0 44px rgba(10,132,255,.09));
+}
+[data-theme="dark"] .accts-phone {
+  filter:
+    drop-shadow(0 6px 6px rgba(0,0,0,.18))
+    drop-shadow(0 24px 40px rgba(0,0,0,.44))
+    drop-shadow(0 64px 96px rgba(0,0,0,.58))
+    drop-shadow(0 0 64px rgba(10,132,255,.18));
+}
+
+/* Floating cards for accounts section */
+.afc {
+  position:absolute; z-index:4;
+  background:var(--surface);
+  border:1px solid var(--card-border);
+  border-radius:18px;
+  box-shadow:var(--card-shadow), 0 0 0 0.5px rgba(255,255,255,.05);
+  padding:14px 16px;
+  transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease;
+  backdrop-filter:blur(12px);
+}
+[data-theme="light"] .afc {
+  background:rgba(255,255,255,.96);
+  box-shadow:0 8px 32px rgba(0,0,0,.09), 0 2px 8px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.05);
+}
+.afc:hover { transform:translateY(-3px) scale(1.015); box-shadow:var(--card-shadow-h); }
+
+/* Card positions — 20px overlap onto phone edges for layered depth */
+.afc-1 { top:10%;    left:-26px; animation:floatB 9s ease-in-out infinite;   min-width:184px; }
+.afc-2 { bottom:14%; left:-30px; animation:floatB 11s 1.2s ease-in-out infinite; min-width:188px; }
+.afc-3 { top:24%;    left:434px; animation:floatB 8.5s 2s ease-in-out infinite; min-width:170px; max-width:188px; }
+
+.afc-lbl  { font-size:.67rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:5px; }
+.afc-val  { font-size:1.38rem; font-weight:800; letter-spacing:-.04em; line-height:1; }
+.afc-note { font-size:.74rem; color:var(--muted); margin-top:4px; line-height:1.4; }
+.afc-row  { display:flex; align-items:center; gap:9px; margin-top:7px; }
+.afc-icon {
+  width:32px; height:32px; border-radius:10px; flex-shrink:0;
+  display:grid; place-items:center;
+}
+.afc-icon-blue   { background:rgba(10,132,255,.11); border:1px solid rgba(10,132,255,.20); color:var(--blue); }
+.afc-icon-green  { background:rgba(50,215,75,.11);  border:1px solid rgba(50,215,75,.20);  color:#32d74b; }
+[data-theme="light"] .afc-icon-green { background:rgba(22,163,74,.09); border-color:rgba(22,163,74,.18); color:#16a34a; }
+.afc-icon-orange { background:rgba(255,159,10,.11); border:1px solid rgba(255,159,10,.20); color:#ff9f0a; }
+.afc-name { font-size:.86rem; font-weight:800; letter-spacing:-.02em; }
+.afc-detail { font-size:.73rem; color:var(--muted); margin-top:1px; }
+.afc-val-green { color:var(--green); }
+[data-theme="light"] .afc-val-green { color:#16a34a; }
+
+/* Feature list */
+.accts-feats { display:flex; flex-direction:column; gap:10px; margin-top:32px; }
+.accts-feat {
+  display:flex; align-items:flex-start; gap:13px; padding:14px 16px; border-radius:15px;
+  background:var(--subtle-bg); border:1px solid var(--subtle-border);
+  transition:background .15s, border-color .15s;
+}
+.accts-feat:hover { background:var(--subtle-bg-h); border-color:var(--subtle-border-h); }
+.accts-feat-icon {
+  width:34px; height:34px; border-radius:10px; flex-shrink:0; display:grid; place-items:center;
+  background:rgba(10,132,255,.10); border:1px solid rgba(10,132,255,.18); color:var(--blue);
+}
+.accts-feat-name { font-size:.93rem; font-weight:800; letter-spacing:-.02em; margin-bottom:2px; }
+.accts-feat-desc { font-size:.82rem; color:var(--muted); line-height:1.5; }
+
+@media (max-width:980px) {
+  .accts-grid { grid-template-columns:1fr; gap:48px; }
+  .accts-showcase { order:-1; min-height:500px; }
+  .afc-1 { left:1%; }
+  .afc-2 { left:2%; }
+  .afc-3 { left:auto; right:1%; }
+}
+@media (max-width:580px) {
+  .afc { display:none; }
+  .accts-showcase { min-height:340px; }
+  .accts-phone { width:min(62vw,210px); animation:none; }
+}
 
 /* ════════════════════════════
    2 · FEATURE HIGHLIGHTS
@@ -825,6 +940,99 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
 
       </div><!-- /showcase -->
     </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     1b · ACCOUNTS
+══════════════════════════════════════ -->
+<section id="accounts">
+  <div class="container">
+    <div class="accts-grid">
+
+      <!-- Left: text + features -->
+      <div class="accts-text">
+        <div class="eyebrow fade-in">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Accounts
+        </div>
+        <h2 class="fade-in d1">Manage every account<br>with clarity.</h2>
+        <p class="sec-sub fade-in d2" style="margin-top:16px;max-width:440px">Track balances, APRs, due dates, minimums, available cash, and protected cash from one organized view.</p>
+
+        <div class="accts-feats fade-in d3">
+          <div class="accts-feat">
+            <div class="accts-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </div>
+            <div>
+              <div class="accts-feat-name">Balance &amp; APR at a glance</div>
+              <div class="accts-feat-desc">See your current balance, interest rate, and credit limit for every card and loan — no guessing.</div>
+            </div>
+          </div>
+          <div class="accts-feat">
+            <div class="accts-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="accts-feat-name">Due dates &amp; minimums</div>
+              <div class="accts-feat-desc">Stay ahead of every payment with due date tracking and minimum payment reminders built in.</div>
+            </div>
+          </div>
+          <div class="accts-feat">
+            <div class="accts-feat-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="accts-feat-name">Available &amp; protected cash</div>
+              <div class="accts-feat-desc">Know exactly how much you can spend and how much is reserved — so you never overdraft.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: phone + floating cards -->
+      <div class="accts-showcase fade-in d2">
+        <div class="accts-glow" aria-hidden="true"></div>
+
+        <!-- iPhone frame -->
+        <div class="accts-phone">
+          <div class="iphone-body">
+            <div class="iphone-screen">
+              <img src="02-accounts-light.png" alt="BalancePilot accounts screen showing balances, APRs, and due dates" width="290" loading="lazy" />
+              <div class="iphone-island" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating card 1: Available Cash -->
+        <div class="afc afc-1" aria-hidden="true">
+          <div class="afc-lbl">Available Cash</div>
+          <div class="afc-val afc-val-green">$650</div>
+          <div class="afc-note">Ready to spend</div>
+        </div>
+
+        <!-- Floating card 2: Protected Cash -->
+        <div class="afc afc-2" aria-hidden="true">
+          <div class="afc-lbl">Protected Cash</div>
+          <div class="afc-val" style="color:var(--blue)">$900</div>
+          <div class="afc-note">Reserved for bills</div>
+        </div>
+
+        <!-- Floating card 3: Active Balances -->
+        <div class="afc afc-3" aria-hidden="true">
+          <div class="afc-row">
+            <div class="afc-icon afc-icon-orange">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </div>
+            <div>
+              <div class="afc-name">Active Balances</div>
+              <div class="afc-detail">5 accounts tracked</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /accts-showcase -->
+    </div><!-- /accts-grid -->
   </div>
 </section>
 
@@ -1478,7 +1686,7 @@ if ('IntersectionObserver' in window) {
     entries.forEach(function(e) {
       if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
+  }, { threshold: 0.06, rootMargin: '0px 0px 200px 0px' });
   document.querySelectorAll('.fade-in').forEach(function(el) { io.observe(el); });
 } else {
   document.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
