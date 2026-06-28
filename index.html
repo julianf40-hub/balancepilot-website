@@ -325,22 +325,36 @@ h1.hero-headline { margin-bottom:24px; font-size:clamp(2.8rem,5.5vw,5.2rem); }
   min-height:640px;
 }
 .accts-glow {
-  position:absolute; width:420px; height:420px; border-radius:50%;
-  background:radial-gradient(circle, var(--orb-1), transparent 64%);
-  filter:blur(52px); pointer-events:none; z-index:0;
+  position:absolute; width:580px; height:580px; border-radius:50%;
+  background:radial-gradient(circle, rgba(10,132,255,.06) 0%, rgba(10,132,255,.02) 50%, transparent 70%);
+  filter:blur(72px); pointer-events:none; z-index:0;
   animation:glowPulse 10s ease-in-out infinite;
 }
+[data-theme="dark"] .accts-glow {
+  background:radial-gradient(circle,
+    rgba(10,100,255,.20) 0%,
+    rgba(0,40,160,.10) 38%,
+    rgba(0,200,255,.04) 60%,
+    transparent 72%);
+}
+[data-theme="light"] .accts-glow {
+  background:radial-gradient(circle, rgba(10,132,255,.055) 0%, rgba(10,132,255,.015) 55%, transparent 72%);
+}
 .accts-phone {
-  position:relative; z-index:2; width:290px; flex-shrink:0;
+  position:relative; z-index:2; width:316px; flex-shrink:0;
   animation:float 12s ease-in-out infinite;
   filter:
-    drop-shadow(0 44px 72px rgba(0,0,0,.18))
-    drop-shadow(0 0 48px rgba(10,132,255,.13));
+    drop-shadow(0 6px 4px rgba(0,0,0,.04))
+    drop-shadow(0 20px 20px rgba(0,0,0,.06))
+    drop-shadow(0 56px 80px rgba(0,0,0,.11))
+    drop-shadow(0 0 44px rgba(10,132,255,.09));
 }
 [data-theme="dark"] .accts-phone {
   filter:
-    drop-shadow(0 48px 88px rgba(0,0,0,.68))
-    drop-shadow(0 0 60px rgba(10,132,255,.22));
+    drop-shadow(0 6px 6px rgba(0,0,0,.18))
+    drop-shadow(0 24px 40px rgba(0,0,0,.44))
+    drop-shadow(0 64px 96px rgba(0,0,0,.58))
+    drop-shadow(0 0 64px rgba(10,132,255,.18));
 }
 
 /* Floating cards for accounts section */
@@ -360,10 +374,10 @@ h1.hero-headline { margin-bottom:24px; font-size:clamp(2.8rem,5.5vw,5.2rem); }
 }
 .afc:hover { transform:translateY(-3px) scale(1.015); box-shadow:var(--card-shadow-h); }
 
-/* Card positions */
-.afc-1 { top:10%;   left:0%;   animation:floatB 9s ease-in-out infinite; min-width:184px; }
-.afc-2 { bottom:14%; left:2%;  animation:floatB 11s 1.2s ease-in-out infinite; min-width:188px; }
-.afc-3 { top:24%;   left:66%;  animation:floatB 8.5s 2s ease-in-out infinite; min-width:170px; max-width:188px; }
+/* Card positions — 20px overlap onto phone edges for layered depth */
+.afc-1 { top:10%;    left:-26px; animation:floatB 9s ease-in-out infinite;   min-width:184px; }
+.afc-2 { bottom:14%; left:-30px; animation:floatB 11s 1.2s ease-in-out infinite; min-width:188px; }
+.afc-3 { top:24%;    left:434px; animation:floatB 8.5s 2s ease-in-out infinite; min-width:170px; max-width:188px; }
 
 .afc-lbl  { font-size:.67rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:5px; }
 .afc-val  { font-size:1.38rem; font-weight:800; letter-spacing:-.04em; line-height:1; }
