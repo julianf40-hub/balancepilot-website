@@ -140,7 +140,7 @@ h2 { font-size:clamp(2.2rem,4.6vw,4rem); line-height:.95; letter-spacing:-.07em;
    1 · HERO
 ════════════════════════════ */
 .hero {
-  padding:160px 0 180px; position:relative; overflow:hidden; background:var(--bg);
+  padding:160px 0 240px; position:relative; overflow:hidden; background:var(--bg);
 }
 .hero::before {
   content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
@@ -273,12 +273,12 @@ h1.hero-headline { margin-bottom:24px; font-size:clamp(2.8rem,5.5vw,5.2rem); }
 .fc:hover { transform:translateY(-3px) scale(1.015); box-shadow:var(--card-shadow-h); }
 
 /* Primary card — largest, most visual weight */
-.fc-1 { top:9%;    left:-5%; animation:floatB 9.5s ease-in-out infinite; padding:16px 18px; min-width:200px; }
-/* Medium card */
-.fc-2 { bottom:11%; right:-5%; animation:floatB 11s 1.5s ease-in-out infinite; min-width:178px; }
+.fc-1 { top:9%;     left:-5%;  animation:floatB 9.5s ease-in-out infinite; padding:16px 18px; min-width:200px; }
+/* Medium card — right side, overlaps phone slightly */
+.fc-2 { bottom:11%; left:67%;  animation:floatB 11s 1.5s ease-in-out infinite; min-width:178px; max-width:195px; }
 /* Supporting cards — smaller */
-.fc-3 { top:21%;   right:-5%; animation:floatB 8.5s 2.2s ease-in-out infinite; padding:12px 14px; min-width:160px; font-size:.95em; }
-.fc-4 { bottom:24%; left:-5%; animation:floatB 10s 0.8s ease-in-out infinite; padding:12px 14px; min-width:160px; font-size:.95em; }
+.fc-3 { top:21%;    left:68%;  animation:floatB 8.5s 2.2s ease-in-out infinite; padding:12px 14px; min-width:160px; max-width:190px; font-size:.95em; }
+.fc-4 { bottom:24%; left:-5%;  animation:floatB 10s 0.8s ease-in-out infinite; padding:12px 14px; min-width:160px; font-size:.95em; }
 
 .fc-lbl { font-size:.67rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; }
 .fc-val { font-size:1.42rem; font-weight:800; letter-spacing:-.04em; line-height:1; }
@@ -582,11 +582,12 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
    RESPONSIVE
 ════════════════════════════ */
 @media (max-width:1180px) {
-  /* Nudge cards when columns tighten */
+  /* Left cards: pull slightly inward */
   .fc-1 { left:-2%; }
-  .fc-2 { right:-2%; }
-  .fc-3 { right:-2%; }
   .fc-4 { left:-2%; }
+  /* Right cards: already using left-based positioning, nudge inward */
+  .fc-2 { left:64%; }
+  .fc-3 { left:65%; }
 }
 @media (max-width:980px) {
   .hero-grid { grid-template-columns:1fr; gap:56px; }
@@ -598,10 +599,10 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
   .privacy-pillars { grid-template-columns:repeat(2,1fr); }
   .plans-wrap { grid-template-columns:1fr; max-width:460px; }
   .shot-grid { grid-template-columns:repeat(3,1fr); }
-  .fc-1 { left:1%; top:3%; }
-  .fc-2 { right:1%; bottom:5%; }
-  .fc-3 { right:1%; top:18%; }
-  .fc-4 { left:1%; bottom:22%; }
+  .fc-1 { left:1%;  top:3%; }
+  .fc-2 { left:auto; right:1%; bottom:5%; }
+  .fc-3 { left:auto; right:1%; top:18%; }
+  .fc-4 { left:1%;  bottom:22%; }
 }
 @media (max-width:760px) {
   .links { display:none; }
@@ -791,7 +792,7 @@ footer { border-top:1px solid var(--footer-border); padding:40px 0; }
         <div class="fc fc-2" aria-hidden="true">
           <div class="fc-lbl">Debt-Free By</div>
           <div class="fc-val fc-val-purple" style="margin-top:4px">Mar 2029</div>
-          <div class="fc-note">See the light at the end of your plan.</div>
+          <div class="fc-note">See the light at the<br>end of the plan.</div>
         </div>
 
         <!-- Card 3: Credit Score Focus (top-right, gold) -->
