@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Plan your debt payoff, compare loan scenarios, preview financial decisions, and understand the impact before you borrow with BalancePilot." />
 <meta name="keywords" content="debt payoff planner, debt payoff app, loan impact calculator, debt planning app, payoff strategy app, manual debt tracker, credit utilization tracker, what-if debt planner" />
-<meta name="theme-color" content="#09090B" />
+<meta name="theme-color" content="#FFFFFF" />
 <title>BalancePilot – Debt Payoff Planner & Loan Impact Preview App</title>
-<!-- Anti-flash: apply saved/system theme before first paint -->
 <script>
 (function(){var t=localStorage.getItem('bp-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}());
 </script>
@@ -22,468 +21,562 @@
 <meta property="og:description" content="Plan your debt payoff, compare loan scenarios, preview financial decisions, and understand the impact before you borrow." />
 <meta property="og:image" content="https://balancepilot.net/balancepilot-og.png" />
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "MobileApplication",
-  "name": "BalancePilot",
-  "description": "Plan your debt payoff, compare loan scenarios, preview financial decisions, and understand the impact before you borrow.",
-  "operatingSystem": "iOS",
-  "applicationCategory": "FinanceApplication",
-  "url": "https://balancepilot.net",
-  "downloadUrl": "https://apps.apple.com/app/balancepilot/id6763011325",
-  "offers": { "@type": "Offer", "price": "0.00", "priceCurrency": "USD" }
-}
+{"@context":"https://schema.org","@type":"MobileApplication","name":"BalancePilot","description":"Plan your debt payoff, compare loan scenarios, preview financial decisions, and understand the impact before you borrow.","operatingSystem":"iOS","applicationCategory":"FinanceApplication","url":"https://balancepilot.net","downloadUrl":"https://apps.apple.com/app/balancepilot/id6763011325","offers":{"@type":"Offer","price":"0.00","priceCurrency":"USD"}}
 </script>
 <style>
+/* ═══════════════════════════════════════
+   BalancePilot — Homepage v2
+   Apple-quality premium redesign
+═══════════════════════════════════════ */
 :root {
-  --radius: 28px;
-  --max: 1180px;
+  --r: 24px;
+  --max: 1160px;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 88px; }
-body {
-  background:
-    radial-gradient(ellipse at 78% 4%, var(--orb-1), transparent 34rem),
-    radial-gradient(ellipse at -4% 46%, var(--orb-2), transparent 28rem),
-    linear-gradient(180deg, var(--body-base) 0%, var(--body-mid) 55%, var(--body-base) 100%);
-  color: var(--text);
-  line-height: 1.55;
-  overflow-x: hidden;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { background: var(--bg); color: var(--text); line-height: 1.55; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
-.container { width: min(100% - 36px, var(--max)); margin: 0 auto; }
+.container { width: min(100% - 40px, var(--max)); margin: 0 auto; }
 
 /* ── Animations ── */
-@keyframes orb-drift {
-  0%, 100% { opacity: .75; transform: scale(1) translate(0,0); }
-  33%       { opacity: 1;   transform: scale(1.07) translate(4px,-6px); }
-  66%       { opacity: .85; transform: scale(.96)  translate(-4px,4px); }
-}
-@keyframes screenshot-float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-6px); }
-}
-.fade-in {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1);
-}
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-.fade-in-d1 { transition-delay: .08s; }
-.fade-in-d2 { transition-delay: .16s; }
-.fade-in-d3 { transition-delay: .24s; }
-.fade-in-d4 { transition-delay: .32s; }
-.fade-in-d5 { transition-delay: .10s; }
-.fade-in-d6 { transition-delay: .20s; }
+@keyframes float    { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-9px)} }
+@keyframes floatB   { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-5px)} }
+@keyframes glowPulse{ 0%,100%{opacity:.45;transform:scale(1)} 50%{opacity:.75;transform:scale(1.08)} }
+.fade-in { opacity:0; transform:translateY(26px); transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1); }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+.d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
+.d4{transition-delay:.28s} .d5{transition-delay:.35s} .d6{transition-delay:.42s}
 
 /* ── Nav ── */
 header {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--header-border);
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  position:sticky; top:0; z-index:100;
+  background:var(--header-bg);
+  border-bottom:1px solid var(--header-border);
+  backdrop-filter:blur(24px) saturate(1.6);
+  -webkit-backdrop-filter:blur(24px) saturate(1.6);
 }
-.nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; color: var(--text); letter-spacing: -.045em; }
-.logo-icon { width: 46px; height: 46px; border-radius: 13px; object-fit: cover; box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.14); background: var(--logo-bg); }
-.links { display: flex; align-items: center; gap: 22px; color: var(--nav-link-color); font-weight: 600; font-size: .94rem; }
-.links a:not(.nav-button) { opacity: .82; transition: opacity .15s; }
-.links a:not(.nav-button):hover { opacity: 1; color: var(--blue); }
-.nav-button, .button {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 48px; padding: 0 22px; border-radius: 11px;
-  border: 1px solid rgba(255,255,255,.12); font-weight: 800; font-size: .94rem;
-  cursor: pointer; text-decoration: none;
+.nav { min-height:68px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.brand { display:inline-flex; align-items:center; gap:10px; font-size:1.2rem; font-weight:800; color:var(--text); letter-spacing:-.04em; flex-shrink:0; }
+.logo-icon { width:38px; height:38px; border-radius:11px; object-fit:cover; background:var(--logo-bg); box-shadow:0 4px 14px rgba(0,0,0,.14),0 0 0 1px rgba(0,0,0,.06); }
+[data-theme="dark"] .logo-icon { box-shadow:0 6px 18px rgba(0,0,0,.50),0 0 0 1px rgba(255,255,255,.10); }
+.links { display:flex; align-items:center; gap:2px; }
+.links a:not(.nav-btn) { padding:6px 10px; border-radius:8px; color:var(--nav-link-color); font-weight:600; font-size:.88rem; opacity:.82; transition:opacity .15s,color .15s; }
+.links a:not(.nav-btn):hover { opacity:1; color:var(--blue); }
+.nav-btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:7px;
+  height:36px; padding:0 14px; border-radius:10px; margin-left:8px;
+  border:none; font-weight:700; font-size:.85rem;
+  background:var(--blue); color:white;
+  box-shadow:0 4px 16px rgba(10,132,255,.28);
+  cursor:pointer; transition:transform .15s,box-shadow .15s,filter .15s;
+  white-space:nowrap;
 }
-.nav-button, .button.primary {
-  background: var(--blue); color: white;
-  box-shadow: 0 10px 30px rgba(10,132,255,.3), inset 0 1px 0 rgba(255,255,255,.18);
+.nav-btn:hover { transform:translateY(-1px); box-shadow:0 8px 26px rgba(10,132,255,.38); filter:brightness(1.06); }
+.nav-btn:active { transform:translateY(0); filter:brightness(.96); }
+.mob-toggle {
+  display:none; width:40px; height:40px; border-radius:11px;
+  border:1px solid var(--stroke); background:var(--mob-toggle-bg); color:var(--text);
+  align-items:center; justify-content:center; flex-direction:column; gap:5px; cursor:pointer;
 }
-.button.secondary { background: var(--btn-sec-bg); color: var(--btn-sec-color); border-color: var(--btn-sec-border); }
-.button:hover, .nav-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 44px rgba(10,132,255,.4), inset 0 1px 0 rgba(255,255,255,.18);
-  filter: brightness(1.06);
-}
-.button.secondary:hover { box-shadow: 0 12px 30px rgba(0,0,0,.12); filter: brightness(1.04); }
-.button:active, .nav-button:active { transform: translateY(0) !important; filter: brightness(.96) !important; transition-duration: .06s !important; }
-.mobile-menu-toggle {
-  display: none; width: 46px; height: 46px; border-radius: 13px;
-  border: 1px solid var(--stroke); background: var(--mob-toggle-bg); color: var(--text);
-  align-items: center; justify-content: center; flex-direction: column; gap: 5px; cursor: pointer;
-}
-.mobile-menu-toggle span { width: 20px; height: 2px; border-radius: 999px; background: currentColor; transition: transform .18s ease, opacity .18s ease; }
-.mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.mobile-menu { display: none; }
+.mob-toggle span { width:18px; height:1.5px; border-radius:999px; background:currentColor; transition:transform .18s ease,opacity .18s ease; }
+.mob-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.mob-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.mob-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu { display:none; }
+
+/* ── Theme switch (from theme.css) ── */
 
 /* ── Badges ── */
-.badge-new {
-  display: inline-flex; align-items: center;
-  padding: 2px 9px; border-radius: 999px;
-  background: rgba(10,132,255,.16); border: 1px solid rgba(10,132,255,.32);
-  color: var(--blue); font-size: .65rem; font-weight: 800; letter-spacing: .09em;
-  text-transform: uppercase; margin-left: 7px; vertical-align: middle; position: relative; top: -1px;
+.badge-new,.badge-pro {
+  display:inline-flex; align-items:center; padding:2px 8px; border-radius:999px;
+  font-size:.6rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
+  margin-left:6px; vertical-align:middle; position:relative; top:-1px;
 }
-.badge-pro {
-  display: inline-flex; align-items: center;
-  padding: 2px 9px; border-radius: 999px;
-  background: var(--badge-pro-bg); border: 1px solid var(--badge-pro-border);
-  color: var(--badge-pro-color); font-size: .65rem; font-weight: 800; letter-spacing: .09em;
-  text-transform: uppercase; margin-left: 7px; vertical-align: middle; position: relative; top: -1px;
+.badge-new { background:rgba(10,132,255,.12); border:1px solid rgba(10,132,255,.28); color:var(--blue); }
+.badge-pro { background:var(--badge-pro-bg); border:1px solid var(--badge-pro-border); color:var(--badge-pro-color); }
+
+/* ── Shared button ── */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  height:52px; padding:0 28px; border-radius:14px;
+  font-weight:800; font-size:.95rem; cursor:pointer; border:1px solid transparent;
+  transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .18s ease,filter .15s;
+}
+.btn-primary {
+  background:var(--blue); color:white;
+  border-color:rgba(255,255,255,.14);
+  box-shadow:0 8px 28px rgba(10,132,255,.30),inset 0 1px 0 rgba(255,255,255,.18);
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 16px 44px rgba(10,132,255,.42),inset 0 1px 0 rgba(255,255,255,.18); filter:brightness(1.05); }
+.btn-primary:active { transform:translateY(0); filter:brightness(.96); transition-duration:.06s; }
+.btn-secondary { background:var(--btn-sec-bg); color:var(--btn-sec-color); border-color:var(--btn-sec-border); }
+.btn-secondary:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(0,0,0,.10); }
+.btn-secondary:active { transform:translateY(0); transition-duration:.06s; }
+.btn-sm { height:44px; padding:0 20px; font-size:.88rem; border-radius:11px; }
+
+/* ── Eyebrow ── */
+.eyebrow {
+  display:inline-flex; align-items:center; gap:7px; padding:4px 13px; border-radius:999px;
+  background:rgba(10,132,255,.09); border:1px solid rgba(10,132,255,.22);
+  color:var(--blue); font-size:.72rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  margin-bottom:18px;
 }
 
-/* ── Hero ── */
-.hero { padding: 60px 0 0; }
-.hero-grid-new {
-  display: grid;
-  grid-template-columns: 1fr 370px 1fr;
-  gap: 32px; align-items: center;
-}
-.hero-left { display: flex; flex-direction: column; gap: 20px; }
-.hero-brand-inline {
-  display: inline-flex; align-items: center; gap: 11px;
-  font-size: 1.05rem; font-weight: 800; letter-spacing: -.04em; color: var(--hero-brand-color);
-}
-.hero-brand-inline .logo-icon { width: 38px; height: 38px; border-radius: 10px; }
-h1 {
-  font-size: clamp(2.7rem, 5.1vw, 4.7rem);
-  line-height: .95; letter-spacing: -.072em;
-  text-wrap: balance;
-}
-.blue { color: var(--blue); }
-.hero-sub {
-  color: var(--muted); font-size: 1.08rem; line-height: 1.68;
-  max-width: 460px;
-}
-.hero-mobile-cta { display: none; flex-direction: column; gap: 10px; }
-.hero-mobile-cta .button { width: 100%; justify-content: center; }
-.hero-mobile-cta-sub { color: var(--muted-2); font-size: .8rem; text-align: center; }
+/* ── Section ── */
+section { padding:100px 0; }
+h1 { font-size:clamp(3rem,5.8vw,5.4rem); line-height:.91; letter-spacing:-.08em; text-wrap:balance; }
+h2 { font-size:clamp(2.2rem,4.6vw,4rem); line-height:.95; letter-spacing:-.07em; text-wrap:balance; }
+.sec-head { margin-bottom:56px; }
+.sec-head.center { text-align:center; }
+.sec-sub { color:var(--muted); font-size:1.08rem; line-height:1.75; margin-top:16px; }
+.sec-sub.narrow { max-width:580px; }
+.sec-sub.cx { margin-left:auto; margin-right:auto; }
+.accent { color:var(--blue); }
+.glass { background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--r); box-shadow:var(--card-shadow); }
 
-.hero-bullets { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-.hero-bullets li {
-  display: flex; align-items: center; gap: 11px;
-  color: var(--muted); font-size: .97rem;
+/* ════════════════════════════
+   1 · HERO
+════════════════════════════ */
+.hero {
+  padding:88px 0 100px; position:relative; overflow:hidden; background:var(--bg);
 }
-.hero-bullets li::before {
-  content: '';
-  width: 18px; height: 18px; min-width: 18px; border-radius: 50%;
-  background: rgba(10,132,255,.13) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M2 5l2.2 2.2L8 3' stroke='%230a84ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
-  border: 1px solid rgba(10,132,255,.25);
+.hero::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 80% 70% at 72% -8%,  var(--orb-1), transparent),
+    radial-gradient(ellipse 55% 50% at -5%  65%,  var(--orb-2), transparent);
 }
+.hero .container { position:relative; z-index:1; }
+.hero-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:60px; align-items:center;
+}
+.hero-kicker { margin-bottom:20px; }
+h1.hero-headline { margin-bottom:22px; }
+.hero-sub { color:var(--muted); font-size:1.1rem; line-height:1.76; max-width:490px; margin-bottom:36px; }
+.hero-ctas { display:flex; align-items:center; gap:13px; flex-wrap:wrap; }
+.hero-trust {
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  margin-top:22px; color:var(--muted-2); font-size:.82rem;
+}
+.hero-trust-sep { width:3px; height:3px; border-radius:50%; background:var(--muted-2); opacity:.4; }
+.hero-mob-ctas { display:none; flex-direction:column; align-items:center; gap:10px; padding-top:4px; }
+.hero-mob-ctas .btn-primary { width:100%; }
+.hero-mob-note { color:var(--muted-2); font-size:.8rem; }
 
-.hero-visual { position: relative; display: grid; place-items: center; }
-.orb {
-  position: absolute; width: 340px; height: 340px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(10,132,255,.4), transparent 64%);
-  filter: blur(20px); pointer-events: none;
-  animation: orb-drift 9s ease-in-out infinite;
+/* Device showcase */
+.showcase {
+  position:relative; display:flex; justify-content:center; align-items:center;
+  min-height:580px;
 }
-.hero-screenshot {
-  position: relative; z-index: 2;
-  width: min(100%, 370px); height: auto;
-  object-fit: contain; border-radius: 36px;
-  box-shadow: var(--hero-ss-shadow);
-  animation: screenshot-float 7s ease-in-out infinite;
+.showcase-glow {
+  position:absolute; width:400px; height:400px; border-radius:50%;
+  background:radial-gradient(circle, var(--orb-1), transparent 66%);
+  filter:blur(44px); pointer-events:none; z-index:0;
+  animation:glowPulse 9s ease-in-out infinite;
 }
+.showcase-phone {
+  position:relative; z-index:2; width:218px; flex-shrink:0;
+  animation:float 7.5s ease-in-out infinite;
+}
+.showcase-phone img {
+  width:100%; border-radius:46px;
+  box-shadow:0 52px 96px rgba(0,0,0,.20),0 0 0 1px rgba(0,0,0,.07);
+}
+[data-theme="dark"] .showcase-phone img {
+  box-shadow:0 52px 96px rgba(0,0,0,.70),0 0 0 1px rgba(255,255,255,.08),0 0 64px rgba(10,132,255,.18);
+}
+.fc {
+  position:absolute; z-index:3;
+  background:var(--surface); border:1px solid var(--card-border);
+  border-radius:18px; box-shadow:var(--card-shadow);
+  padding:14px 16px; min-width:176px;
+}
+.fc-1 { top:10%; left:-14%; animation:floatB 9.5s ease-in-out infinite; }
+.fc-2 { bottom:14%; left:-10%; animation:floatB 11s 1.2s ease-in-out infinite; }
+.fc-3 { top:18%; right:-16%; animation:floatB 8.5s 2s ease-in-out infinite; }
+.fc-lbl { font-size:.68rem; font-weight:700; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; margin-bottom:6px; }
+.fc-val { font-size:1.45rem; font-weight:800; letter-spacing:-.04em; line-height:1; }
+.fc-bar { height:5px; border-radius:999px; background:var(--subtle-border); margin-top:10px; overflow:hidden; }
+.fc-bar-fill { height:100%; border-radius:999px; background:var(--blue); }
+.fc-note { color:var(--muted); font-size:.75rem; margin-top:5px; }
+.fc-row { display:flex; align-items:center; gap:10px; margin-top:6px; }
+.fc-icon { width:30px; height:30px; border-radius:9px; flex-shrink:0; display:grid; place-items:center; background:rgba(10,132,255,.12); border:1px solid rgba(10,132,255,.22); color:var(--blue); }
+.fc-name { font-size:.84rem; font-weight:700; letter-spacing:-.02em; }
+.fc-detail { font-size:.73rem; color:var(--muted); margin-top:1px; }
+.fc-amt { font-size:1.1rem; font-weight:800; color:var(--blue); letter-spacing:-.03em; margin-left:auto; }
+.chip {
+  display:inline-flex; align-items:center; gap:5px; padding:3px 9px;
+  border-radius:999px; font-size:.73rem; font-weight:700;
+}
+.chip-blue { background:rgba(10,132,255,.12); color:var(--blue); border:1px solid rgba(10,132,255,.22); }
+.chip-green { background:rgba(50,215,75,.12); color:#32d74b; border:1px solid rgba(50,215,75,.25); }
+[data-theme="light"] .chip-green { background:rgba(22,163,74,.10); color:#16a34a; border-color:rgba(22,163,74,.22); }
 
-.hero-right { display: flex; flex-direction: column; gap: 18px; }
-.hero-feature-card {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 18px 20px; border-radius: 20px;
-  background: var(--hero-feat-bg);
-  border: 1px solid var(--hero-feat-border);
-  box-shadow: var(--hero-feat-shadow);
+/* ════════════════════════════
+   2 · FEATURE HIGHLIGHTS
+════════════════════════════ */
+#features { background:var(--bg-2); }
+.feat-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
 }
-.hero-feature-card:hover { transform: translateX(4px); box-shadow: var(--hero-feat-shadow-h); }
-.hfc-icon {
-  width: 42px; height: 42px; min-width: 42px; border-radius: 12px;
-  background: rgba(10,132,255,.14); border: 1px solid rgba(10,132,255,.26);
-  color: var(--blue); display: grid; place-items: center;
+.feat-card {
+  padding:28px 26px; border-radius:22px;
+  background:var(--card-bg); border:1px solid var(--card-border);
+  box-shadow:var(--card-shadow);
+  transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease,border-color .15s;
 }
-.hfc-title { font-size: .97rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.3; }
-.hfc-sub { color: var(--muted); font-size: .85rem; margin-top: 4px; line-height: 1.45; }
+.feat-card:hover { transform:translateY(-5px); box-shadow:var(--card-shadow-h); border-color:var(--card-border-h); }
+.feat-icon {
+  width:48px; height:48px; border-radius:14px; margin-bottom:20px;
+  display:grid; place-items:center;
+  background:rgba(10,132,255,.10); border:1px solid rgba(10,132,255,.20); color:var(--blue);
+}
+.feat-card h3 { font-size:1.06rem; font-weight:800; margin-bottom:9px; letter-spacing:-.025em; }
+.feat-card p { color:var(--muted); font-size:.92rem; line-height:1.68; }
 
-.hero-cta-row {
-  display: flex; flex-wrap: wrap; gap: 14px;
-  justify-content: center; padding: 34px 0 8px;
+/* ════════════════════════════
+   3 · SMART PAYOFF PLANNING
+════════════════════════════ */
+.payoff-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
+.strategy-list { display:flex; flex-direction:column; gap:10px; margin-top:32px; }
+.si {
+  display:flex; align-items:flex-start; gap:14px; padding:18px 20px; border-radius:18px;
+  background:var(--card-bg); border:1px solid var(--card-border); box-shadow:var(--card-shadow);
+  transition:transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s ease;
 }
-.hero-trust { text-align: center; color: var(--muted-2); font-size: .84rem; padding-bottom: 24px; }
+.si:hover { transform:translateX(5px); box-shadow:var(--card-shadow-h); }
+.si-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+.si-dot-blue   { background:var(--blue); box-shadow:0 0 0 3px rgba(10,132,255,.18); }
+.si-dot-green  { background:#32d74b; box-shadow:0 0 0 3px rgba(50,215,75,.18); }
+[data-theme="light"] .si-dot-green { background:#16a34a; box-shadow:0 0 0 3px rgba(22,163,74,.18); }
+.si-dot-orange { background:#ff9f0a; box-shadow:0 0 0 3px rgba(255,159,10,.18); }
+.si-dot-purple { background:#bf5af2; box-shadow:0 0 0 3px rgba(191,90,242,.18); }
+.si-name { font-size:1rem; font-weight:800; letter-spacing:-.025em; margin-bottom:3px; }
+.si-desc { font-size:.87rem; color:var(--muted); line-height:1.55; }
+.payoff-visual { position:relative; display:flex; justify-content:center; }
+.payoff-glow {
+  position:absolute; width:300px; height:300px; border-radius:50%;
+  background:radial-gradient(circle,var(--orb-1),transparent 65%);
+  filter:blur(36px); z-index:0; animation:glowPulse 10s ease-in-out infinite;
+}
+.payoff-phone { position:relative; z-index:2; width:min(100%,230px); border-radius:42px; box-shadow:var(--loan-ss-shadow); }
 
-/* ── Section base ── */
-section { padding: 80px 0; }
-.section-head { max-width: 760px; margin-bottom: 36px; }
-.section-head.center { text-align: center; margin-left: auto; margin-right: auto; }
-h2 { font-size: clamp(2.1rem, 4.8vw, 4rem); line-height: 1.03; letter-spacing: -.065em; margin-bottom: 14px; }
-.h2-sm { font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: -.055em; }
-.h2-cta { font-size: clamp(2rem, 4vw, 3.1rem); letter-spacing: -.06em; }
-.section-head p { color: var(--muted); font-size: 1.08rem; line-height: 1.7; }
-.eyebrow-label {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 5px 13px; border-radius: 999px;
-  background: rgba(10,132,255,.11); border: 1px solid rgba(10,132,255,.25);
-  color: var(--blue); font-size: .78rem; font-weight: 700; letter-spacing: .08em;
-  text-transform: uppercase; margin-bottom: 14px;
+/* ════════════════════════════
+   4 · PLAN BEFORE YOU BORROW
+════════════════════════════ */
+#borrow { background:var(--bg-2); }
+.borrow-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
+.borrow-feats { display:flex; flex-direction:column; gap:11px; margin-top:32px; }
+.bf {
+  display:flex; align-items:flex-start; gap:14px; padding:15px 18px; border-radius:16px;
+  background:var(--subtle-bg); border:1px solid var(--subtle-border);
+  transition:background .15s,border-color .15s;
 }
+.bf:hover { background:var(--subtle-bg-h); border-color:var(--subtle-border-h); }
+.bf-icon {
+  width:36px; height:36px; border-radius:10px; flex-shrink:0; display:grid; place-items:center;
+  background:rgba(10,132,255,.12); border:1px solid rgba(10,132,255,.22); color:var(--blue);
+}
+.bf-name { font-size:.96rem; font-weight:800; letter-spacing:-.02em; margin-bottom:2px; }
+.bf-desc { font-size:.83rem; color:var(--muted); line-height:1.5; }
+.borrow-vis { position:relative; display:flex; justify-content:center; align-items:center; }
+.borrow-phone { position:relative; width:220px; animation:float 8s ease-in-out infinite; }
+.borrow-phone img { width:100%; border-radius:42px; box-shadow:var(--loan-ss-shadow); }
+.borrow-card {
+  position:absolute; z-index:3;
+  background:var(--surface); border:1px solid var(--card-border);
+  border-radius:16px; padding:13px 15px; box-shadow:var(--card-shadow);
+  min-width:154px;
+}
+.bc1 { top:-16px; right:-48px; }
+.bc2 { bottom:-12px; left:-48px; }
+.bc-lbl { font-size:.68rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
+.bc-val { font-size:1.12rem; font-weight:800; letter-spacing:-.03em; }
+.bc-sub { font-size:.74rem; color:var(--muted); margin-top:2px; }
 
-/* ── Glass card base ── */
-.glass {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  box-shadow: var(--card-shadow);
+/* ════════════════════════════
+   5 · CREDIT SCORE FOCUS
+════════════════════════════ */
+.credit-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
+.credit-items { display:flex; flex-direction:column; gap:10px; margin-top:32px; }
+.ci {
+  display:flex; align-items:center; gap:14px; padding:15px 18px; border-radius:16px;
+  background:var(--card-bg); border:1px solid var(--card-border); box-shadow:var(--card-shadow);
+  transition:transform .2s cubic-bezier(.22,1,.36,1);
 }
+.ci:hover { transform:translateX(5px); }
+.ci-icon {
+  width:38px; height:38px; border-radius:11px; flex-shrink:0; display:grid; place-items:center;
+  background:rgba(10,132,255,.10); border:1px solid rgba(10,132,255,.20); color:var(--blue);
+}
+.ci-name { font-size:.96rem; font-weight:800; letter-spacing:-.02em; margin-bottom:2px; }
+.ci-desc { font-size:.82rem; color:var(--muted); line-height:1.45; }
+.util-card {
+  background:var(--card-bg); border:1px solid var(--card-border);
+  border-radius:24px; padding:28px; box-shadow:var(--card-shadow);
+}
+.util-title { font-size:.98rem; font-weight:800; letter-spacing:-.025em; margin-bottom:22px; }
+.util-rows { display:flex; flex-direction:column; gap:14px; }
+.util-row {}
+.util-meta { display:flex; justify-content:space-between; font-size:.81rem; margin-bottom:6px; }
+.util-acct { font-weight:700; }
+.util-pct { color:var(--muted); }
+.util-track { height:6px; border-radius:999px; background:var(--subtle-border); overflow:hidden; }
+.util-fill { height:100%; border-radius:999px; }
+.fill-red    { background:#ff3b30; }
+.fill-yellow { background:#ff9f0a; }
+.fill-green  { background:var(--green); }
+[data-theme="light"] .fill-green { background:#16a34a; }
+.util-total {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:18px; padding-top:16px; border-top:1px solid var(--subtle-border);
+}
+.util-total-lbl { font-size:.82rem; color:var(--muted); font-weight:600; }
+.util-total-val { font-size:1.32rem; font-weight:800; letter-spacing:-.035em; }
+.util-opp {
+  margin-top:12px; padding:12px 14px; border-radius:12px;
+  background:rgba(10,132,255,.09); border:1px solid rgba(10,132,255,.20);
+}
+.util-opp-lbl { font-size:.78rem; font-weight:700; color:var(--blue); margin-bottom:2px; }
+.util-opp-desc { font-size:.8rem; color:var(--muted); line-height:1.5; }
 
-/* ── Feature grid ── */
-.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.feature-card {
-  padding: 26px; min-height: 190px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  box-shadow: var(--card-shadow);
+/* ════════════════════════════
+   6 · PRIVACY FIRST
+════════════════════════════ */
+#privacy-section { background:var(--bg-2); }
+.privacy-hero { text-align:center; max-width:660px; margin:0 auto 56px; }
+.privacy-pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.pp {
+  text-align:center; padding:32px 20px; border-radius:22px;
+  background:var(--card-bg); border:1px solid var(--card-border); box-shadow:var(--card-shadow);
+  transition:transform .22s cubic-bezier(.22,1,.36,1);
 }
-.feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow-h);
-  border-color: var(--card-border-h);
+.pp:hover { transform:translateY(-5px); }
+.pp-icon {
+  width:54px; height:54px; border-radius:17px; margin:0 auto 18px;
+  display:grid; place-items:center;
+  background:rgba(10,132,255,.10); border:1px solid rgba(10,132,255,.20); color:var(--blue);
 }
-.icon {
-  width: 48px; height: 48px; border-radius: 14px;
-  display: grid; place-items: center; margin-bottom: 20px;
-  background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.22);
-  color: var(--blue);
+.pp-title { font-size:1rem; font-weight:800; letter-spacing:-.025em; margin-bottom:9px; }
+.pp-desc { font-size:.86rem; color:var(--muted); line-height:1.6; }
+.privacy-note {
+  margin-top:40px; text-align:center; padding:30px 32px; border-radius:20px;
+  background:var(--card-bg); border:1px solid var(--card-border); box-shadow:var(--card-shadow);
 }
-.feature-card h3 { font-size: 1.12rem; letter-spacing: -.03em; margin-bottom: 9px; font-weight: 800; }
-.feature-card p { color: var(--muted); font-size: .96rem; line-height: 1.68; }
+.privacy-note p { color:var(--muted); font-size:.97rem; line-height:1.72; max-width:600px; margin:10px auto 0; }
+.privacy-note strong { color:var(--text); }
 
-/* ── Why / Pro / Loan / Trust panels ── */
-.why-panel, .pro-panel, .loan-panel, .trust-panel {
-  background: var(--card-bg-alt);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  box-shadow: var(--card-shadow);
-  padding: clamp(28px, 5vw, 48px);
-}
-.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
-.why-point {
-  padding: 20px 22px; border-radius: 20px;
-  background: var(--subtle-bg); border: 1px solid var(--subtle-border);
-}
-.why-point h3 { font-size: 1.05rem; letter-spacing: -.03em; margin-bottom: 7px; font-weight: 800; }
-.why-point p { color: var(--muted); font-size: .95rem; line-height: 1.65; }
-
-/* ── Loan Impact ── */
-.loan-grid { display: grid; grid-template-columns: 1fr 290px; gap: 52px; align-items: center; }
-.loan-bullets { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-top: 24px; }
-.loan-bullets li {
-  display: flex; align-items: center; gap: 12px;
-  color: var(--muted); font-size: .97rem;
-}
-.loan-bullets li::before {
-  content: '';
-  width: 20px; height: 20px; min-width: 20px; border-radius: 50%;
-  background: rgba(10,132,255,.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M2 5l2.2 2.2L8 3' stroke='%230a84ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
-  border: 1px solid rgba(10,132,255,.25);
-}
-.loan-visual { position: relative; display: grid; place-items: center; }
-.loan-orb {
-  position: absolute; width: 260px; height: 260px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(10,132,255,.3), transparent 65%);
-  filter: blur(18px); pointer-events: none;
-  animation: orb-drift 11s ease-in-out infinite reverse;
-}
-.loan-screenshot {
-  position: relative; z-index: 2;
-  width: min(100%, 290px); height: auto; border-radius: 32px;
-  box-shadow: var(--loan-ss-shadow);
-}
-
-/* ── Screenshots ── */
-.screens { padding-top: 40px; }
-.screenshot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
+/* ════════════════════════════
+   7 · SCREENSHOTS
+════════════════════════════ */
+.shot-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
 .shot {
-  border-radius: 24px; overflow: hidden;
-  background: var(--shot-bg); border: 1px solid var(--shot-border);
-  box-shadow: var(--shot-shadow);
-  padding: 8px;
-  cursor: default;
+  border-radius:20px; overflow:hidden; padding:7px;
+  background:var(--shot-bg); border:1px solid var(--shot-border); box-shadow:var(--shot-shadow);
+  transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease,border-color .15s;
 }
-.shot:hover {
-  transform: translateY(-6px) scale(1.012);
-  box-shadow: var(--shot-shadow-h);
-  border-color: var(--shot-border-h);
-}
-.shot-img { width: 100%; height: auto; border-radius: 18px; display: block; }
-.shot-title { padding: 11px 6px 2px; color: var(--shot-title-color); font-weight: 800; letter-spacing: -.03em; font-size: .93rem; line-height: 1.3; }
-.shot-caption { color: var(--muted); font-size: .82rem; padding: 3px 6px 8px; line-height: 1.45; }
-.mobile-swipe-hint { display: none; }
+.shot:hover { transform:translateY(-6px) scale(1.015); box-shadow:var(--shot-shadow-h); border-color:var(--shot-border-h); }
+.shot img { width:100%; border-radius:14px; display:block; }
+.shot-lbl { padding:9px 5px 2px; font-weight:800; font-size:.87rem; color:var(--shot-title-color); letter-spacing:-.02em; }
+.shot-cap { color:var(--muted); font-size:.76rem; padding:2px 5px 7px; line-height:1.4; }
+.swipe-hint { display:none; color:var(--muted); font-size:.88rem; margin-bottom:-28px; }
 
-/* ── Steps ── */
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.step {
-  padding: 28px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  box-shadow: var(--card-shadow);
+/* ════════════════════════════
+   8 · PREMIUM
+════════════════════════════ */
+#premium { background:var(--bg-2); }
+.plans-wrap { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:860px; margin:0 auto; }
+.plan {
+  padding:36px 32px; border-radius:26px;
+  background:var(--card-bg); border:1px solid var(--card-border); box-shadow:var(--card-shadow);
 }
-.step-num {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(10,132,255,.14); color: var(--blue);
-  border: 1px solid rgba(10,132,255,.32);
-  display: grid; place-items: center; font-weight: 900; font-size: 1rem;
-  margin-bottom: 18px;
+.plan.featured {
+  background:var(--blue); border-color:rgba(255,255,255,.18);
+  box-shadow:0 24px 64px rgba(10,132,255,.36);
 }
-.step h3 { font-size: 1.12rem; letter-spacing: -.03em; margin-bottom: 8px; font-weight: 800; }
-.step p { color: var(--muted); font-size: .96rem; line-height: 1.68; }
+.plan-tier { font-size:.76rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; opacity:.65; margin-bottom:6px; }
+.plan.featured .plan-tier { color:rgba(255,255,255,.65); }
+.plan-head { font-size:1.7rem; font-weight:800; letter-spacing:-.045em; margin-bottom:8px; }
+.plan-sub { font-size:.88rem; color:var(--muted); line-height:1.6; margin-bottom:28px; }
+.plan.featured .plan-sub { color:rgba(255,255,255,.7); }
+.plan-items { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.plan-items li { display:flex; align-items:center; gap:10px; font-size:.93rem; font-weight:600; color:var(--muted); }
+.plan.featured .plan-items li { color:rgba(255,255,255,.85); }
+.plan-items li::before {
+  content:''; width:18px; height:18px; min-width:18px; border-radius:50%; flex-shrink:0;
+  background:rgba(10,132,255,.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 5l2.2 2.2L8 3' stroke='%230a84ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+  border:1px solid rgba(10,132,255,.25);
+}
+.plan.featured .plan-items li::before {
+  background-color:rgba(255,255,255,.18);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 5l2.2 2.2L8 3' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  border-color:rgba(255,255,255,.28);
+}
+.plan-cta { margin-top:30px; }
+.btn-white {
+  display:inline-flex; align-items:center; justify-content:center; gap:7px;
+  height:46px; padding:0 22px; border-radius:12px; font-weight:800; font-size:.9rem;
+  background:white; color:var(--blue); border:none; cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,.13);
+  transition:transform .15s,box-shadow .15s;
+}
+.btn-white:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,.18); }
+.plan-note { margin-top:10px; font-size:.78rem; color:var(--muted); }
+.plan.featured .plan-note { color:rgba(255,255,255,.5); }
 
-/* ── Pro ── */
-.pro-features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 30px; }
-.pro-feat {
-  display: flex; align-items: center; gap: 10px;
-  padding: 13px 16px; border-radius: 14px;
-  background: var(--subtle-bg); border: 1px solid var(--subtle-border);
-  font-size: .95rem; font-weight: 700; letter-spacing: -.02em;
+/* ════════════════════════════
+   9 · FAQ
+════════════════════════════ */
+.faq-list { display:flex; flex-direction:column; gap:8px; max-width:760px; margin:0 auto; }
+.faq-item {
+  border-radius:16px; overflow:hidden;
+  background:var(--faq-bg); border:1px solid var(--faq-border); box-shadow:var(--card-shadow);
 }
-.pro-feat:hover { background: var(--subtle-bg-h); border-color: var(--subtle-border-h); }
-.pro-feat::before { content: '✓'; color: var(--blue); font-weight: 900; flex-shrink: 0; }
+.faq-q {
+  width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:20px 22px; background:none; border:none; cursor:pointer;
+  color:var(--text); font-size:.98rem; font-weight:700; letter-spacing:-.02em; text-align:left;
+  transition:background .15s;
+}
+.faq-q:hover { background:var(--faq-summary-hover); }
+.faq-chevron {
+  width:28px; height:28px; border-radius:8px; flex-shrink:0; display:grid; place-items:center;
+  background:var(--subtle-bg); border:1px solid var(--subtle-border); color:var(--muted);
+  transition:transform .28s cubic-bezier(.22,1,.36,1),background .15s;
+}
+.faq-item.open .faq-chevron { transform:rotate(180deg); background:var(--subtle-bg-h); }
+.faq-body { max-height:0; overflow:hidden; transition:max-height .38s cubic-bezier(.22,1,.36,1); padding:0 22px; }
+.faq-item.open .faq-body { max-height:300px; padding-bottom:20px; }
+.faq-body p { color:var(--muted); font-size:.93rem; line-height:1.75; border-top:1px solid var(--faq-answer-border); padding-top:16px; }
 
-/* ── Disclaimer ── */
-.disclaimer {
-  padding: 28px 32px; display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center;
-  background: var(--card-bg-alt);
-  border: 1px solid var(--card-border); border-radius: var(--radius);
-  box-shadow: var(--card-shadow);
-}
-.shield { width: 60px; height: 60px; border-radius: 20px; display: grid; place-items: center; font-size: 1.7rem; border: 1px solid var(--icon-box-border); background: var(--icon-box-bg); }
-.disclaimer h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); letter-spacing: -.04em; margin-bottom: 9px; }
-.disclaimer p { color: var(--muted); font-size: .97rem; line-height: 1.72; }
+/* ════════════════════════════
+   10 · FINAL CTA
+════════════════════════════ */
+.final-cta { text-align:center; padding:128px 0; }
+.final-cta h2 { font-size:clamp(2.4rem,5.2vw,4.6rem); letter-spacing:-.075em; margin-bottom:20px; }
+.final-cta-sub { color:var(--muted); font-size:1.1rem; line-height:1.75; max-width:460px; margin:0 auto 38px; }
+.final-note { color:var(--muted-2); font-size:.82rem; margin-top:14px; }
 
-/* ── Trust ── */
-.trust-panel { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; }
-.trust-icon { width: 68px; height: 68px; border-radius: 22px; display: grid; place-items: center; font-size: 1.9rem; border: 1px solid var(--icon-box-border); background: var(--icon-box-bg); flex-shrink: 0; }
-.trust-panel h2 { font-size: clamp(1.7rem, 3.2vw, 2.6rem); letter-spacing: -.055em; margin-bottom: 12px; }
-.trust-panel > div > p { color: var(--muted); font-size: 1rem; line-height: 1.72; margin-bottom: 22px; }
-.trust-bullets { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-.trust-bullets li {
-  display: flex; align-items: center; gap: 10px;
-  color: var(--muted); font-size: .93rem;
-  padding: 12px 16px; border-radius: 13px;
-  background: var(--subtle-bg); border: 1px solid var(--subtle-border);
+/* Disclaimer */
+.disc {
+  display:flex; gap:20px; align-items:flex-start; padding:28px 32px;
+  background:var(--card-bg-alt); border:1px solid var(--card-border);
+  border-radius:22px; box-shadow:var(--card-shadow);
 }
-.trust-bullets li::before { content: '✓'; color: var(--green); font-weight: 900; flex-shrink: 0; }
-
-/* ── CTA panel ── */
-.cta-panel {
-  padding: clamp(30px, 6vw, 56px);
-  display: flex; align-items: center; justify-content: space-between; gap: 28px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border); border-radius: var(--radius);
-  box-shadow: var(--card-shadow);
+.disc-icon {
+  width:46px; height:46px; border-radius:13px; flex-shrink:0; display:grid; place-items:center;
+  font-size:1.35rem; background:var(--icon-box-bg); border:1px solid var(--icon-box-border);
 }
-.cta-panel h2 { letter-spacing: -.06em; margin-bottom: 10px; }
-.cta-panel p { color: var(--muted); font-size: 1.05rem; line-height: 1.65; }
+.disc h3 { font-size:1rem; font-weight:800; letter-spacing:-.025em; margin-bottom:6px; }
+.disc p { color:var(--muted); font-size:.88rem; line-height:1.65; }
 
 /* ── Footer ── */
-footer { border-top: 1px solid var(--footer-border); padding: 36px 0; color: var(--muted); }
-.footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
-.footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-.footer-links a { color: var(--muted-2); font-size: .9rem; transition: color .15s; }
-.footer-links a:hover { color: var(--blue); }
-.fine { color: var(--muted-2); font-size: .83rem; max-width: 920px; margin-top: 20px; line-height: 1.6; }
+footer { border-top:1px solid var(--footer-border); padding:40px 0; }
+.ft-top { display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:22px; }
+.ft-links { display:flex; gap:2px; flex-wrap:wrap; }
+.ft-links a { padding:5px 10px; border-radius:8px; color:var(--muted-2); font-size:.87rem; transition:color .15s; }
+.ft-links a:hover { color:var(--blue); }
+.ft-copy { color:var(--muted-2); font-size:.82rem; }
+.fine { color:var(--muted-2); font-size:.8rem; line-height:1.6; border-top:1px solid var(--footer-border); padding-top:18px; }
 
-/* ── Responsive ── */
-@media (max-width: 1080px) {
-  .hero-grid-new { grid-template-columns: 1fr auto; }
-  .hero-right { display: none; }
+/* ════════════════════════════
+   RESPONSIVE
+════════════════════════════ */
+@media (max-width:1080px) {
+  .fc-1 { left:-6%; } .fc-3 { right:-6%; }
 }
-@media (max-width: 980px) {
-  .feature-grid, .steps, .why-grid { grid-template-columns: 1fr 1fr; }
-  .pro-features-grid { grid-template-columns: 1fr; }
-  .screenshot-grid { grid-template-columns: repeat(2, 1fr); }
-  .cta-panel { flex-direction: column; align-items: flex-start; }
-  .loan-grid { grid-template-columns: 1fr; }
-  .loan-visual { order: -1; }
-  .trust-bullets { grid-template-columns: 1fr; }
+@media (max-width:980px) {
+  .hero-grid { grid-template-columns:1fr; gap:56px; }
+  .hero-grid > .showcase { order:-1; min-height:460px; }
+  .hero-sub { max-width:100%; }
+  .payoff-grid,.borrow-grid,.credit-grid { grid-template-columns:1fr; gap:48px; }
+  .payoff-visual,.borrow-vis { order:-1; }
+  .feat-grid { grid-template-columns:repeat(2,1fr); }
+  .privacy-pillars { grid-template-columns:repeat(2,1fr); }
+  .plans-wrap { grid-template-columns:1fr; max-width:460px; }
+  .shot-grid { grid-template-columns:repeat(3,1fr); }
+  .fc-1 { left:2%; top:4%; } .fc-2 { left:2%; bottom:4%; } .fc-3 { right:2%; top:14%; }
 }
-@media (max-width: 760px) {
-  .brand { min-width: 0; flex: 1; }
-  .brand span { white-space: nowrap; }
-  .links { display: none; }
-  .mobile-menu-toggle { display: inline-flex; flex: 0 0 auto; }
+@media (max-width:760px) {
+  .links { display:none; }
+  .mob-toggle { display:inline-flex; }
   .mobile-menu {
-    display: grid; gap: 9px; padding: 0 18px 18px;
-    background: var(--mob-menu-bg);
-    border-bottom: 1px solid var(--mob-menu-border);
-    backdrop-filter: blur(20px);
+    display:grid; gap:8px; padding:0 16px 16px;
+    background:var(--mob-menu-bg); border-bottom:1px solid var(--mob-menu-border);
+    backdrop-filter:blur(20px);
   }
-  .mobile-menu[hidden] { display: none; }
+  .mobile-menu[hidden] { display:none; }
   .mobile-menu a {
-    display: flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 13px;
-    color: var(--text); font-weight: 700;
-    background: var(--mob-item-bg); border: 1px solid var(--mob-item-border);
+    display:flex; align-items:center; min-height:46px; padding:0 14px; border-radius:12px;
+    color:var(--text); font-weight:700;
+    background:var(--mob-item-bg); border:1px solid var(--mob-item-border);
   }
-  .mobile-menu-button { justify-content: center; background: var(--blue) !important; color: white !important; box-shadow: 0 10px 28px rgba(10,132,255,.32) !important; }
-  .trust-panel { grid-template-columns: 1fr; }
-  .disclaimer { grid-template-columns: 1fr; padding: 22px 20px; }
+  .mob-menu-dl { justify-content:center; background:var(--blue) !important; color:white !important; box-shadow:0 8px 24px rgba(10,132,255,.32) !important; }
+  .hero { padding:56px 0 72px; }
+  .hero-text { text-align:center; align-items:center; }
+  .hero-sub { text-align:center; }
+  .hero-ctas,.hero-trust { display:none; }
+  .hero-mob-ctas { display:flex; }
+  section { padding:72px 0; }
+  .showcase { min-height:380px; }
+  .showcase-phone { width:180px; }
+  .disc { flex-direction:column; padding:22px 20px; }
 }
-@media (max-width: 680px) {
-  .hero { padding-top: 36px; }
-  .hero-grid-new { grid-template-columns: 1fr; text-align: center; }
-  .hero-brand-inline { justify-content: center; }
-  .hero-sub { max-width: 100%; }
-  .hero-bullets { align-items: flex-start; text-align: left; }
-  .hero-mobile-cta { display: flex; }
-  .hero-cta-row { display: none; }
-  .hero-trust { display: none; }
-  .hero-visual { padding: 6px 0; }
-  .hero-screenshot { width: min(76vw, 300px); border-radius: 28px; animation: none; }
-  .orb { width: 220px; height: 220px; animation: none; }
-  .hero-right { display: flex; }
-  h1 { font-size: clamp(2.5rem, 13vw, 3.7rem); }
-  .feature-grid, .steps, .why-grid { grid-template-columns: 1fr; }
-  .mobile-swipe-hint { display: block; color: var(--muted); font-size: .92rem; margin-top: -20px; margin-bottom: 16px; }
-  .screenshot-grid { display: flex; gap: 14px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 4px 18px 20px; margin-left: -18px; margin-right: -18px; -webkit-overflow-scrolling: touch; }
-  .screenshot-grid::-webkit-scrollbar { display: none; }
-  .shot { flex: 0 0 min(80vw, 340px); scroll-snap-align: center; }
-  .shot:hover { transform: none; }
-  #waitlist .cta-panel { padding: 28px 22px; border-radius: 24px; }
-  #waitlist .h2-cta { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+@media (max-width:580px) {
+  .feat-grid { grid-template-columns:1fr; }
+  .privacy-pillars { grid-template-columns:1fr 1fr; }
+  .shot-grid {
+    display:flex; gap:11px; overflow-x:auto; scroll-snap-type:x mandatory;
+    padding:4px 20px 20px; margin-left:-20px; margin-right:-20px; -webkit-overflow-scrolling:touch;
+  }
+  .shot-grid::-webkit-scrollbar { display:none; }
+  .shot { flex:0 0 min(76vw,290px); scroll-snap-align:center; }
+  .shot:hover { transform:none; }
+  .swipe-hint { display:block; }
+  .fc,.bc1,.bc2 { display:none; }
+  .showcase { min-height:300px; }
+  .showcase-phone { width:min(60vw,190px); animation:none; }
+  .borrow-phone { animation:none; }
+  .final-cta { padding:80px 0; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .fade-in { opacity: 1; transform: none; transition: none; }
-  .orb, .hero-screenshot { animation: none; }
-  .shot:hover, .feature-card:hover { transform: none; }
+@media (max-width:400px) {
+  .privacy-pillars { grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .fade-in { opacity:1; transform:none; transition:none; }
+  .showcase-phone,.borrow-phone,.showcase-glow,.payoff-glow,.fc { animation:none; }
+  .shot:hover,.feat-card:hover { transform:none; }
 }
 </style>
 </head>
 <body>
 
+<!-- ══ NAV ══ -->
 <header>
   <div class="container nav">
     <a class="brand" href="#top" aria-label="BalancePilot home">
-      <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" loading="eager" decoding="sync" />
+      <img class="logo-icon" src="balancepilot-icon.png" width="38" height="38" alt="BalancePilot app icon" loading="eager" decoding="sync" />
       <span>BalancePilot</span>
     </a>
     <nav class="links" aria-label="Main navigation">
       <a href="#features">Features</a>
       <a href="strategies.html">Strategies</a>
       <a href="#screenshots">Screenshots</a>
-      <a href="#how">How It Works</a>
       <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
       <div class="theme-switch" aria-label="Color theme">
         <button class="theme-opt" data-theme-val="light" aria-pressed="false" aria-label="Light mode">☀️ <span class="theme-label">Light</span></button>
         <button class="theme-opt" data-theme-val="dark" aria-pressed="false" aria-label="Dark mode">🌙 <span class="theme-label">Dark</span></button>
       </div>
-      <a class="nav-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
+      <a class="nav-btn" href="https://apps.apple.com/app/balancepilot/id6763011325">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download
+      </a>
     </nav>
-    <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+    <button class="mob-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -491,10 +584,9 @@ footer { border-top: 1px solid var(--footer-border); padding: 36px 0; color: var
     <a href="#features">Features</a>
     <a href="strategies.html">Strategies</a>
     <a href="#screenshots">Screenshots</a>
-    <a href="#how">How It Works</a>
     <a href="support.html">Support</a>
     <a href="privacy.html">Privacy</a>
-    <a class="mobile-menu-button" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
+    <a class="mob-menu-dl" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
     <div class="theme-switch mobile-visible" aria-label="Color theme">
       <button class="theme-opt" data-theme-val="light" aria-pressed="false" aria-label="Light mode">☀️ <span class="theme-label">Light</span></button>
       <button class="theme-opt" data-theme-val="dark" aria-pressed="false" aria-label="Dark mode">🌙 <span class="theme-label">Dark</span></button>
@@ -504,339 +596,690 @@ footer { border-top: 1px solid var(--footer-border); padding: 36px 0; color: var
 
 <main id="top">
 
-  <!-- ── HERO ── -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid-new">
+<!-- ══════════════════════════════════════
+     1 · HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
 
-        <div class="hero-left">
-          <div class="hero-brand-inline" aria-hidden="true">
-            <img class="logo-icon" src="balancepilot-icon.png" width="38" height="38" alt="" loading="eager" decoding="sync" />
-            <span>BalancePilot</span>
-          </div>
-          <h1>Plan Your Debt Payoff<br>Before You <span class="blue">Move Money.</span></h1>
-          <p class="hero-sub">For anyone managing credit cards, personal loans, or any personal debt — BalancePilot helps you understand what to pay next, preview financial decisions before committing, and build a realistic path to becoming debt free.</p>
+      <!-- Left: Text -->
+      <div class="hero-text">
+        <div class="hero-kicker">
+          <span class="eyebrow">iOS App · Free to Download</span>
+        </div>
+        <h1 class="hero-headline">Build the fastest path to becoming<br><span class="accent">debt-free.</span></h1>
+        <p class="hero-sub">BalancePilot helps you organize credit cards and loans, compare payoff strategies, preview new loans before you borrow, and stay on track — all without connecting your bank account.</p>
 
-          <!-- Mobile-only above-fold CTA -->
-          <div class="hero-mobile-cta" aria-label="Download BalancePilot">
-            <a class="button primary" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
-            <p class="hero-mobile-cta-sub">Free to download &bull; No bank login required</p>
-          </div>
-
-          <ul class="hero-bullets" aria-label="Key features">
-            <li>Personalized payment recommendations</li>
-            <li>Available Cash planning and tracking</li>
-            <li>Credit utilization guidance</li>
-            <li>What-If payoff scenarios</li>
-            <li>Loan impact forecasting</li>
-            <li>No bank linking required</li>
-          </ul>
+        <!-- Desktop CTAs -->
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://apps.apple.com/app/balancepilot/id6763011325">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download on the App Store
+          </a>
+          <a class="btn btn-secondary" href="#features">
+            Learn More
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="hero-trust">
+          <span>Free to download</span>
+          <span class="hero-trust-sep"></span>
+          <span>No bank login required</span>
+          <span class="hero-trust-sep"></span>
+          <span>iOS only</span>
         </div>
 
-        <div class="hero-visual" role="img" aria-label="BalancePilot app dashboard preview">
-          <div class="orb" aria-hidden="true"></div>
-          <img class="hero-screenshot" src="screenshot-overview.png" width="863" height="1202"
+        <!-- Mobile CTAs -->
+        <div class="hero-mob-ctas">
+          <a class="btn btn-primary" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
+          <p class="hero-mob-note">Free · No bank login required · iOS</p>
+        </div>
+      </div>
+
+      <!-- Right: Device showcase -->
+      <div class="showcase" role="img" aria-label="BalancePilot app previews">
+        <div class="showcase-glow" aria-hidden="true"></div>
+
+        <!-- Float card 1: Payoff Progress (top-left) -->
+        <div class="fc fc-1" aria-hidden="true">
+          <div class="fc-lbl">Total Debt</div>
+          <div class="fc-val">$33,291</div>
+          <div class="fc-bar"><div class="fc-bar-fill" style="width:47%"></div></div>
+          <div class="fc-note">47% paid · 18 months remaining</div>
+        </div>
+
+        <!-- Phone -->
+        <div class="showcase-phone">
+          <img src="screenshot-overview.png" width="863" height="1202"
             loading="eager" fetchpriority="high" decoding="async"
-            alt="BalancePilot dashboard showing debt overview, best next move, and payoff progress" />
+            alt="BalancePilot dashboard showing debt overview and payoff progress" />
         </div>
 
-        <div class="hero-right">
-          <div class="hero-feature-card">
-            <div class="hfc-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <!-- Float card 2: Best Next Move (bottom-left) -->
+        <div class="fc fc-2" aria-hidden="true">
+          <div class="fc-lbl">Best Next Move</div>
+          <div class="fc-row">
+            <div class="fc-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
             </div>
             <div>
-              <div class="hfc-title">Loan Impact Preview <span class="badge-new">New</span></div>
-              <div class="hfc-sub">See how a potential loan affects your entire payoff plan before you commit</div>
+              <div class="fc-name">Chase Sapphire</div>
+              <div class="fc-detail">26% APR · $4,200</div>
+            </div>
+            <div class="fc-amt">$380</div>
+          </div>
+        </div>
+
+        <!-- Float card 3: Loan Impact (top-right) -->
+        <div class="fc fc-3" aria-hidden="true">
+          <div class="fc-lbl">Loan Impact Preview</div>
+          <div style="display:flex;align-items:center;gap:7px;margin-top:7px;">
+            <span class="chip chip-blue">+4 months</span>
+          </div>
+          <div class="fc-note" style="margin-top:6px;">Borrow $5,000 @ 9.9% APR</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     2 · FEATURE HIGHLIGHTS
+══════════════════════════════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="sec-head center fade-in">
+      <h2>Everything you need to take control.</h2>
+      <p class="sec-sub narrow cx">Plan smarter, borrow intentionally, and understand your financial picture before making any move.</p>
+    </div>
+    <div class="feat-grid">
+      <article class="feat-card fade-in d1">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <h3>Smart Payoff Planning</h3>
+        <p>Understand which account deserves attention next based on balances, due dates, APR, utilization, and available cash.</p>
+      </article>
+      <article class="feat-card fade-in d2">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <h3>Credit Score Focus <span class="badge-new">New</span></h3>
+        <p>Prioritize utilization improvements and identify opportunities that may positively impact your credit profile.</p>
+      </article>
+      <article class="feat-card fade-in d3">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Plan Before You Borrow <span class="badge-new">New</span></h3>
+        <p>Preview how a potential loan affects your payoff timeline, monthly obligations, and strategy — before committing.</p>
+      </article>
+      <article class="feat-card fade-in d4">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/></svg>
+        </div>
+        <h3>What-If Planning</h3>
+        <p>Experiment with extra payments, alternative cash amounts, and different scenarios without making any real changes.</p>
+      </article>
+      <article class="feat-card fade-in d5">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Statement Import <span class="badge-pro">Pro</span></h3>
+        <p>Import supported credit card statements locally on your device to auto-populate account details and promo plans.</p>
+      </article>
+      <article class="feat-card fade-in d6">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h3>Calendar & Due Dates</h3>
+        <p>Track due dates, paydays, and upcoming obligations to plan payments at exactly the right time each month.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     3 · SMART PAYOFF PLANNING
+══════════════════════════════════════ -->
+<section id="payoff">
+  <div class="container">
+    <div class="payoff-grid">
+      <div>
+        <div class="fade-in">
+          <span class="eyebrow">Strategy</span>
+          <h2>Five approaches. One flexible planner.</h2>
+          <p class="sec-sub">BalancePilot lets you compare every major debt payoff strategy — and follows whatever approach fits your goals, motivation, and cash situation.</p>
+        </div>
+        <div class="strategy-list">
+          <div class="si fade-in d1">
+            <div class="si-dot si-dot-blue"></div>
+            <div>
+              <div class="si-name">Avalanche</div>
+              <div class="si-desc">Target the highest APR first to minimize total interest paid over your payoff period.</div>
             </div>
           </div>
-          <div class="hero-feature-card">
-            <div class="hfc-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+          <div class="si fade-in d2">
+            <div class="si-dot si-dot-green"></div>
+            <div>
+              <div class="si-name">Snowball</div>
+              <div class="si-desc">Pay the smallest balance first for early wins that build momentum and motivation.</div>
+            </div>
+          </div>
+          <div class="si fade-in d3">
+            <div class="si-dot si-dot-orange"></div>
+            <div>
+              <div class="si-name">Smart Hybrid</div>
+              <div class="si-desc">Weighs both APR and balance together — clearing quick wins without ignoring interest costs.</div>
+            </div>
+          </div>
+          <div class="si fade-in d4">
+            <div class="si-dot si-dot-purple"></div>
+            <div>
+              <div class="si-name">Plan My Way</div>
+              <div class="si-desc">You define the sequence. BalancePilot follows your order while tracking minimums across all accounts.</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:28px;" class="fade-in d5">
+          <a class="btn btn-secondary btn-sm" href="strategies.html">Compare All Strategies →</a>
+        </div>
+      </div>
+      <div class="payoff-visual fade-in">
+        <div class="payoff-glow" aria-hidden="true"></div>
+        <img class="payoff-phone" src="screenshot-strategy.png" width="390" height="844"
+          loading="lazy" decoding="async"
+          alt="BalancePilot payoff strategy selection screen" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     4 · PLAN BEFORE YOU BORROW
+══════════════════════════════════════ -->
+<section id="borrow">
+  <div class="container">
+    <div class="borrow-grid">
+      <div>
+        <div class="fade-in">
+          <span class="eyebrow">Loan Planning</span>
+          <h2>See the impact before you commit.</h2>
+          <p class="sec-sub">Thinking about a personal loan or financing a purchase? BalancePilot shows you exactly how it changes your monthly payments, debt-free date, and total interest — before you sign anything.</p>
+        </div>
+        <div class="borrow-feats">
+          <div class="bf fade-in d1">
+            <div class="bf-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             </div>
             <div>
-              <div class="hfc-title">What-If Scenarios</div>
-              <div class="hfc-sub">Experiment with extra payments and different cash amounts before moving money</div>
+              <div class="bf-name">Loan Impact Preview</div>
+              <div class="bf-desc">Full before-and-after view of how any loan changes your plan.</div>
+            </div>
+          </div>
+          <div class="bf fade-in d2">
+            <div class="bf-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+            </div>
+            <div>
+              <div class="bf-name">Compare Loan Offers</div>
+              <div class="bf-desc">Side-by-side comparison of up to three loans across payment, interest, and payoff impact.</div>
+            </div>
+          </div>
+          <div class="bf fade-in d3">
+            <div class="bf-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <div class="bf-name">Safe to Add?</div>
+              <div class="bf-desc">Understand whether adding a loan keeps your plan realistic given current cash flow.</div>
+            </div>
+          </div>
+          <div class="bf fade-in d4">
+            <div class="bf-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <div class="bf-name">Planned Loans</div>
+              <div class="bf-desc">Save loan ideas now and activate them later when you're ready to move forward.</div>
+            </div>
+          </div>
+          <div class="bf fade-in d5">
+            <div class="bf-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="bf-name">Grace Period Support</div>
+              <div class="bf-desc">Model interest-free periods and understand when they expire so nothing catches you off guard.</div>
             </div>
           </div>
         </div>
-
       </div>
-
-      <div class="hero-cta-row">
-        <a class="button primary" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
-        <a class="button secondary" href="#features">Explore Features</a>
-      </div>
-      <p class="hero-trust">Manual account entry &bull; No bank login required &bull; Privacy focused</p>
-    </div>
-  </section>
-
-  <!-- ── FEATURES ── -->
-  <section id="features">
-    <div class="container">
-      <div class="section-head fade-in">
-        <h2>Built for proactive debt planning.</h2>
-        <p>BalancePilot goes beyond tracking. Understand what to focus on, model decisions before making them, and stay ahead of your payoff timeline — all without connecting a bank account.</p>
-      </div>
-      <div class="feature-grid">
-        <article class="feature-card fade-in fade-in-d1">
-          <div class="icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      <div class="borrow-vis fade-in">
+        <div class="borrow-phone">
+          <img src="screenshot-loan-impact.png" width="390" height="844"
+            loading="lazy" decoding="async"
+            alt="BalancePilot Loan Impact Preview screen" />
+          <div class="borrow-card bc1" aria-hidden="true">
+            <div class="bc-lbl">Without Loan</div>
+            <div class="bc-val">Apr 2026</div>
+            <div class="bc-sub">Debt-free date</div>
           </div>
-          <h3>Smart Payoff Planning</h3>
-          <p>Understand which account may need attention next based on balances, due dates, utilization, and available cash.</p>
-        </article>
-        <article class="feature-card fade-in fade-in-d2">
-          <div class="icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-          </div>
-          <h3>Credit Score Focus <span class="badge-new">New</span></h3>
-          <p>Prioritize utilization improvements and identify opportunities that may positively influence your credit profile while staying aligned with your payoff strategy.</p>
-        </article>
-        <article class="feature-card fade-in fade-in-d3">
-          <div class="icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/></svg>
-          </div>
-          <h3>What-If Planning</h3>
-          <p>Experiment with extra payments, different cash amounts, and alternative payoff scenarios before making real-world decisions.</p>
-        </article>
-        <article class="feature-card fade-in fade-in-d4">
-          <div class="icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3>Promotional Interest Protection</h3>
-          <p>Track promotional balances and avoid costly deferred-interest surprises by understanding important dates and obligations.</p>
-        </article>
-        <article class="feature-card fade-in fade-in-d5">
-          <div class="icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <h3>Statement PDF Analyzer <span class="badge-pro">Pro</span></h3>
-          <p>Import supported credit card statements locally on your device to help populate account information and promotional plans.</p>
-        </article>
-        <article class="feature-card fade-in fade-in-d6">
-          <div class="icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
-          </div>
-          <h3>Plan Before You Borrow <span class="badge-new">New</span></h3>
-          <p>Preview how a potential loan could affect your payment plan, payoff timeline, monthly obligations, and overall strategy before committing.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── LOAN IMPACT ── -->
-  <section id="loan-impact">
-    <div class="container">
-      <div class="loan-panel fade-in">
-        <div class="loan-grid">
-          <div>
-            <div class="eyebrow-label">Plan Before You Borrow</div>
-            <h2 class="h2-sm">See the Impact<br>Before You Commit.</h2>
-            <p style="color:var(--muted);font-size:1.05rem;line-height:1.72;margin-top:12px;">Thinking about financing a purchase or taking out a personal loan? BalancePilot lets you preview how a potential loan could affect your monthly payments, debt-free date, interest costs, and overall payoff strategy — before making a decision.</p>
-            <ul class="loan-bullets" aria-label="Loan impact features">
-              <li>Full Loan Impact Preview</li>
-              <li>Compare up to three loan offers</li>
-              <li>View payment and payoff changes</li>
-              <li>Understand long-term plan impact</li>
-              <li>Save Planned Loans for later activation</li>
-              <li>Neutral guidance focused on information, not recommendations</li>
-            </ul>
-          </div>
-          <div class="loan-visual" aria-label="Loan Impact Preview app screen">
-            <div class="loan-orb" aria-hidden="true"></div>
-            <img class="loan-screenshot" src="screenshot-home.png" width="390" height="844"
-              loading="lazy" decoding="async"
-              alt="BalancePilot app showing loan impact preview and payoff planning" />
+          <div class="borrow-card bc2" aria-hidden="true">
+            <div class="bc-lbl">With Loan</div>
+            <div class="bc-val accent">Aug 2026</div>
+            <div class="bc-sub">+4 months impact</div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── WHY ── -->
-  <section id="why">
-    <div class="container">
-      <div class="why-panel fade-in">
-        <div class="section-head" style="margin-bottom:0;">
-          <h2>Built for real-life payoff planning.</h2>
-          <p>Most payoff tools assume perfect numbers. BalancePilot helps you plan around available cash, due dates, protected commitments, paydays, and the financial decisions you face before making them.</p>
+<!-- ══════════════════════════════════════
+     5 · CREDIT SCORE FOCUS
+══════════════════════════════════════ -->
+<section id="credit">
+  <div class="container">
+    <div class="credit-grid">
+      <div>
+        <div class="fade-in">
+          <span class="eyebrow">Credit Score Focus</span>
+          <h2>Plan for your credit score, not just payoff.</h2>
+          <p class="sec-sub">BalancePilot can align your payoff strategy with credit utilization goals — helping you make smarter decisions about which balances to target first.</p>
         </div>
-        <div class="why-grid">
-          <div class="why-point"><h3>Available Cash planning</h3><p>See how available cash, safety buffers, and set-asides affect what's realistic for payments each month.</p></div>
-          <div class="why-point"><h3>Payday-aware timing</h3><p>Plan around when money comes in, not just when a balance exists.</p></div>
-          <div class="why-point"><h3>Manual by design</h3><p>No bank login required. You control what information you enter and track — always.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── SCREENSHOTS ── -->
-  <section id="screenshots" class="screens">
-    <div class="container">
-      <div class="section-head fade-in">
-        <h2>See BalancePilot in action.</h2>
-        <p>Real screens from the app — OLED dark interface, blue accents, and everything you need to plan, track, and stay ahead of your debt payoff.</p>
-      </div>
-      <p class="mobile-swipe-hint">Swipe to preview more screens →</p>
-      <div class="screenshot-grid">
-        <article class="shot fade-in fade-in-d1">
-          <img class="shot-img" src="screenshot-home.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot home dashboard showing debt overview, best next move, and payoff progress" />
-          <h3 class="shot-title">Home Dashboard</h3>
-          <p class="shot-caption">See what needs attention and understand your progress.</p>
-        </article>
-        <article class="shot fade-in fade-in-d2">
-          <img class="shot-img" src="screenshot-credit.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Credit Score Focus screen showing utilization opportunities" />
-          <h3 class="shot-title">Credit Score Focus <span class="badge-new">New</span></h3>
-          <p class="shot-caption">Identify utilization opportunities and payoff priorities.</p>
-        </article>
-        <article class="shot fade-in fade-in-d3">
-          <img class="shot-img" src="screenshot-whatif.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot What-If Plan screen showing different payment scenarios" />
-          <h3 class="shot-title">What-If Plan</h3>
-          <p class="shot-caption">Experiment with different payment strategies.</p>
-        </article>
-        <article class="shot fade-in fade-in-d4">
-          <img class="shot-img" src="screenshot-loan-impact.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Loan Impact Preview showing how a potential loan affects payoff timeline" />
-          <h3 class="shot-title">Loan Impact Preview <span class="badge-new">New</span></h3>
-          <p class="shot-caption">Understand the impact before borrowing.</p>
-        </article>
-        <article class="shot fade-in fade-in-d1">
-          <img class="shot-img" src="screenshot-compare-loans.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Compare Loan Offers screen" />
-          <h3 class="shot-title">Compare Loan Offers <span class="badge-new">New</span></h3>
-          <p class="shot-caption">Compare payment, interest, and payoff effects.</p>
-        </article>
-        <article class="shot fade-in fade-in-d2">
-          <img class="shot-img" src="screenshot-planned-loans.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Planned Loans screen showing saved loan ideas" />
-          <h3 class="shot-title">Planned Loans <span class="badge-new">New</span></h3>
-          <p class="shot-caption">Save ideas now and activate them later.</p>
-        </article>
-        <article class="shot fade-in fade-in-d3">
-          <img class="shot-img" src="screenshot-statement.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Statement Analyzer screen showing PDF import" />
-          <h3 class="shot-title">Statement Analyzer <span class="badge-pro">Pro</span></h3>
-          <p class="shot-caption">Import supported statements locally on your device.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── HOW IT WORKS ── -->
-  <section id="how">
-    <div class="container">
-      <div class="section-head center fade-in">
-        <h2>Simple, proactive, built around you.</h2>
-        <p>Add your accounts, choose a strategy, then use BalancePilot to understand and plan every financial move before you make it.</p>
-      </div>
-      <div class="steps">
-        <article class="step fade-in fade-in-d1">
-          <div class="step-num">1</div>
-          <h3>Add Your Accounts</h3>
-          <p>Enter cards, loans, minimums, due dates, APRs, and available cash. No bank linking required — you enter what matters to your plan.</p>
-        </article>
-        <article class="step fade-in fade-in-d2">
-          <div class="step-num">2</div>
-          <h3>Plan Before You Commit</h3>
-          <p>Compare payoff approaches, run What-If scenarios, and preview loan impacts before making any real-world financial decision.</p>
-        </article>
-        <article class="step fade-in fade-in-d3">
-          <div class="step-num">3</div>
-          <h3>Follow Your Plan</h3>
-          <p>Log payments, track progress, and stay ahead of due dates — with a clear picture of where you stand and what to do next.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── PRO ── -->
-  <section id="pro">
-    <div class="container">
-      <div class="pro-panel fade-in">
-        <div class="section-head" style="margin-bottom:0;">
-          <div class="eyebrow-label">BalancePilot Pro</div>
-          <h2>Plan before you commit.</h2>
-          <p>Free to download with core planning tools included. Pro unlocks loan impact modeling, advanced forecasting, statement imports, and premium features for users who want to go deeper.</p>
-        </div>
-        <div class="pro-features-grid">
-          <div class="pro-feat">Full Loan Impact Preview <span class="badge-new">New</span></div>
-          <div class="pro-feat">Compare Loan Offers <span class="badge-new">New</span></div>
-          <div class="pro-feat">Planned Loans <span class="badge-new">New</span></div>
-          <div class="pro-feat">Statement PDF Analyzer <span style="color:var(--muted-2);font-size:.8rem;font-weight:600;margin-left:4px;">(U.S. only)</span></div>
-          <div class="pro-feat">Export Payoff Summary</div>
-          <div class="pro-feat">Premium Interface</div>
-          <div class="pro-feat">Advanced payoff insights</div>
-        </div>
-        <p style="color:var(--muted-2);font-size:.86rem;margin-top:22px;line-height:1.55;">Subscription details are shown in the app before purchase. Download free and explore first.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── TRUST ── -->
-  <section id="trust">
-    <div class="container">
-      <div class="trust-panel fade-in">
-        <div class="trust-icon" aria-hidden="true">◇</div>
-        <div>
-          <h2>Built Around Privacy.</h2>
-          <p>BalancePilot is a manual debt planning application. Your financial institution credentials are never required. Account information is entered by you and remains under your control.</p>
-          <ul class="trust-bullets">
-            <li>No bank account linking</li>
-            <li>No credential collection</li>
-            <li>Manual account management</li>
-            <li>Local statement processing for supported imports</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── DISCLAIMER ── -->
-  <section id="disclaimer">
-    <div class="container">
-      <div class="disclaimer fade-in">
-        <div class="shield" aria-hidden="true">◇</div>
-        <div>
-          <h2>BalancePilot is a planning tool, not financial advice.</h2>
-          <p>BalancePilot helps users organize accounts, compare payoff strategies, and preview financial decisions based on information they enter. Loan impact previews are estimates based on the information you provide and are not guaranteed outcomes. Always consult a qualified financial professional for personalized advice.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA ── -->
-  <section id="waitlist">
-    <div class="container">
-      <div class="cta-panel fade-in">
-        <div style="flex:1;max-width:620px;">
-          <h2 class="h2-cta">Plan your debt payoff.<br>Download BalancePilot.</h2>
-          <p>Free to download. Understand what to pay next, model your options, and build a realistic path to becoming debt free.</p>
-          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:28px;">
-            <a class="button primary" href="https://apps.apple.com/app/balancepilot/id6763011325">Download on the App Store</a>
+        <div class="credit-items">
+          <div class="ci fade-in d1">
+            <div class="ci-icon" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <div>
+              <div class="ci-name">Utilization Reduction</div>
+              <div class="ci-desc">Identify which cards to pay down to improve per-card and overall utilization.</div>
+            </div>
           </div>
-          <p style="color:var(--muted-2);font-size:.83rem;margin-top:12px;">Free to download &bull; No bank login required</p>
+          <div class="ci fade-in d2">
+            <div class="ci-icon" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
+            <div>
+              <div class="ci-name">Revolving Debt Focus</div>
+              <div class="ci-desc">Prioritize revolving credit cards over installment loans for utilization impact.</div>
+            </div>
+          </div>
+          <div class="ci fade-in d3">
+            <div class="ci-icon" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <div class="ci-name">Milestone Goals</div>
+              <div class="ci-desc">Set custom utilization targets and see the payment amount needed to reach them.</div>
+            </div>
+          </div>
+          <div class="ci fade-in d4">
+            <div class="ci-icon" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div>
+              <div class="ci-name">Manual Targets</div>
+              <div class="ci-desc">Enter your own utilization target per card to model exactly what's needed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="util-card">
+          <div class="util-title">Credit Utilization Overview</div>
+          <div class="util-rows">
+            <div class="util-row">
+              <div class="util-meta"><span class="util-acct">Chase Sapphire</span><span class="util-pct">78%</span></div>
+              <div class="util-track"><div class="util-fill fill-red" style="width:78%"></div></div>
+            </div>
+            <div class="util-row">
+              <div class="util-meta"><span class="util-acct">Citi Double Cash</span><span class="util-pct">45%</span></div>
+              <div class="util-track"><div class="util-fill fill-yellow" style="width:45%"></div></div>
+            </div>
+            <div class="util-row">
+              <div class="util-meta"><span class="util-acct">Discover it</span><span class="util-pct">22%</span></div>
+              <div class="util-track"><div class="util-fill fill-green" style="width:22%"></div></div>
+            </div>
+            <div class="util-row">
+              <div class="util-meta"><span class="util-acct">Capital One</span><span class="util-pct">8%</span></div>
+              <div class="util-track"><div class="util-fill fill-green" style="width:8%"></div></div>
+            </div>
+          </div>
+          <div class="util-total">
+            <span class="util-total-lbl">Overall Utilization</span>
+            <span class="util-total-val">38%</span>
+          </div>
+          <div class="util-opp">
+            <div class="util-opp-lbl">Opportunity identified</div>
+            <div class="util-opp-desc">Pay $1,200 to Chase Sapphire to reduce utilization to 48% and reach your 30% goal.</div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     6 · PRIVACY FIRST
+══════════════════════════════════════ -->
+<section id="privacy-section">
+  <div class="container">
+    <div class="privacy-hero fade-in">
+      <span class="eyebrow">Privacy First</span>
+      <h2>Your financial information stays with you.</h2>
+      <p class="sec-sub">BalancePilot is designed from the ground up around manual entry. No bank connection. No credential sharing. No data scraping. Everything stays on your device.</p>
+    </div>
+    <div class="privacy-pillars">
+      <div class="pp fade-in d1">
+        <div class="pp-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="pp-title">No Bank Login</div>
+        <div class="pp-desc">BalancePilot never asks for bank credentials, account numbers, or login information of any kind.</div>
+      </div>
+      <div class="pp fade-in d2">
+        <div class="pp-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="pp-title">No Credential Sharing</div>
+        <div class="pp-desc">You never share access to financial accounts. BalancePilot works entirely with what you enter manually.</div>
+      </div>
+      <div class="pp fade-in d3">
+        <div class="pp-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="pp-title">Manual by Design</div>
+        <div class="pp-desc">You control exactly what information you enter and track. Nothing is imported, scraped, or synced automatically.</div>
+      </div>
+      <div class="pp fade-in d4">
+        <div class="pp-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <div class="pp-title">Stays on Device</div>
+        <div class="pp-desc">Statement imports are processed locally. Your account data and plans never leave your iPhone.</div>
+      </div>
+    </div>
+    <div class="privacy-note fade-in">
+      <strong>Built for people who value control.</strong>
+      <p>Manual planning isn't a limitation — it's a feature. You understand exactly what's in your plan because you put it there. <strong>No surprises. No third-party access. Complete control.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     7 · SCREENSHOTS
+══════════════════════════════════════ -->
+<section id="screenshots">
+  <div class="container">
+    <div class="sec-head center fade-in">
+      <h2>See BalancePilot in action.</h2>
+      <p class="sec-sub narrow cx">Every screen, every feature — exactly what you get when you download.</p>
+    </div>
+    <p class="swipe-hint">Swipe to explore →</p>
+    <div class="shot-grid">
+      <article class="shot fade-in d1">
+        <img src="screenshot-overview.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot overview dashboard" />
+        <div class="shot-lbl">Overview</div>
+        <div class="shot-cap">Total debt, progress, and best next move.</div>
+      </article>
+      <article class="shot fade-in d2">
+        <img src="screenshot-home.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot home dashboard" />
+        <div class="shot-lbl">Home Dashboard</div>
+        <div class="shot-cap">See what needs attention at a glance.</div>
+      </article>
+      <article class="shot fade-in d3">
+        <img src="screenshot-accounts.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot accounts screen" />
+        <div class="shot-lbl">Accounts</div>
+        <div class="shot-cap">All your cards and loans in one place.</div>
+      </article>
+      <article class="shot fade-in d4">
+        <img src="screenshot-progress.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot payoff progress" />
+        <div class="shot-lbl">Payoff Progress</div>
+        <div class="shot-cap">Track how far you've come.</div>
+      </article>
+      <article class="shot fade-in d5">
+        <img src="screenshot-strategy.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot strategy selector" />
+        <div class="shot-lbl">Payoff Strategy</div>
+        <div class="shot-cap">Choose Avalanche, Snowball, Hybrid, or Custom.</div>
+      </article>
+      <article class="shot fade-in d1">
+        <img src="screenshot-credit.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Credit Score Focus" />
+        <div class="shot-lbl">Credit Score Focus <span class="badge-new">New</span></div>
+        <div class="shot-cap">Utilization opportunities and targets.</div>
+      </article>
+      <article class="shot fade-in d2">
+        <img src="screenshot-whatif.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot What-If planner" />
+        <div class="shot-lbl">What-If Plan</div>
+        <div class="shot-cap">Experiment before making any real moves.</div>
+      </article>
+      <article class="shot fade-in d3">
+        <img src="screenshot-loan-impact.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Loan Impact Preview" />
+        <div class="shot-lbl">Loan Impact <span class="badge-new">New</span></div>
+        <div class="shot-cap">See the full impact before borrowing.</div>
+      </article>
+      <article class="shot fade-in d4">
+        <img src="screenshot-compare-loans.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot compare loan offers" />
+        <div class="shot-lbl">Compare Loans <span class="badge-new">New</span></div>
+        <div class="shot-cap">Side-by-side offer comparison.</div>
+      </article>
+      <article class="shot fade-in d5">
+        <img src="screenshot-planned-loans.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot planned loans" />
+        <div class="shot-lbl">Planned Loans <span class="badge-new">New</span></div>
+        <div class="shot-cap">Save ideas. Activate when ready.</div>
+      </article>
+      <article class="shot fade-in d1">
+        <img src="screenshot-upcoming.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot upcoming payments" />
+        <div class="shot-lbl">Calendar</div>
+        <div class="shot-cap">Due dates and payment timing.</div>
+      </article>
+      <article class="shot fade-in d2">
+        <img src="screenshot-payday.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot payday planning" />
+        <div class="shot-lbl">Payday Planning</div>
+        <div class="shot-cap">Plan around when money arrives.</div>
+      </article>
+      <article class="shot fade-in d3">
+        <img src="screenshot-compare.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot strategy comparison" />
+        <div class="shot-lbl">Strategy Compare</div>
+        <div class="shot-cap">See strategies side by side.</div>
+      </article>
+      <article class="shot fade-in d4">
+        <img src="screenshot-log.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot payment log" />
+        <div class="shot-lbl">Payment Log</div>
+        <div class="shot-cap">Record and track every payment.</div>
+      </article>
+      <article class="shot fade-in d5">
+        <img src="screenshot-statement.png" width="390" height="844" loading="lazy" decoding="async" alt="BalancePilot Statement Analyzer" />
+        <div class="shot-lbl">Statement Import <span class="badge-pro">Pro</span></div>
+        <div class="shot-cap">Import statements locally on device.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     8 · PREMIUM
+══════════════════════════════════════ -->
+<section id="premium">
+  <div class="container">
+    <div class="sec-head center fade-in">
+      <h2>Free to start. Pro when you're ready.</h2>
+      <p class="sec-sub narrow cx">Core planning tools are free. Pro unlocks loan modeling, statement imports, and advanced features for users who want to go deeper.</p>
+    </div>
+    <div class="plans-wrap fade-in">
+      <div class="plan">
+        <div class="plan-tier">Free</div>
+        <div class="plan-head">Core Planning</div>
+        <div class="plan-sub">Everything you need to organize accounts and build a payoff plan from day one.</div>
+        <ul class="plan-items">
+          <li>Unlimited accounts and balances</li>
+          <li>Avalanche, Snowball, Hybrid strategies</li>
+          <li>What-If payment scenarios</li>
+          <li>Available cash planning</li>
+          <li>Payday-aware scheduling</li>
+          <li>Due date tracking and calendar</li>
+          <li>Payment logging and progress</li>
+        </ul>
+        <div class="plan-cta">
+          <a class="btn btn-secondary btn-sm" href="https://apps.apple.com/app/balancepilot/id6763011325">Download Free</a>
+        </div>
+      </div>
+      <div class="plan featured">
+        <div class="plan-tier">Pro</div>
+        <div class="plan-head">Full Power</div>
+        <div class="plan-sub" style="color:rgba(255,255,255,.7)">Advanced loan modeling, credit tools, statement import, and premium interface.</div>
+        <ul class="plan-items">
+          <li>Everything in Free</li>
+          <li>Full Loan Impact Preview</li>
+          <li>Compare up to 3 loan offers</li>
+          <li>Planned Loans (save &amp; activate)</li>
+          <li>Credit Score Focus mode</li>
+          <li>Statement PDF Analyzer (US)</li>
+          <li>Export payoff summary</li>
+          <li>Premium interface themes</li>
+        </ul>
+        <div class="plan-cta">
+          <a class="btn-white" href="https://apps.apple.com/app/balancepilot/id6763011325">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Get Pro on App Store
+          </a>
+        </div>
+        <div class="plan-note">Subscription details shown before purchase. Try free first.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     9 · FAQ
+══════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="sec-head center fade-in">
+      <h2>Common questions.</h2>
+    </div>
+    <div class="faq-list fade-in">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Do I need to connect my bank account?
+          <div class="faq-chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </button>
+        <div class="faq-body"><p>No. BalancePilot never connects to your bank. You manually enter your account balances, APRs, due dates, and available cash. This is intentional — you stay in complete control of your financial information.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Does BalancePilot work offline?
+          <div class="faq-chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </button>
+        <div class="faq-body"><p>Yes. Because everything is manual and stored on your device, BalancePilot works fully offline. There's no server sync, no account required, and no internet dependency to use the core features.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Can I compare different loan offers?
+          <div class="faq-chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </button>
+        <div class="faq-body"><p>Yes — with Pro. The Compare Loan Offers feature lets you enter up to three different loan scenarios side by side and see exactly how each one affects your monthly payment, total interest, and debt-free date.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Can I export my payoff plan?
+          <div class="faq-chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </button>
+        <div class="faq-body"><p>Yes — with Pro. You can export a payoff summary to share or save. It includes your strategy, account breakdown, payment schedule, and projected payoff timeline.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Does it work in Canada and Australia?
+          <div class="faq-chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </button>
+        <div class="faq-body"><p>Yes. BalancePilot works wherever you have debt to manage — the core planning features work globally. The Statement PDF Analyzer is currently limited to supported US card issuers, but all other features are available internationally.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How is my financial information protected?
+          <div class="faq-chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </button>
+        <div class="faq-body"><p>Your data stays on your iPhone using standard iOS app storage. BalancePilot does not transmit account data to any server, does not collect financial credentials, and does not use your data for advertising or profiling.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Is BalancePilot financial advice?
+          <div class="faq-chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </button>
+        <div class="faq-body"><p>No. BalancePilot is a planning and organization tool. It helps you model scenarios and understand your options based on the information you enter — but it does not provide personalized financial, legal, or tax advice. Always consult a qualified professional for guidance specific to your situation.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     10 · FINAL CTA
+══════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="container">
+    <div class="fade-in">
+      <h2>Take control of your<br><span class="accent">financial future.</span></h2>
+      <p class="final-cta-sub">Free to download. No bank login. Start building a realistic path to debt-free today.</p>
+      <a class="btn btn-primary" href="https://apps.apple.com/app/balancepilot/id6763011325">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
+      </a>
+      <p class="final-note">Free to download &bull; No bank login required &bull; iOS</p>
+    </div>
+  </div>
+</section>
+
+<!-- Disclaimer -->
+<section style="padding:0 0 80px;">
+  <div class="container">
+    <div class="disc fade-in">
+      <div class="disc-icon" aria-hidden="true">◇</div>
+      <div>
+        <h3>BalancePilot is a planning tool, not financial advice.</h3>
+        <p>Payoff estimates and loan previews are based on information you enter and are for planning purposes only. Always verify balances, APRs, due dates, and payment requirements with your lender. Consult a qualified financial professional for decisions specific to your situation.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 </main>
 
+<!-- ══ FOOTER ══ -->
 <footer>
   <div class="container">
-    <div class="footer-row">
+    <div class="ft-top">
       <a class="brand" href="#top">
-        <img class="logo-icon" src="balancepilot-icon.png" width="46" height="46" alt="BalancePilot app icon" loading="lazy" decoding="async" />
+        <img class="logo-icon" src="balancepilot-icon.png" width="38" height="38" alt="BalancePilot" loading="lazy" decoding="async" />
         <span>BalancePilot</span>
       </a>
-      <div class="footer-links">
+      <div class="ft-links">
         <a href="#features">Features</a>
         <a href="strategies.html">Strategies</a>
         <a href="#screenshots">Screenshots</a>
-        <a href="#how">How It Works</a>
         <a href="support.html">Support</a>
         <a href="privacy.html">Privacy</a>
       </div>
-      <small style="color:var(--muted-2);">© <span id="year"></span> BalancePilot. All rights reserved.</small>
+      <small class="ft-copy">© <span id="year"></span> BalancePilot. All rights reserved.</small>
     </div>
-    <p class="fine">BalancePilot provides educational payoff estimates and planning tools only. It is not financial, legal, or tax advice. Always verify balances, due dates, APRs, minimum payments, and payment requirements with your lender. Loan impact previews are estimates only and do not constitute financial advice.</p>
+    <p class="fine">BalancePilot provides educational payoff estimates and planning tools only. It is not financial, legal, or tax advice. Always verify balances, APRs, due dates, minimum payments, and payment requirements with your lender. Loan impact previews are estimates only and do not constitute financial advice. Available Cash planning and payoff strategies are based solely on information entered by the user.</p>
   </div>
 </footer>
 
@@ -852,35 +1295,49 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.addEventListener('load', function() { if (!location.hash) window.scrollTo(0,0); });
 
 // Mobile menu
-const menuToggle = document.querySelector('.mobile-menu-toggle');
-const mobileMenu = document.getElementById('mobileMenu');
-if (menuToggle && mobileMenu) {
-  menuToggle.addEventListener('click', function() {
-    const open = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', String(!open));
-    mobileMenu.hidden = open;
+var toggle = document.querySelector('.mob-toggle');
+var menu   = document.getElementById('mobileMenu');
+if (toggle && menu) {
+  toggle.addEventListener('click', function() {
+    var open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    menu.hidden = open;
   });
-  mobileMenu.querySelectorAll('a').forEach(function(l) {
+  menu.querySelectorAll('a').forEach(function(l) {
     l.addEventListener('click', function() {
-      menuToggle.setAttribute('aria-expanded','false');
-      mobileMenu.hidden = true;
+      toggle.setAttribute('aria-expanded','false');
+      menu.hidden = true;
     });
   });
 }
 
-// Scroll fade-in with IntersectionObserver
-if ('IntersectionObserver' in window) {
-  const io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var btn  = item.querySelector('.faq-q');
+  var body = item.querySelector('.faq-body');
+  btn.addEventListener('click', function() {
+    var open = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(function(o) {
+      o.classList.remove('open');
+      o.querySelector('.faq-q').setAttribute('aria-expanded','false');
     });
-  }, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
+    if (!open) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
+
+// Scroll fade-in
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
   document.querySelectorAll('.fade-in').forEach(function(el) { io.observe(el); });
 } else {
-  // Fallback: show everything immediately
   document.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
 }
 </script>
